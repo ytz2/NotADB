@@ -1,12 +1,14 @@
 #include <string>
-#include <memory>s
+#include <memory>
 namespace interface {
 
-	class IMessage : public iSerializable, public iDeserializable {
-		virtual bool ToString(std::string& output) = 0;
-		virtual bool FromString(const std::string& input) = 0;
-		virtual ~IMessage() = 0;
-	};
+class IMessage {
+public:
+	virtual bool ToString(std::string &output) = 0;
+	virtual bool FromString(const std::string &input) = 0;
+	virtual ~IMessage() {
+	}
+};
 
-	typedef std::shared_ptr<IMessage> IMessagePtr;
+typedef std::shared_ptr<IMessage> IMessagePtr;
 }
