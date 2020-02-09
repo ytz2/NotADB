@@ -9,18 +9,19 @@
 namespace interface {
 
 class IMessage;
+class ISession;
+typedef std::shared_ptr<ISession> ISessionPtr;
 class IListener {
 public:
 	virtual bool start() = 0;
 	virtual bool shouldProcess(const IMessagePtr) = 0;
-	virtual bool onMessage(const IMessagePtr) = 0;
+	virtual bool onMessage(ISessionPtr session, const IMessagePtr) = 0;
 	virtual ~IListener() {
 	}
 };
 typedef std::shared_ptr<IListener> IListnerPtr;
 
-class ISession;
-typedef std::shared_ptr<ISession> ISessionPtr;
+
 
 class IConnectionCallback {
 public:
@@ -65,7 +66,7 @@ protected:
 	virtual void onMessage(const IMessagePtr msg) {
 		for (auto l : appCallbacks_) {
 			if (l->shouldProcess(msg)) {
-				l->onMessage(msg);
+				l->onMessage(shared_from_this(), msg);
 			}
 		}
 	}

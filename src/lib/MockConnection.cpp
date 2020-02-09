@@ -33,7 +33,7 @@ void MockAcceptor::accept() {
 			auto news = std::make_shared<MockConnection>(*s, io_, SERVER);
 			addSession(news->name(), news);
 			news->registerSessionCallback(shared_from_this());
-			news->registerListner(std::make_shared<MockListener>(news, SERVER));
+			news->registerListner(std::make_shared<MockListener>(SERVER));
 			news->init();
 			LOG(INFO) << news->name() << " has been accepted for connection"
 					<< std::endl;

@@ -137,8 +137,7 @@ private:
 
 class MockListener: public interface::IListener {
 public:
-	MockListener(interface::ISessionPtr session, MockSide side) :
-			session_(session), side_(side) {
+	MockListener(MockSide side) :side_(side) {
 
 	}
 	virtual bool start() {
@@ -147,13 +146,17 @@ public:
 	virtual bool shouldProcess(const interface::IMessagePtr) {
 		return true;
 	}
-	virtual bool onMessage(const interface::IMessagePtr msg) {
+	virtual bool onMessage(interface::ISessionPtr session, const interface::IMessagePtr msg) {
 		std::string buf;
 		if (msg && msg->ToString(buf)) {
-			LOG(INFO) << (side_ == SERVER ? "server" : "client")
+			LOG(INFO) << (side_ == SERVER ? "server" : "client") << " with session: "<< session->name()
 					<< " listener received" << buf << std::endl;
-			if (side_ == SERVER && session_ && session_->connected()) {
-				return session_->send(msg);
+			if (side_ == SERVER && session && session->connected()) {
+				auto m = std::static_pointer_cast<MockMessage>(msg);
+				if (!m)
+					return false;
+				(*m)["signature"] = "server";
+				return session->send(msg);
 			}
 		} else {
 			return false;
@@ -164,9 +167,7 @@ public:
 	}
 
 private:
-
 	MockSide side_;
-	interface::ISessionPtr session_;
 };
 
 } /* namespace lib */
