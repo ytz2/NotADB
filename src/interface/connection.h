@@ -22,8 +22,6 @@ public:
 };
 typedef std::shared_ptr<IListener> IListnerPtr;
 
-
-
 class IConnectionCallback {
 public:
 	// handles session layer disconnect

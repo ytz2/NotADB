@@ -52,11 +52,16 @@ public:
 			TcpSession(std::move(boost::asio::ip::tcp::socket(io)), codec,
 					name), io_(io), host_(host), port_(port), retryTimer_(
 					std::make_shared<boost::asio::deadline_timer>(io)), timeouter_(
-					std::make_shared<boost::asio::deadline_timer>(io)), retryInterval_(100), timeoutInterval_(100){
+					std::make_shared<boost::asio::deadline_timer>(io)), retryInterval_(
+					100), timeoutInterval_(100), manualllyStopped_(false){
 
 	}
 
 	virtual bool start() override;
+	void stop() {
+		manualllyStopped_ = true;
+		disconnect();
+	}
 
 	void setTimeoutIntervalMill(int t) {
 		timeoutInterval_ = boost::posix_time::millisec(t);
@@ -68,13 +73,22 @@ public:
 
 protected:
 	virtual void onConnectionFail() {
-		LOG(ERROR) << "Connection failed, will rety in " <<retryInterval_.total_milliseconds() << " mill seconds";
+		LOG(ERROR) << "Connection failed, will rety in "
+				<< retryInterval_.total_milliseconds() << " mill seconds";
 		retryTimer_->expires_from_now(retryInterval_);
 		retryTimer_->async_wait([this](const boost::system::error_code &e) {
 			this->start();
 		});
 	}
+	virtual void onDisconnect() override {
+		LOG(ERROR) << "Disconnected from remote";
+		TcpSession::onDisconnect();
+		// as a client, we will reconnect
+		if (!manualllyStopped_)
+			onConnectionFail();
+	}
 protected:
+	std::atomic<bool> manualllyStopped_;
 	boost::asio::io_service &io_;
 	std::string host_;
 	std::string port_;
@@ -88,11 +102,12 @@ class TcpServer: public interface::IAcceptor,
 		public interface::IConnectionCallback {
 public: // MockAcceptors
 	TcpServer() = delete;
-	TcpServer(boost::asio::io_context &io_context,
-			int port,
+	TcpServer(boost::asio::io_context &io_context, int port,
 			MessageCodecPtr codec) :
-			codec_(codec),acceptor_(io_context, boost::asio::ip::tcp::endpoint(boost::asio::ip::tcp::v4(), port)) {
-		LOG(INFO) <<"Tcp Server start will listen on " << port;
+			codec_(codec), acceptor_(io_context,
+					boost::asio::ip::tcp::endpoint(boost::asio::ip::tcp::v4(),
+							port)) {
+		LOG(INFO) << "Tcp Server start will listen on " << port;
 	}
 public: // IAcceptor
 	virtual bool start() override;

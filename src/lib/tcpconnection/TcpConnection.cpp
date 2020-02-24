@@ -73,6 +73,7 @@ bool TcpSession::send(const interface::IMessagePtr msg) {
 
 bool TcpClientSession::start() {
 	try {
+		manualllyStopped_ = false;
 		LOG(INFO) << "Starting the tcp session to " << host_ << ":"
 				<< port_;
 		tcp::resolver::query q { host_, port_ };
