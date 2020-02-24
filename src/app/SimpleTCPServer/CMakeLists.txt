@@ -1,5 +1,5 @@
 ﻿cmake_minimum_required(VERSION 3.8)
-project(MockServerClient)
+project(SimpleTCPServer)
 
 find_package (Threads)
 find_package(GLog REQUIRED)
@@ -10,7 +10,8 @@ find_package(GLog REQUIRED)
 # Link the header only library from subproject2 using it's alias sub::lib2
 # This will cause the include directories for that target to be added to this project
 target_link_libraries(${PROJECT_NAME}
-    sub::libmockconnection
+	sub::libmessage
+    sub::libtcpconnectoin
     sub::interface
     ${CMAKE_THREAD_LIBS_INIT}
     ${GLOG_LIBRARIES}

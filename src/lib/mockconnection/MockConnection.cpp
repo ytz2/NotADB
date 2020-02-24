@@ -34,7 +34,7 @@ void MockAcceptor::accept() {
 			addSession(news->name(), news);
 			news->registerSessionCallback(shared_from_this());
 			news->registerListner(std::make_shared<MockListener>(SERVER));
-			news->init();
+			news->start();
 			LOG(INFO) << news->name() << " has been accepted for connection"
 					<< std::endl;
 		}
@@ -82,9 +82,10 @@ bool MockConnection::send(const interface::IMessagePtr msg) {
 	return true;
 }
 
-void MockConnection::init() {
+bool MockConnection::start() {
 	connected_ = true;
 	poll();
+	return true;
 }
 
 void MockConnection::poll() {

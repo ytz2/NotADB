@@ -12,6 +12,7 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR})
 set(CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake;${CMAKE_MODULE_PATH})
 # Include sub-projects.
 add_subdirectory ("interface")
+add_subdirectory("message")
 add_subdirectory ("lib")
 add_subdirectory ("app")
 

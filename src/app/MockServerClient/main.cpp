@@ -5,7 +5,7 @@
  *      Author: yanhualiu
  */
 
-#include <lib/MockConnection.h>
+#include <lib/mockconnection/MockConnection.h>
 #include <glog/logging.h>
 #include <stdlib.h>
 #include <functional>
@@ -38,13 +38,14 @@ int main(int argc, char *argv[]) {
 			lib::mock::CLIENT);
 	auto client2 = std::make_shared<lib::mock::MockConnection>(*socket2, io,
 			lib::mock::CLIENT);
-	auto listener = std::make_shared<lib::mock::MockListener>(lib::mock::CLIENT);
+	auto listener = std::make_shared<lib::mock::MockListener>(
+			lib::mock::CLIENT);
 	client1->registerListner(listener);
 	client2->registerListner(listener);
 	auto server = std::make_shared<lib::mock::MockAcceptor>(tcpMgr, io);
 	server->start();
-	client1->init();
-	client2->init();
+	client1->start();
+	client2->start();
 	boost::asio::deadline_timer t1(io, boost::posix_time::seconds(1));
 	t1.async_wait(std::bind(heartbeat, std::placeholders::_1, &t1, client1));
 	boost::asio::deadline_timer t2(io, boost::posix_time::seconds(1));

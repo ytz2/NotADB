@@ -1,3 +1,4 @@
+#pragma once
 #include <vector>
 #include <unordered_map>
 #include <memory>
@@ -5,7 +6,7 @@
 #include <atomic>
 #include <mutex>
 #include <json/json.h>
-//#include <interface/message.h>
+#include <interface/message.h>
 namespace interface {
 
 class IMessage;
@@ -29,6 +30,9 @@ public:
 	virtual void onDisconnect(ISessionPtr) = 0;
 	// hanldes message sent for logging/audit etc
 	virtual void onMessageSent(ISessionPtr, const IMessagePtr) = 0;
+
+	// handle connected
+	virtual void onConnect(ISessionPtr) = 0;
 	virtual ~IConnectionCallback() {
 	}
 };
@@ -43,9 +47,12 @@ public:
 	ISession(const std::string &name, bool connected) :
 			name_(name), connected_(connected) {
 	}
-	virtual void disconnect() = 0;
+	virtual void disconnect() {
+		connected_ = false;
+		onDisconnect();
+	}
 	virtual bool send(const IMessagePtr msg) = 0;
-	virtual void init() = 0;
+	virtual bool start() = 0;
 	virtual bool connected() {
 		return connected_;
 	}
@@ -74,6 +81,13 @@ protected:
 		connected_ = false;
 		for (auto l : sessionCallbacks_) {
 			l->onDisconnect(shared_from_this());
+		}
+	}
+
+	virtual void onConnected() {
+		connected_ = true;
+		for (auto l : sessionCallbacks_) {
+			l->onConnect(shared_from_this());
 		}
 	}
 protected:

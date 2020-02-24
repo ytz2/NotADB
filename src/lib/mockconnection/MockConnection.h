@@ -27,6 +27,12 @@ public: //IMessage
 		delete reader;
 		return parsingSuccessful;
 	}
+	virtual int GetMessageID(){
+		return 0;
+	}
+	virtual const std::string GetMessageName() {
+		return "json";
+	}
 };
 
 enum MockSide {
@@ -109,6 +115,7 @@ public: // IConnectionCallback
 	virtual void onDisconnect(interface::ISessionPtr session) override;
 	virtual void onMessageSent(interface::ISessionPtr,
 			const interface::IMessagePtr) override;
+	virtual void onConnect(interface::ISessionPtr) override {} //noop
 public:
 	void accept();
 private:
@@ -125,7 +132,7 @@ public:
 	;
 	virtual void disconnect() override;
 	virtual bool send(const interface::IMessagePtr msg) override;
-	virtual void init();
+	virtual bool start() override;
 public:
 	void poll();
 private:

@@ -1,3 +1,4 @@
+#pragma once
 #include <string>
 #include <memory>
 namespace interface {
@@ -6,9 +7,19 @@ class IMessage {
 public:
 	virtual bool ToString(std::string &output) = 0;
 	virtual bool FromString(const std::string &input) = 0;
+	virtual int GetMessageID() = 0;
+	virtual const std::string GetMessageName() = 0;
 	virtual ~IMessage() {
 	}
 };
 
 typedef std::shared_ptr<IMessage> IMessagePtr;
+
+class IMessageFactory {
+public:
+	virtual IMessagePtr createMessageByID(int id) = 0;
+	virtual IMessagePtr createMessageByName(const std::string& name) = 0;
+	virtual const std::string getProtocolName() const = 0;
+};
+
 }
