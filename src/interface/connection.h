@@ -37,7 +37,28 @@ public:
 
 typedef std::shared_ptr<IConnectionCallback> IConnectionCallbackPtr;
 
-class ISession: public std::enable_shared_from_this<ISession> {
+class ICallbackContainer {
+public:
+	ICallbackContainer() = default;
+	void registerSessionCallback(IConnectionCallbackPtr cb) {
+		sessionCallbacks_.push_back(cb);
+	}
+	void registerListner(IListnerPtr cb) {
+		appCallbacks_.push_back(cb);
+	}
+	virtual void onMessage(const IMessagePtr msg) = 0;
+	virtual void onConnected() = 0;
+	virtual void onDisconnect() = 0;
+	virtual ~ICallbackContainer() {
+	}
+protected:
+	// when session is disconnected, do sessionCallbacks each by each
+	std::vector<IConnectionCallbackPtr> sessionCallbacks_;
+	std::vector<IListnerPtr> appCallbacks_;
+};
+
+class ISession: public ICallbackContainer, public std::enable_shared_from_this<
+		ISession> {
 public:
 	ISession(const std::string &name) :
 			name_(name), connected_(true) {
@@ -57,32 +78,25 @@ public:
 	const std::string& name() {
 		return name_;
 	}
-	void registerSessionCallback(IConnectionCallbackPtr cb) {
-		sessionCallbacks_.push_back(cb);
-	}
-	void registerListner(IListnerPtr cb) {
-		appCallbacks_.push_back(cb);
-	}
-
 	virtual ~ISession() {
 	}
-	;
 protected:
-	virtual void onMessage(const IMessagePtr msg) {
+	// ICallbackContainer
+	virtual void onMessage(const IMessagePtr msg) override {
 		for (auto l : appCallbacks_) {
 			if (l->shouldProcess(msg)) {
 				l->onMessage(shared_from_this(), msg);
 			}
 		}
 	}
-	virtual void onDisconnect() {
+	virtual void onDisconnect() override {
 		connected_ = false;
 		for (auto l : sessionCallbacks_) {
 			l->onDisconnect(shared_from_this());
 		}
 	}
 
-	virtual void onConnected() {
+	virtual void onConnected() override {
 		connected_ = true;
 		for (auto l : sessionCallbacks_) {
 			l->onConnect(shared_from_this());
@@ -93,9 +107,6 @@ protected:
 	std::string name_;
 	// state
 	std::atomic<bool> connected_;
-	// when session is disconnected, do sessionCallbacks each by each
-	std::vector<IConnectionCallbackPtr> sessionCallbacks_;
-	std::vector<IListnerPtr> appCallbacks_;
 };
 
 typedef std::shared_ptr<ISession> ISessionPtr;

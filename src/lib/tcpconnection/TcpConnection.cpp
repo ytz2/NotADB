@@ -161,6 +161,15 @@ void TcpServer::accept() {
 					LOG(INFO) << "session " << name
 							<< " has been established";
 					sessions_[name] = session;
+					// give listners to child
+					for (auto s : sessionCallbacks_) {
+						session->registerSessionCallback(s);
+					}
+					// also register myself
+					session->registerSessionCallback(shared_from_this());
+					for (auto l : appCallbacks_) {
+						session->registerListner(l);
+					}
 					if (!session->start()) {
 						throw std::runtime_error(
 								"Failed to read the socket for tcp server");

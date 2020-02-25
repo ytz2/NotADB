@@ -26,7 +26,9 @@ public: // ISession
 	TcpSession(boost::asio::ip::tcp::socket soccket, MessageCodecPtr codec,
 			const std::string &name);
 	virtual ~TcpSession() {
-		disconnect();
+		if (socket_.is_open()) {
+			socket_.close();
+		}
 	}
 	virtual void disconnect() override {
 		if (socket_.is_open())
@@ -53,7 +55,7 @@ public:
 					name), io_(io), host_(host), port_(port), retryTimer_(
 					std::make_shared<boost::asio::deadline_timer>(io)), timeouter_(
 					std::make_shared<boost::asio::deadline_timer>(io)), retryInterval_(
-					100), timeoutInterval_(100), manualllyStopped_(false){
+					100), timeoutInterval_(100), manualllyStopped_(false) {
 
 	}
 
@@ -98,8 +100,10 @@ protected:
 	boost::posix_time::millisec timeoutInterval_;
 };
 
-class TcpServer: public interface::IAcceptor,
-		public interface::IConnectionCallback {
+class TcpServer: public std::enable_shared_from_this<TcpServer>,
+		public interface::IAcceptor,
+		public interface::IConnectionCallback,
+		public interface::ICallbackContainer {
 public: // MockAcceptors
 	TcpServer() = delete;
 	TcpServer(boost::asio::io_context &io_context, int port,
@@ -117,6 +121,16 @@ public: // IConnectionCallback
 	virtual void onMessageSent(interface::ISessionPtr,
 			const interface::IMessagePtr) override;
 	virtual void onConnect(interface::ISessionPtr session) override;
+public: // ICallbackContainer
+	virtual void onMessage(const interface::IMessagePtr msg) override {
+		//noop
+	}
+	virtual void onConnected() override {
+		//noop
+	}
+	virtual void onDisconnect() override {
+		// noop
+	}
 protected:
 	void accept();
 
