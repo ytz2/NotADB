@@ -47,7 +47,7 @@ public:
 			LOG(INFO) << session->name() << " sent: " << body;
 		} else {
 			LOG(ERROR) << session->name()
-					<< " ailed to deserialize msg sent " << msg;
+					<< " failed to deserialize msg sent " << msg;
 		}
 	}
 	virtual void onDisconnect(interface::ISessionPtr session) override {
