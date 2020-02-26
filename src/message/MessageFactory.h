@@ -1,47 +1,41 @@
-/*
- * MessageFactory.h
- *
- *  Created on: Feb 9, 2020
- *      Author: yanhualiu
- */
-
+/* Copyright 2020 Yanhua Liu */
 #ifndef SRC_MESSAGE_MESSAGEFACTORY_H_
 #define SRC_MESSAGE_MESSAGEFACTORY_H_
 
 #include <interface/message.h>
-#include <unordered_map>
-#include <string>
 #include <message/commonjson/CommonJsonFactory.h>
+
+#include <string>
+#include <unordered_map>
 namespace lib {
 namespace message {
-
-
-
 class MessageFactory {
-public:
-	static MessageFactory* getInstance(){
-		static MessageFactory fact;
-		return &fact;
-	}
-	interface::IMessagePtr createMessageByProtocolMsgID(const std::string& name, int id){
-		if (!factories_.count(name)) {
-			return nullptr;
-		}
-		return factories_[name]->createMessageByID(id);
-	}
-	interface::IMessagePtr createMessageByProtocolMsgName(const std::string& name, const std::string& msgName){
-		if (!factories_.count(name)) {
-			return nullptr;
-		}
-		return factories_[name]->createMessageByName(msgName);
-	}
-private:
-	MessageFactory()
-	{
-		auto jfactory = commonjson::CommonJsonFactory::getInstance();
-		factories_[jfactory->getProtocolName()] = jfactory;
-	}
-	std::unordered_map<std::string, interface::IMessageFactory*> factories_;
+ public:
+  static MessageFactory* getInstance() {
+    static MessageFactory fact;
+    return &fact;
+  }
+  interface::IMessagePtr createMessageByProtocolMsgID(const std::string& name,
+                                                      int id) {
+    if (!factories_.count(name)) {
+      return nullptr;
+    }
+    return factories_[name]->createMessageByID(id);
+  }
+  interface::IMessagePtr createMessageByProtocolMsgName(
+      const std::string& name, const std::string& msgName) {
+    if (!factories_.count(name)) {
+      return nullptr;
+    }
+    return factories_[name]->createMessageByName(msgName);
+  }
+
+ private:
+  MessageFactory() {
+    auto jfactory = commonjson::CommonJsonFactory::getInstance();
+    factories_[jfactory->getProtocolName()] = jfactory;
+  }
+  std::unordered_map<std::string, interface::IMessageFactory*> factories_;
 };
 
 } /* namespace message */

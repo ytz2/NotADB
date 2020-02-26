@@ -1,14 +1,6 @@
-/*
- * MessageFactory.cpp
- *
- *  Created on: Feb 9, 2020
- *      Author: yanhualiu
- */
-
+/* Copyright 2020 Yanhua Liu */
 #include "MessageFactory.h"
 
 namespace lib {
-namespace message {
-
-} /* namespace message */
+namespace message {} /* namespace message */
 } /* namespace lib */
