@@ -148,8 +148,8 @@ void TcpServer::accept() {
     if (!ec) {
       boost::uuids::uuid uuid = boost::uuids::random_generator()();
       auto name = boost::lexical_cast<std::string>(uuid);
-      auto session =
-          std::make_shared<TcpSession>(std::move(socket), codec_, name);
+      auto session = std::make_shared<TcpSession>(std::move(socket),
+                                                  codec_->clone(), name);
       LOG(INFO) << "session " << name << " has been established";
       sessions_[name] = session;
       // give listners to child

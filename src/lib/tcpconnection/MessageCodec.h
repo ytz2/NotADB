@@ -25,6 +25,7 @@ class MessageCodec {
  public:
   explicit MessageCodec(const std::string &protocol) : protocol(protocol) {}
   virtual ~MessageCodec() {}
+  virtual std::shared_ptr<MessageCodec> clone() = 0;
   BufferPtr readBuffer(std::size_t size) {
     return std::make_shared<boost::asio::mutable_buffer>(
         buffer_.getBufferForRead(size), size);
@@ -45,7 +46,9 @@ class FlatMessageDecoder : public MessageCodec {
  public:
   explicit FlatMessageDecoder(const std::string &protocol)
       : MessageCodec(protocol) {}
-
+  virtual std::shared_ptr<MessageCodec> clone() {
+    return std::make_shared<FlatMessageDecoder>(protocol);
+  }
   BufferPtr writeBuffer(interface::IMessagePtr msg) override;
   bool getMessages(
       std::vector<interface::IMessagePtr> &msgs) override;  // NOLINT
