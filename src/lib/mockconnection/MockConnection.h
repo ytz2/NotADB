@@ -4,6 +4,7 @@
 #include <glog/logging.h>
 #include <interface/connection.h>
 #include <interface/message.h>
+#include <message/commonjson/CommonJsonMessage.h>
 
 #include <boost/asio.hpp>
 #include <exception>      // NOLINT
@@ -15,27 +16,7 @@
 #include <utility>        // NOLINT
 namespace lib {
 namespace mock {
-class MockMessage : public interface::IMessage, public Json::Value {
- public:  // IMessage
-  bool ToString(std::string &output) const override {
-    Json::StreamWriterBuilder builder;
-    builder["indentation"] = "";
-    output = Json::writeString(builder, *this);
-    return true;
-  }
-  bool FromString(const std::string &input) override {
-    Json::CharReaderBuilder builder;
-    Json::CharReader *reader = builder.newCharReader();
-    std::string errors;
-
-    bool parsingSuccessful = reader->parse(
-        input.c_str(), input.c_str() + input.size(), this, &errors);
-    delete reader;
-    return parsingSuccessful;
-  }
-  virtual int GetMessageID() { return 0; }
-  virtual const std::string GetMessageName() { return "json"; }
-};
+typedef lib::message::commonjson::CommonJsonMessage MockMessage;
 
 enum MockSide { ADMIN, SERVER, CLIENT, NA };
 
