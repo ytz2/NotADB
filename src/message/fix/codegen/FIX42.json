@@ -1,0 +1,7577 @@
+{
+    "enums": [
+        {
+            "id": "102",
+            "name": "CxlRejReason",
+            "values": [
+                {
+                    "name": "TOO_LATE_TO_CANCEL",
+                    "value": "0"
+                },
+                {
+                    "name": "UNKNOWN_ORDER",
+                    "value": "1"
+                },
+                {
+                    "name": "BROKER_OPTION",
+                    "value": "2"
+                },
+                {
+                    "name": "ORDER_ALREADY_IN_PENDING_CANCEL_OR_PENDING_REPLACE_STATUS",
+                    "value": "3"
+                }
+            ]
+        },
+        {
+            "id": "103",
+            "name": "OrdRejReason",
+            "values": [
+                {
+                    "name": "BROKER_OPTION",
+                    "value": "0"
+                },
+                {
+                    "name": "UNKNOWN_SYMBOL",
+                    "value": "1"
+                },
+                {
+                    "name": "EXCHANGE_CLOSED",
+                    "value": "2"
+                },
+                {
+                    "name": "ORDER_EXCEEDS_LIMIT",
+                    "value": "3"
+                },
+                {
+                    "name": "TOO_LATE_TO_ENTER",
+                    "value": "4"
+                },
+                {
+                    "name": "UNKNOWN_ORDER",
+                    "value": "5"
+                },
+                {
+                    "name": "DUPLICATE_ORDER",
+                    "value": "6"
+                },
+                {
+                    "name": "DUPLICATE_OF_A_VERBALLY_COMMUNICATED_ORDER",
+                    "value": "7"
+                },
+                {
+                    "name": "STALE_ORDER",
+                    "value": "8"
+                }
+            ]
+        },
+        {
+            "id": "104",
+            "name": "IOIQualifier",
+            "values": [
+                {
+                    "name": "ALL_OR_NONE",
+                    "value": "A"
+                },
+                {
+                    "name": "AT_THE_CLOSE",
+                    "value": "C"
+                },
+                {
+                    "name": "IN_TOUCH_WITH",
+                    "value": "I"
+                },
+                {
+                    "name": "LIMIT",
+                    "value": "L"
+                },
+                {
+                    "name": "MORE_BEHIND",
+                    "value": "M"
+                },
+                {
+                    "name": "AT_THE_OPEN",
+                    "value": "O"
+                },
+                {
+                    "name": "TAKING_A_POSITION",
+                    "value": "P"
+                },
+                {
+                    "name": "AT_THE_MARKET",
+                    "value": "Q"
+                },
+                {
+                    "name": "READY_TO_TRADE",
+                    "value": "R"
+                },
+                {
+                    "name": "PORTFOLIO_SHOW_N",
+                    "value": "S"
+                },
+                {
+                    "name": "THROUGH_THE_DAY",
+                    "value": "T"
+                },
+                {
+                    "name": "VERSUS",
+                    "value": "V"
+                },
+                {
+                    "name": "INDICATION",
+                    "value": "W"
+                },
+                {
+                    "name": "CROSSING_OPPORTUNITY",
+                    "value": "X"
+                },
+                {
+                    "name": "AT_THE_MIDPOINT",
+                    "value": "Y"
+                },
+                {
+                    "name": "PRE_OPEN",
+                    "value": "Z"
+                }
+            ]
+        },
+        {
+            "id": "113",
+            "name": "ReportToExch",
+            "values": [
+                {
+                    "name": "NO",
+                    "value": "N"
+                },
+                {
+                    "name": "YES",
+                    "value": "Y"
+                }
+            ]
+        },
+        {
+            "id": "114",
+            "name": "LocateReqd",
+            "values": [
+                {
+                    "name": "NO",
+                    "value": "N"
+                },
+                {
+                    "name": "YES",
+                    "value": "Y"
+                }
+            ]
+        },
+        {
+            "id": "121",
+            "name": "ForexReq",
+            "values": [
+                {
+                    "name": "NO",
+                    "value": "N"
+                },
+                {
+                    "name": "YES",
+                    "value": "Y"
+                }
+            ]
+        },
+        {
+            "id": "123",
+            "name": "GapFillFlag",
+            "values": [
+                {
+                    "name": "NO",
+                    "value": "N"
+                },
+                {
+                    "name": "YES",
+                    "value": "Y"
+                }
+            ]
+        },
+        {
+            "id": "127",
+            "name": "DKReason",
+            "values": [
+                {
+                    "name": "UNKNOWN_SYMBOL",
+                    "value": "A"
+                },
+                {
+                    "name": "WRONG_SIDE",
+                    "value": "B"
+                },
+                {
+                    "name": "QUANTITY_EXCEEDS_ORDER",
+                    "value": "C"
+                },
+                {
+                    "name": "NO_MATCHING_ORDER",
+                    "value": "D"
+                },
+                {
+                    "name": "PRICE_EXCEEDS_LIMIT",
+                    "value": "E"
+                },
+                {
+                    "name": "OTHER",
+                    "value": "Z"
+                }
+            ]
+        },
+        {
+            "id": "13",
+            "name": "CommType",
+            "values": [
+                {
+                    "name": "PER_SHARE",
+                    "value": "1"
+                },
+                {
+                    "name": "PERCENTAGE",
+                    "value": "2"
+                },
+                {
+                    "name": "ABSOLUTE",
+                    "value": "3"
+                }
+            ]
+        },
+        {
+            "id": "130",
+            "name": "IOINaturalFlag",
+            "values": [
+                {
+                    "name": "NO",
+                    "value": "N"
+                },
+                {
+                    "name": "YES",
+                    "value": "Y"
+                }
+            ]
+        },
+        {
+            "id": "139",
+            "name": "MiscFeeType",
+            "values": [
+                {
+                    "name": "REGULATORY",
+                    "value": "1"
+                },
+                {
+                    "name": "TAX",
+                    "value": "2"
+                },
+                {
+                    "name": "LOCAL_COMMISSION",
+                    "value": "3"
+                },
+                {
+                    "name": "EXCHANGE_FEES",
+                    "value": "4"
+                },
+                {
+                    "name": "STAMP",
+                    "value": "5"
+                },
+                {
+                    "name": "LEVY",
+                    "value": "6"
+                },
+                {
+                    "name": "OTHER",
+                    "value": "7"
+                },
+                {
+                    "name": "MARKUP",
+                    "value": "8"
+                },
+                {
+                    "name": "CONSUMPTION_TAX",
+                    "value": "9"
+                }
+            ]
+        },
+        {
+            "id": "141",
+            "name": "ResetSeqNumFlag",
+            "values": [
+                {
+                    "name": "NO",
+                    "value": "N"
+                },
+                {
+                    "name": "YES",
+                    "value": "Y"
+                }
+            ]
+        },
+        {
+            "id": "150",
+            "name": "ExecType",
+            "values": [
+                {
+                    "name": "NEW",
+                    "value": "0"
+                },
+                {
+                    "name": "PARTIAL_FILL",
+                    "value": "1"
+                },
+                {
+                    "name": "FILL",
+                    "value": "2"
+                },
+                {
+                    "name": "DONE_FOR_DAY",
+                    "value": "3"
+                },
+                {
+                    "name": "CANCELED",
+                    "value": "4"
+                },
+                {
+                    "name": "REPLACE",
+                    "value": "5"
+                },
+                {
+                    "name": "PENDING_CANCEL",
+                    "value": "6"
+                },
+                {
+                    "name": "STOPPED",
+                    "value": "7"
+                },
+                {
+                    "name": "REJECTED",
+                    "value": "8"
+                },
+                {
+                    "name": "SUSPENDED",
+                    "value": "9"
+                },
+                {
+                    "name": "PENDING_NEW",
+                    "value": "A"
+                },
+                {
+                    "name": "CALCULATED",
+                    "value": "B"
+                },
+                {
+                    "name": "EXPIRED",
+                    "value": "C"
+                },
+                {
+                    "name": "RESTATED",
+                    "value": "D"
+                },
+                {
+                    "name": "PENDING_REPLACE",
+                    "value": "E"
+                }
+            ]
+        },
+        {
+            "id": "156",
+            "name": "SettlCurrFxRateCalc",
+            "values": [
+                {
+                    "name": "MULTIPLY",
+                    "value": "M"
+                },
+                {
+                    "name": "DIVIDE",
+                    "value": "D"
+                }
+            ]
+        },
+        {
+            "id": "160",
+            "name": "SettlInstMode",
+            "values": [
+                {
+                    "name": "DEFAULT",
+                    "value": "0"
+                },
+                {
+                    "name": "STANDING_INSTRUCTIONS_PROVIDED",
+                    "value": "1"
+                },
+                {
+                    "name": "SPECIFIC_ALLOCATION_ACCOUNT_OVERRIDING",
+                    "value": "2"
+                },
+                {
+                    "name": "SPECIFIC_ALLOCATION_ACCOUNT_STANDING",
+                    "value": "3"
+                }
+            ]
+        },
+        {
+            "id": "163",
+            "name": "SettlInstTransType",
+            "values": [
+                {
+                    "name": "CANCEL",
+                    "value": "C"
+                },
+                {
+                    "name": "NEW",
+                    "value": "N"
+                },
+                {
+                    "name": "REPLACE",
+                    "value": "R"
+                }
+            ]
+        },
+        {
+            "id": "165",
+            "name": "SettlInstSource",
+            "values": [
+                {
+                    "name": "BROKERS_INSTRUCTIONS",
+                    "value": "1"
+                },
+                {
+                    "name": "INSTITUTIONS_INSTRUCTIONS",
+                    "value": "2"
+                }
+            ]
+        },
+        {
+            "id": "166",
+            "name": "SettlLocation",
+            "values": [
+                {
+                    "name": "CEDEL",
+                    "value": "CED"
+                },
+                {
+                    "name": "DEPOSITORY_TRUST_COMPANY",
+                    "value": "DTC"
+                },
+                {
+                    "name": "EUROCLEAR",
+                    "value": "EUR"
+                },
+                {
+                    "name": "FEDERAL_BOOK_ENTRY",
+                    "value": "FED"
+                },
+                {
+                    "name": "LOCAL_MARKET_SETTLE_LOCATION",
+                    "value": "ISO Country Code"
+                },
+                {
+                    "name": "PHYSICAL",
+                    "value": "PNY"
+                },
+                {
+                    "name": "PARTICIPANT_TRUST_COMPANY",
+                    "value": "PTC"
+                }
+            ]
+        },
+        {
+            "id": "167",
+            "name": "SecurityType",
+            "values": [
+                {
+                    "name": "WILDCARD_ENTRY",
+                    "value": "?"
+                },
+                {
+                    "name": "BANKERS_ACCEPTANCE",
+                    "value": "BA"
+                },
+                {
+                    "name": "CONVERTIBLE_BOND",
+                    "value": "CB"
+                },
+                {
+                    "name": "CERTIFICATE_OF_DEPOSIT",
+                    "value": "CD"
+                },
+                {
+                    "name": "COLLATERALIZE_MORTGAGE_OBLIGATION",
+                    "value": "CMO"
+                },
+                {
+                    "name": "CORPORATE_BOND",
+                    "value": "CORP"
+                },
+                {
+                    "name": "COMMERCIAL_PAPER",
+                    "value": "CP"
+                },
+                {
+                    "name": "CORPORATE_PRIVATE_PLACEMENT",
+                    "value": "CPP"
+                },
+                {
+                    "name": "COMMON_STOCK",
+                    "value": "CS"
+                },
+                {
+                    "name": "FEDERAL_HOUSING_AUTHORITY",
+                    "value": "FHA"
+                },
+                {
+                    "name": "FEDERAL_HOME_LOAN",
+                    "value": "FHL"
+                },
+                {
+                    "name": "FEDERAL_NATIONAL_MORTGAGE_ASSOCIATION",
+                    "value": "FN"
+                },
+                {
+                    "name": "FOREIGN_EXCHANGE_CONTRACT",
+                    "value": "FOR"
+                },
+                {
+                    "name": "FUTURE",
+                    "value": "FUT"
+                },
+                {
+                    "name": "GOVERNMENT_NATIONAL_MORTGAGE_ASSOCIATION",
+                    "value": "GN"
+                },
+                {
+                    "name": "TREASURIES_PLUS_AGENCY_DEBENTURE",
+                    "value": "GOVT"
+                },
+                {
+                    "name": "MORTGAGE_IOETTE",
+                    "value": "IET"
+                },
+                {
+                    "name": "MUTUAL_FUND",
+                    "value": "MF"
+                },
+                {
+                    "name": "MORTGAGE_INTEREST_ONLY",
+                    "value": "MIO"
+                },
+                {
+                    "name": "MORTGAGE_PRINCIPAL_ONLY",
+                    "value": "MPO"
+                },
+                {
+                    "name": "MORTGAGE_PRIVATE_PLACEMENT",
+                    "value": "MPP"
+                },
+                {
+                    "name": "MISCELLANEOUS_PASS_THRU",
+                    "value": "MPT"
+                },
+                {
+                    "name": "MUNICIPAL_BOND",
+                    "value": "MUNI"
+                },
+                {
+                    "name": "NO_ISITC_SECURITY_TYPE",
+                    "value": "NONE"
+                },
+                {
+                    "name": "OPTION",
+                    "value": "OPT"
+                },
+                {
+                    "name": "PREFERRED_STOCK",
+                    "value": "PS"
+                },
+                {
+                    "name": "REPURCHASE_AGREEMENT",
+                    "value": "RP"
+                },
+                {
+                    "name": "REVERSE_REPURCHASE_AGREEMENT",
+                    "value": "RVRP"
+                },
+                {
+                    "name": "STUDENT_LOAN_MARKETING_ASSOCIATION",
+                    "value": "SL"
+                },
+                {
+                    "name": "TIME_DEPOSIT",
+                    "value": "TD"
+                },
+                {
+                    "name": "US_TREASURY_BILL",
+                    "value": "USTB"
+                },
+                {
+                    "name": "WARRANT",
+                    "value": "WAR"
+                },
+                {
+                    "name": "CATS_TIGERS_LIONS",
+                    "value": "ZOO"
+                }
+            ]
+        },
+        {
+            "id": "169",
+            "name": "StandInstDbType",
+            "values": [
+                {
+                    "name": "OTHER",
+                    "value": "0"
+                },
+                {
+                    "name": "DTC_SID",
+                    "value": "1"
+                },
+                {
+                    "name": "THOMSON_ALERT",
+                    "value": "2"
+                },
+                {
+                    "name": "A_GLOBAL_CUSTODIAN",
+                    "value": "3"
+                }
+            ]
+        },
+        {
+            "id": "18",
+            "name": "ExecInst",
+            "values": [
+                {
+                    "name": "STAY_ON_OFFERSIDE",
+                    "value": "0"
+                },
+                {
+                    "name": "NOT_HELD",
+                    "value": "1"
+                },
+                {
+                    "name": "WORK",
+                    "value": "2"
+                },
+                {
+                    "name": "GO_ALONG",
+                    "value": "3"
+                },
+                {
+                    "name": "OVER_THE_DAY",
+                    "value": "4"
+                },
+                {
+                    "name": "HELD",
+                    "value": "5"
+                },
+                {
+                    "name": "PARTICIPATE_DONT_INITIATE",
+                    "value": "6"
+                },
+                {
+                    "name": "STRICT_SCALE",
+                    "value": "7"
+                },
+                {
+                    "name": "TRY_TO_SCALE",
+                    "value": "8"
+                },
+                {
+                    "name": "STAY_ON_BIDSIDE",
+                    "value": "9"
+                },
+                {
+                    "name": "NO_CROSS",
+                    "value": "A"
+                },
+                {
+                    "name": "OK_TO_CROSS",
+                    "value": "B"
+                },
+                {
+                    "name": "CALL_FIRST",
+                    "value": "C"
+                },
+                {
+                    "name": "PERCENT_OF_VOLUME",
+                    "value": "D"
+                },
+                {
+                    "name": "DO_NOT_INCREASE",
+                    "value": "E"
+                },
+                {
+                    "name": "DO_NOT_REDUCE",
+                    "value": "F"
+                },
+                {
+                    "name": "ALL_OR_NONE",
+                    "value": "G"
+                },
+                {
+                    "name": "INSTITUTIONS_ONLY",
+                    "value": "I"
+                },
+                {
+                    "name": "LAST_PEG",
+                    "value": "L"
+                },
+                {
+                    "name": "MID_PRICE_PEG",
+                    "value": "M"
+                },
+                {
+                    "name": "NON_NEGOTIABLE",
+                    "value": "N"
+                },
+                {
+                    "name": "OPENING_PEG",
+                    "value": "O"
+                },
+                {
+                    "name": "MARKET_PEG",
+                    "value": "P"
+                },
+                {
+                    "name": "PRIMARY_PEG",
+                    "value": "R"
+                },
+                {
+                    "name": "SUSPEND",
+                    "value": "S"
+                },
+                {
+                    "name": "FIXED_PEG_TO_LOCAL_BEST_BID_OR_OFFER_AT_TIME_OF_ORDER",
+                    "value": "T"
+                },
+                {
+                    "name": "CUSTOMER_DISPLAY_INSTRUCTION",
+                    "value": "U"
+                },
+                {
+                    "name": "NETTING",
+                    "value": "V"
+                },
+                {
+                    "name": "PEG_TO_VWAP",
+                    "value": "W"
+                }
+            ]
+        },
+        {
+            "id": "197",
+            "name": "AllocLinkType",
+            "values": [
+                {
+                    "name": "F_X_NETTING",
+                    "value": "0"
+                },
+                {
+                    "name": "F_X_SWAP",
+                    "value": "1"
+                }
+            ]
+        },
+        {
+            "id": "20",
+            "name": "ExecTransType",
+            "values": [
+                {
+                    "name": "NEW",
+                    "value": "0"
+                },
+                {
+                    "name": "CANCEL",
+                    "value": "1"
+                },
+                {
+                    "name": "CORRECT",
+                    "value": "2"
+                },
+                {
+                    "name": "STATUS",
+                    "value": "3"
+                }
+            ]
+        },
+        {
+            "id": "201",
+            "name": "PutOrCall",
+            "values": [
+                {
+                    "name": "PUT",
+                    "value": "0"
+                },
+                {
+                    "name": "CALL",
+                    "value": "1"
+                }
+            ]
+        },
+        {
+            "id": "203",
+            "name": "CoveredOrUncovered",
+            "values": [
+                {
+                    "name": "COVERED",
+                    "value": "0"
+                },
+                {
+                    "name": "UNCOVERED",
+                    "value": "1"
+                }
+            ]
+        },
+        {
+            "id": "204",
+            "name": "CustomerOrFirm",
+            "values": [
+                {
+                    "name": "CUSTOMER",
+                    "value": "0"
+                },
+                {
+                    "name": "FIRM",
+                    "value": "1"
+                }
+            ]
+        },
+        {
+            "id": "208",
+            "name": "NotifyBrokerOfCredit",
+            "values": [
+                {
+                    "name": "NO",
+                    "value": "N"
+                },
+                {
+                    "name": "YES",
+                    "value": "Y"
+                }
+            ]
+        },
+        {
+            "id": "209",
+            "name": "AllocHandlInst",
+            "values": [
+                {
+                    "name": "MATCH",
+                    "value": "1"
+                },
+                {
+                    "name": "FORWARD",
+                    "value": "2"
+                },
+                {
+                    "name": "FORWARD_AND_MATCH",
+                    "value": "3"
+                }
+            ]
+        },
+        {
+            "id": "21",
+            "name": "HandlInst",
+            "values": [
+                {
+                    "name": "AUTOMATED_EXECUTION_ORDER_PRIVATE_NO_BROKER_INTERVENTION",
+                    "value": "1"
+                },
+                {
+                    "name": "AUTOMATED_EXECUTION_ORDER_PUBLIC_BROKER_INTERVENTION_OK",
+                    "value": "2"
+                },
+                {
+                    "name": "MANUAL_ORDER_BEST_EXECUTION",
+                    "value": "3"
+                }
+            ]
+        },
+        {
+            "id": "216",
+            "name": "RoutingType",
+            "values": [
+                {
+                    "name": "TARGET_FIRM",
+                    "value": "1"
+                },
+                {
+                    "name": "TARGET_LIST",
+                    "value": "2"
+                },
+                {
+                    "name": "BLOCK_FIRM",
+                    "value": "3"
+                },
+                {
+                    "name": "BLOCK_LIST",
+                    "value": "4"
+                }
+            ]
+        },
+        {
+            "id": "219",
+            "name": "Benchmark",
+            "values": [
+                {
+                    "name": "CURVE",
+                    "value": "1"
+                },
+                {
+                    "name": "5_YR",
+                    "value": "2"
+                },
+                {
+                    "name": "OLD_5",
+                    "value": "3"
+                },
+                {
+                    "name": "10_YR",
+                    "value": "4"
+                },
+                {
+                    "name": "OLD_10",
+                    "value": "5"
+                },
+                {
+                    "name": "30_YR",
+                    "value": "6"
+                },
+                {
+                    "name": "OLD_30",
+                    "value": "7"
+                },
+                {
+                    "name": "3_MO_LIBOR",
+                    "value": "8"
+                },
+                {
+                    "name": "6_MO_LIBOR",
+                    "value": "9"
+                }
+            ]
+        },
+        {
+            "id": "22",
+            "name": "IDSource",
+            "values": [
+                {
+                    "name": "CUSIP",
+                    "value": "1"
+                },
+                {
+                    "name": "SEDOL",
+                    "value": "2"
+                },
+                {
+                    "name": "QUIK",
+                    "value": "3"
+                },
+                {
+                    "name": "ISIN_NUMBER",
+                    "value": "4"
+                },
+                {
+                    "name": "RIC_CODE",
+                    "value": "5"
+                },
+                {
+                    "name": "ISO_CURRENCY_CODE",
+                    "value": "6"
+                },
+                {
+                    "name": "ISO_COUNTRY_CODE",
+                    "value": "7"
+                },
+                {
+                    "name": "EXCHANGE_SYMBOL",
+                    "value": "8"
+                },
+                {
+                    "name": "CONSOLIDATED_TAPE_ASSOCIATION",
+                    "value": "9"
+                }
+            ]
+        },
+        {
+            "id": "25",
+            "name": "IOIQltyInd",
+            "values": [
+                {
+                    "name": "HIGH",
+                    "value": "H"
+                },
+                {
+                    "name": "LOW",
+                    "value": "L"
+                },
+                {
+                    "name": "MEDIUM",
+                    "value": "M"
+                }
+            ]
+        },
+        {
+            "id": "263",
+            "name": "SubscriptionRequestType",
+            "values": [
+                {
+                    "name": "SNAPSHOT",
+                    "value": "0"
+                },
+                {
+                    "name": "SNAPSHOT_PLUS_UPDATES",
+                    "value": "1"
+                },
+                {
+                    "name": "DISABLE_PREVIOUS_SNAPSHOT_PLUS_UPDATE_REQUEST",
+                    "value": "2"
+                }
+            ]
+        },
+        {
+            "id": "265",
+            "name": "MDUpdateType",
+            "values": [
+                {
+                    "name": "FULL_REFRESH",
+                    "value": "0"
+                },
+                {
+                    "name": "INCREMENTAL_REFRESH",
+                    "value": "1"
+                }
+            ]
+        },
+        {
+            "id": "266",
+            "name": "AggregatedBook",
+            "values": [
+                {
+                    "name": "NO",
+                    "value": "N"
+                },
+                {
+                    "name": "YES",
+                    "value": "Y"
+                }
+            ]
+        },
+        {
+            "id": "269",
+            "name": "MDEntryType",
+            "values": [
+                {
+                    "name": "BID",
+                    "value": "0"
+                },
+                {
+                    "name": "OFFER",
+                    "value": "1"
+                },
+                {
+                    "name": "TRADE",
+                    "value": "2"
+                },
+                {
+                    "name": "INDEX_VALUE",
+                    "value": "3"
+                },
+                {
+                    "name": "OPENING_PRICE",
+                    "value": "4"
+                },
+                {
+                    "name": "CLOSING_PRICE",
+                    "value": "5"
+                },
+                {
+                    "name": "SETTLEMENT_PRICE",
+                    "value": "6"
+                },
+                {
+                    "name": "TRADING_SESSION_HIGH_PRICE",
+                    "value": "7"
+                },
+                {
+                    "name": "TRADING_SESSION_LOW_PRICE",
+                    "value": "8"
+                },
+                {
+                    "name": "TRADING_SESSION_VWAP_PRICE",
+                    "value": "9"
+                }
+            ]
+        },
+        {
+            "id": "27",
+            "name": "IOIShares",
+            "values": [
+                {
+                    "name": "LARGE",
+                    "value": "L"
+                },
+                {
+                    "name": "MEDIUM",
+                    "value": "M"
+                },
+                {
+                    "name": "SMALL",
+                    "value": "S"
+                }
+            ]
+        },
+        {
+            "id": "274",
+            "name": "TickDirection",
+            "values": [
+                {
+                    "name": "PLUS_TICK",
+                    "value": "0"
+                },
+                {
+                    "name": "ZERO_PLUS_TICK",
+                    "value": "1"
+                },
+                {
+                    "name": "MINUS_TICK",
+                    "value": "2"
+                },
+                {
+                    "name": "ZERO_MINUS_TICK",
+                    "value": "3"
+                }
+            ]
+        },
+        {
+            "id": "276",
+            "name": "QuoteCondition",
+            "values": [
+                {
+                    "name": "OPEN",
+                    "value": "A"
+                },
+                {
+                    "name": "CLOSED",
+                    "value": "B"
+                },
+                {
+                    "name": "EXCHANGE_BEST",
+                    "value": "C"
+                },
+                {
+                    "name": "CONSOLIDATED_BEST",
+                    "value": "D"
+                },
+                {
+                    "name": "LOCKED",
+                    "value": "E"
+                },
+                {
+                    "name": "CROSSED",
+                    "value": "F"
+                },
+                {
+                    "name": "DEPTH",
+                    "value": "G"
+                },
+                {
+                    "name": "FAST_TRADING",
+                    "value": "H"
+                },
+                {
+                    "name": "NON_FIRM",
+                    "value": "I"
+                }
+            ]
+        },
+        {
+            "id": "277",
+            "name": "TradeCondition",
+            "values": [
+                {
+                    "name": "CASH",
+                    "value": "A"
+                },
+                {
+                    "name": "AVERAGE_PRICE_TRADE",
+                    "value": "B"
+                },
+                {
+                    "name": "CASH_TRADE",
+                    "value": "C"
+                },
+                {
+                    "name": "NEXT_DAY",
+                    "value": "D"
+                },
+                {
+                    "name": "OPENING",
+                    "value": "E"
+                },
+                {
+                    "name": "INTRADAY_TRADE_DETAIL",
+                    "value": "F"
+                },
+                {
+                    "name": "RULE_127_TRADE",
+                    "value": "G"
+                },
+                {
+                    "name": "RULE_155_TRADE",
+                    "value": "H"
+                },
+                {
+                    "name": "SOLD_LAST",
+                    "value": "I"
+                },
+                {
+                    "name": "NEXT_DAY_TRADE",
+                    "value": "J"
+                },
+                {
+                    "name": "OPENED",
+                    "value": "K"
+                },
+                {
+                    "name": "SELLER",
+                    "value": "L"
+                },
+                {
+                    "name": "SOLD",
+                    "value": "M"
+                },
+                {
+                    "name": "STOPPED_STOCK",
+                    "value": "N"
+                }
+            ]
+        },
+        {
+            "id": "279",
+            "name": "MDUpdateAction",
+            "values": [
+                {
+                    "name": "NEW",
+                    "value": "0"
+                },
+                {
+                    "name": "CHANGE",
+                    "value": "1"
+                },
+                {
+                    "name": "DELETE",
+                    "value": "2"
+                }
+            ]
+        },
+        {
+            "id": "28",
+            "name": "IOITransType",
+            "values": [
+                {
+                    "name": "CANCEL",
+                    "value": "C"
+                },
+                {
+                    "name": "NEW",
+                    "value": "N"
+                },
+                {
+                    "name": "REPLACE",
+                    "value": "R"
+                }
+            ]
+        },
+        {
+            "id": "281",
+            "name": "MDReqRejReason",
+            "values": [
+                {
+                    "name": "UNKNOWN_SYMBOL",
+                    "value": "0"
+                },
+                {
+                    "name": "DUPLICATE_MDREQID",
+                    "value": "1"
+                },
+                {
+                    "name": "INSUFFICIENT_BANDWIDTH",
+                    "value": "2"
+                },
+                {
+                    "name": "INSUFFICIENT_PERMISSIONS",
+                    "value": "3"
+                },
+                {
+                    "name": "UNSUPPORTED_SUBSCRIPTIONREQUESTTYPE",
+                    "value": "4"
+                },
+                {
+                    "name": "UNSUPPORTED_MARKETDEPTH",
+                    "value": "5"
+                },
+                {
+                    "name": "UNSUPPORTED_MDUPDATETYPE",
+                    "value": "6"
+                },
+                {
+                    "name": "UNSUPPORTED_AGGREGATEDBOOK",
+                    "value": "7"
+                },
+                {
+                    "name": "UNSUPPORTED_MDENTRYTYPE",
+                    "value": "8"
+                }
+            ]
+        },
+        {
+            "id": "285",
+            "name": "DeleteReason",
+            "values": [
+                {
+                    "name": "CANCELATION",
+                    "value": "0"
+                },
+                {
+                    "name": "ERROR",
+                    "value": "1"
+                }
+            ]
+        },
+        {
+            "id": "286",
+            "name": "OpenCloseSettleFlag",
+            "values": [
+                {
+                    "name": "DAILY_OPEN",
+                    "value": "0"
+                },
+                {
+                    "name": "SESSION_OPEN",
+                    "value": "1"
+                },
+                {
+                    "name": "DELIVERY_SETTLEMENT_PRICE",
+                    "value": "2"
+                }
+            ]
+        },
+        {
+            "id": "29",
+            "name": "LastCapacity",
+            "values": [
+                {
+                    "name": "AGENT",
+                    "value": "1"
+                },
+                {
+                    "name": "CROSS_AS_AGENT",
+                    "value": "2"
+                },
+                {
+                    "name": "CROSS_AS_PRINCIPAL",
+                    "value": "3"
+                },
+                {
+                    "name": "PRINCIPAL",
+                    "value": "4"
+                }
+            ]
+        },
+        {
+            "id": "291",
+            "name": "FinancialStatus",
+            "values": [
+                {
+                    "name": "BANKRUPT",
+                    "value": "1"
+                }
+            ]
+        },
+        {
+            "id": "292",
+            "name": "CorporateAction",
+            "values": [
+                {
+                    "name": "EX_DIVIDEND",
+                    "value": "A"
+                },
+                {
+                    "name": "EX_DISTRIBUTION",
+                    "value": "B"
+                },
+                {
+                    "name": "EX_RIGHTS",
+                    "value": "C"
+                },
+                {
+                    "name": "NEW",
+                    "value": "D"
+                },
+                {
+                    "name": "EX_INTEREST",
+                    "value": "E"
+                }
+            ]
+        },
+        {
+            "id": "297",
+            "name": "QuoteAckStatus",
+            "values": [
+                {
+                    "name": "ACCEPTED",
+                    "value": "0"
+                },
+                {
+                    "name": "CANCELED_FOR_SYMBOL",
+                    "value": "1"
+                },
+                {
+                    "name": "CANCELED_FOR_SECURITY_TYPE",
+                    "value": "2"
+                },
+                {
+                    "name": "CANCELED_FOR_UNDERLYING",
+                    "value": "3"
+                },
+                {
+                    "name": "CANCELED_ALL",
+                    "value": "4"
+                },
+                {
+                    "name": "REJECTED",
+                    "value": "5"
+                }
+            ]
+        },
+        {
+            "id": "298",
+            "name": "QuoteCancelType",
+            "values": [
+                {
+                    "name": "CANCEL_FOR_SYMBOL",
+                    "value": "1"
+                },
+                {
+                    "name": "CANCEL_FOR_SECURITY_TYPE",
+                    "value": "2"
+                },
+                {
+                    "name": "CANCEL_FOR_UNDERLYING_SYMBOL",
+                    "value": "3"
+                },
+                {
+                    "name": "CANCEL_FOR_ALL_QUOTES",
+                    "value": "4"
+                }
+            ]
+        },
+        {
+            "id": "300",
+            "name": "QuoteRejectReason",
+            "values": [
+                {
+                    "name": "UNKNOWN_SYMBOL",
+                    "value": "1"
+                },
+                {
+                    "name": "EXCHANGE",
+                    "value": "2"
+                },
+                {
+                    "name": "QUOTE_REQUEST_EXCEEDS_LIMIT",
+                    "value": "3"
+                },
+                {
+                    "name": "TOO_LATE_TO_ENTER",
+                    "value": "4"
+                },
+                {
+                    "name": "UNKNOWN_QUOTE",
+                    "value": "5"
+                },
+                {
+                    "name": "DUPLICATE_QUOTE",
+                    "value": "6"
+                },
+                {
+                    "name": "INVALID_BID_ASK_SPREAD",
+                    "value": "7"
+                },
+                {
+                    "name": "INVALID_PRICE",
+                    "value": "8"
+                },
+                {
+                    "name": "NOT_AUTHORIZED_TO_QUOTE_SECURITY",
+                    "value": "9"
+                }
+            ]
+        },
+        {
+            "id": "301",
+            "name": "QuoteResponseLevel",
+            "values": [
+                {
+                    "name": "NO_ACKNOWLEDGEMENT",
+                    "value": "0"
+                },
+                {
+                    "name": "ACKNOWLEDGE_ONLY_NEGATIVE_OR_ERRONEOUS_QUOTES",
+                    "value": "1"
+                },
+                {
+                    "name": "ACKNOWLEDGE_EACH_QUOTE_MESSAGES",
+                    "value": "2"
+                }
+            ]
+        },
+        {
+            "id": "303",
+            "name": "QuoteRequestType",
+            "values": [
+                {
+                    "name": "MANUAL",
+                    "value": "1"
+                },
+                {
+                    "name": "AUTOMATIC",
+                    "value": "2"
+                }
+            ]
+        },
+        {
+            "id": "321",
+            "name": "SecurityRequestType",
+            "values": [
+                {
+                    "name": "REQUEST_SECURITY_IDENTITY_AND_SPECIFICATIONS",
+                    "value": "0"
+                },
+                {
+                    "name": "REQUEST_SECURITY_IDENTITY_FOR_THE_SPECIFICATIONS_PROVIDED",
+                    "value": "1"
+                },
+                {
+                    "name": "REQUEST_LIST_SECURITY_TYPES",
+                    "value": "2"
+                },
+                {
+                    "name": "REQUEST_LIST_SECURITIES",
+                    "value": "3"
+                }
+            ]
+        },
+        {
+            "id": "323",
+            "name": "SecurityResponseType",
+            "values": [
+                {
+                    "name": "ACCEPT_SECURITY_PROPOSAL_AS_IS",
+                    "value": "1"
+                },
+                {
+                    "name": "ACCEPT_SECURITY_PROPOSAL_WITH_REVISIONS_AS_INDICATED_IN_THE_MESSAGE",
+                    "value": "2"
+                },
+                {
+                    "name": "LIST_OF_SECURITY_TYPES_RETURNED_PER_REQUEST",
+                    "value": "3"
+                },
+                {
+                    "name": "LIST_OF_SECURITIES_RETURNED_PER_REQUEST",
+                    "value": "4"
+                },
+                {
+                    "name": "REJECT_SECURITY_PROPOSAL",
+                    "value": "5"
+                },
+                {
+                    "name": "CAN_NOT_MATCH_SELECTION_CRITERIA",
+                    "value": "6"
+                }
+            ]
+        },
+        {
+            "id": "325",
+            "name": "UnsolicitedIndicator",
+            "values": [
+                {
+                    "name": "NO",
+                    "value": "N"
+                },
+                {
+                    "name": "YES",
+                    "value": "Y"
+                }
+            ]
+        },
+        {
+            "id": "326",
+            "name": "SecurityTradingStatus",
+            "values": [
+                {
+                    "name": "OPENING_DELAY",
+                    "value": "1"
+                },
+                {
+                    "name": "MARKET_ON_CLOSE_IMBALANCE_SELL",
+                    "value": "10"
+                },
+                {
+                    "name": "NO_MARKET_IMBALANCE",
+                    "value": "12"
+                },
+                {
+                    "name": "NO_MARKET_ON_CLOSE_IMBALANCE",
+                    "value": "13"
+                },
+                {
+                    "name": "ITS_PRE_OPENING",
+                    "value": "14"
+                },
+                {
+                    "name": "NEW_PRICE_INDICATION",
+                    "value": "15"
+                },
+                {
+                    "name": "TRADE_DISSEMINATION_TIME",
+                    "value": "16"
+                },
+                {
+                    "name": "READY_TO_TRADE",
+                    "value": "17"
+                },
+                {
+                    "name": "NOT_AVAILABLE_FOR_TRADING",
+                    "value": "18"
+                },
+                {
+                    "name": "NOT_TRADED_ON_THIS_MARKET",
+                    "value": "19"
+                },
+                {
+                    "name": "TRADING_HALT",
+                    "value": "2"
+                },
+                {
+                    "name": "UNKNOWN_OR_INVALID",
+                    "value": "20"
+                },
+                {
+                    "name": "RESUME",
+                    "value": "3"
+                },
+                {
+                    "name": "NO_OPEN_NO_RESUME",
+                    "value": "4"
+                },
+                {
+                    "name": "PRICE_INDICATION",
+                    "value": "5"
+                },
+                {
+                    "name": "TRADING_RANGE_INDICATION",
+                    "value": "6"
+                },
+                {
+                    "name": "MARKET_IMBALANCE_BUY",
+                    "value": "7"
+                },
+                {
+                    "name": "MARKET_IMBALANCE_SELL",
+                    "value": "8"
+                },
+                {
+                    "name": "MARKET_ON_CLOSE_IMBALANCE_BUY",
+                    "value": "9"
+                }
+            ]
+        },
+        {
+            "id": "327",
+            "name": "HaltReasonChar",
+            "values": [
+                {
+                    "name": "NEWS_DISSEMINATION",
+                    "value": "D"
+                },
+                {
+                    "name": "ORDER_INFLUX",
+                    "value": "E"
+                },
+                {
+                    "name": "ORDER_IMBALANCE",
+                    "value": "I"
+                },
+                {
+                    "name": "ADDITIONAL_INFORMATION",
+                    "value": "M"
+                },
+                {
+                    "name": "NEWS_PENDING",
+                    "value": "P"
+                },
+                {
+                    "name": "EQUIPMENT_CHANGEOVER",
+                    "value": "X"
+                }
+            ]
+        },
+        {
+            "id": "328",
+            "name": "InViewOfCommon",
+            "values": [
+                {
+                    "name": "NO",
+                    "value": "N"
+                },
+                {
+                    "name": "YES",
+                    "value": "Y"
+                }
+            ]
+        },
+        {
+            "id": "329",
+            "name": "DueToRelated",
+            "values": [
+                {
+                    "name": "NO",
+                    "value": "N"
+                },
+                {
+                    "name": "YES",
+                    "value": "Y"
+                }
+            ]
+        },
+        {
+            "id": "334",
+            "name": "Adjustment",
+            "values": [
+                {
+                    "name": "CANCEL",
+                    "value": "1"
+                },
+                {
+                    "name": "ERROR",
+                    "value": "2"
+                },
+                {
+                    "name": "CORRECTION",
+                    "value": "3"
+                }
+            ]
+        },
+        {
+            "id": "338",
+            "name": "TradSesMethod",
+            "values": [
+                {
+                    "name": "ELECTRONIC",
+                    "value": "1"
+                },
+                {
+                    "name": "OPEN_OUTCRY",
+                    "value": "2"
+                },
+                {
+                    "name": "TWO_PARTY",
+                    "value": "3"
+                }
+            ]
+        },
+        {
+            "id": "339",
+            "name": "TradSesMode",
+            "values": [
+                {
+                    "name": "TESTING",
+                    "value": "1"
+                },
+                {
+                    "name": "SIMULATED",
+                    "value": "2"
+                },
+                {
+                    "name": "PRODUCTION",
+                    "value": "3"
+                }
+            ]
+        },
+        {
+            "id": "340",
+            "name": "TradSesStatus",
+            "values": [
+                {
+                    "name": "HALTED",
+                    "value": "1"
+                },
+                {
+                    "name": "OPEN",
+                    "value": "2"
+                },
+                {
+                    "name": "CLOSED",
+                    "value": "3"
+                },
+                {
+                    "name": "PRE_OPEN",
+                    "value": "4"
+                },
+                {
+                    "name": "PRE_CLOSE",
+                    "value": "5"
+                }
+            ]
+        },
+        {
+            "id": "347",
+            "name": "MessageEncoding",
+            "values": [
+                {
+                    "name": "EUC_JP",
+                    "value": "EUC-JP"
+                },
+                {
+                    "name": "ISO_2022_JP",
+                    "value": "ISO-2022-JP"
+                },
+                {
+                    "name": "SHIFT_JIS",
+                    "value": "SHIFT_JIS"
+                },
+                {
+                    "name": "UTF_8",
+                    "value": "UTF-8"
+                }
+            ]
+        },
+        {
+            "id": "35",
+            "name": "MsgType",
+            "values": [
+                {
+                    "name": "HEARTBEAT",
+                    "value": "0"
+                },
+                {
+                    "name": "TEST_REQUEST",
+                    "value": "1"
+                },
+                {
+                    "name": "RESEND_REQUEST",
+                    "value": "2"
+                },
+                {
+                    "name": "REJECT",
+                    "value": "3"
+                },
+                {
+                    "name": "SEQUENCE_RESET",
+                    "value": "4"
+                },
+                {
+                    "name": "LOGOUT",
+                    "value": "5"
+                },
+                {
+                    "name": "INDICATION_OF_INTEREST",
+                    "value": "6"
+                },
+                {
+                    "name": "ADVERTISEMENT",
+                    "value": "7"
+                },
+                {
+                    "name": "EXECUTION_REPORT",
+                    "value": "8"
+                },
+                {
+                    "name": "ORDER_CANCEL_REJECT",
+                    "value": "9"
+                },
+                {
+                    "name": "QUOTE_STATUS_REQUEST",
+                    "value": "a"
+                },
+                {
+                    "name": "LOGON",
+                    "value": "A"
+                },
+                {
+                    "name": "NEWS",
+                    "value": "B"
+                },
+                {
+                    "name": "QUOTE_ACKNOWLEDGEMENT",
+                    "value": "b"
+                },
+                {
+                    "name": "EMAIL",
+                    "value": "C"
+                },
+                {
+                    "name": "SECURITY_DEFINITION_REQUEST",
+                    "value": "c"
+                },
+                {
+                    "name": "ORDER_SINGLE",
+                    "value": "D"
+                },
+                {
+                    "name": "SECURITY_DEFINITION",
+                    "value": "d"
+                },
+                {
+                    "name": "ORDER_LIST",
+                    "value": "E"
+                },
+                {
+                    "name": "SECURITY_STATUS_REQUEST",
+                    "value": "e"
+                },
+                {
+                    "name": "SECURITY_STATUS",
+                    "value": "f"
+                },
+                {
+                    "name": "ORDER_CANCEL_REQUEST",
+                    "value": "F"
+                },
+                {
+                    "name": "ORDER_CANCEL_REPLACE_REQUEST",
+                    "value": "G"
+                },
+                {
+                    "name": "TRADING_SESSION_STATUS_REQUEST",
+                    "value": "g"
+                },
+                {
+                    "name": "ORDER_STATUS_REQUEST",
+                    "value": "H"
+                },
+                {
+                    "name": "TRADING_SESSION_STATUS",
+                    "value": "h"
+                },
+                {
+                    "name": "MASS_QUOTE",
+                    "value": "i"
+                },
+                {
+                    "name": "BUSINESS_MESSAGE_REJECT",
+                    "value": "j"
+                },
+                {
+                    "name": "ALLOCATION",
+                    "value": "J"
+                },
+                {
+                    "name": "LIST_CANCEL_REQUEST",
+                    "value": "K"
+                },
+                {
+                    "name": "BID_REQUEST",
+                    "value": "k"
+                },
+                {
+                    "name": "BID_RESPONSE",
+                    "value": "l"
+                },
+                {
+                    "name": "LIST_EXECUTE",
+                    "value": "L"
+                },
+                {
+                    "name": "LIST_STRIKE_PRICE",
+                    "value": "m"
+                },
+                {
+                    "name": "LIST_STATUS_REQUEST",
+                    "value": "M"
+                },
+                {
+                    "name": "LIST_STATUS",
+                    "value": "N"
+                },
+                {
+                    "name": "ALLOCATION_ACK",
+                    "value": "P"
+                },
+                {
+                    "name": "DONT_KNOW_TRADE",
+                    "value": "Q"
+                },
+                {
+                    "name": "QUOTE_REQUEST",
+                    "value": "R"
+                },
+                {
+                    "name": "QUOTE",
+                    "value": "S"
+                },
+                {
+                    "name": "SETTLEMENT_INSTRUCTIONS",
+                    "value": "T"
+                },
+                {
+                    "name": "MARKET_DATA_REQUEST",
+                    "value": "V"
+                },
+                {
+                    "name": "MARKET_DATA_SNAPSHOT_FULL_REFRESH",
+                    "value": "W"
+                },
+                {
+                    "name": "MARKET_DATA_INCREMENTAL_REFRESH",
+                    "value": "X"
+                },
+                {
+                    "name": "MARKET_DATA_REQUEST_REJECT",
+                    "value": "Y"
+                },
+                {
+                    "name": "QUOTE_CANCEL",
+                    "value": "Z"
+                }
+            ]
+        },
+        {
+            "id": "368",
+            "name": "QuoteEntryRejectReason",
+            "values": [
+                {
+                    "name": "UNKNOWN_SYMBOL",
+                    "value": "1"
+                },
+                {
+                    "name": "EXCHANGE",
+                    "value": "2"
+                },
+                {
+                    "name": "QUOTE_EXCEEDS_LIMIT",
+                    "value": "3"
+                },
+                {
+                    "name": "TOO_LATE_TO_ENTER",
+                    "value": "4"
+                },
+                {
+                    "name": "UNKNOWN_QUOTE",
+                    "value": "5"
+                },
+                {
+                    "name": "DUPLICATE_QUOTE",
+                    "value": "6"
+                },
+                {
+                    "name": "INVALID_BID_ASK_SPREAD",
+                    "value": "7"
+                },
+                {
+                    "name": "INVALID_PRICE",
+                    "value": "8"
+                },
+                {
+                    "name": "NOT_AUTHORIZED_TO_QUOTE_SECURITY",
+                    "value": "9"
+                }
+            ]
+        },
+        {
+            "id": "373",
+            "name": "SessionRejectReason",
+            "values": [
+                {
+                    "name": "INVALID_TAG_NUMBER",
+                    "value": "0"
+                },
+                {
+                    "name": "REQUIRED_TAG_MISSING",
+                    "value": "1"
+                },
+                {
+                    "name": "SENDINGTIME_ACCURACY_PROBLEM",
+                    "value": "10"
+                },
+                {
+                    "name": "INVALID_MSGTYPE",
+                    "value": "11"
+                },
+                {
+                    "name": "TAG_NOT_DEFINED_FOR_THIS_MESSAGE_TYPE",
+                    "value": "2"
+                },
+                {
+                    "name": "UNDEFINED_TAG",
+                    "value": "3"
+                },
+                {
+                    "name": "TAG_SPECIFIED_WITHOUT_A_VALUE",
+                    "value": "4"
+                },
+                {
+                    "name": "VALUE_IS_INCORRECT",
+                    "value": "5"
+                },
+                {
+                    "name": "INCORRECT_DATA_FORMAT_FOR_VALUE",
+                    "value": "6"
+                },
+                {
+                    "name": "DECRYPTION_PROBLEM",
+                    "value": "7"
+                },
+                {
+                    "name": "SIGNATURE_PROBLEM",
+                    "value": "8"
+                },
+                {
+                    "name": "COMPID_PROBLEM",
+                    "value": "9"
+                }
+            ]
+        },
+        {
+            "id": "374",
+            "name": "BidRequestTransType",
+            "values": [
+                {
+                    "name": "CANCEL",
+                    "value": "C"
+                },
+                {
+                    "name": "NO",
+                    "value": "N"
+                }
+            ]
+        },
+        {
+            "id": "377",
+            "name": "SolicitedFlag",
+            "values": [
+                {
+                    "name": "NO",
+                    "value": "N"
+                },
+                {
+                    "name": "YES",
+                    "value": "Y"
+                }
+            ]
+        },
+        {
+            "id": "378",
+            "name": "ExecRestatementReason",
+            "values": [
+                {
+                    "name": "GT_CORPORATE_ACTION",
+                    "value": "0"
+                },
+                {
+                    "name": "GT_RENEWAL",
+                    "value": "1"
+                },
+                {
+                    "name": "VERBAL_CHANGE",
+                    "value": "2"
+                },
+                {
+                    "name": "REPRICING_OF_ORDER",
+                    "value": "3"
+                },
+                {
+                    "name": "BROKER_OPTION",
+                    "value": "4"
+                },
+                {
+                    "name": "PARTIAL_DECLINE_OF_ORDERQTY",
+                    "value": "5"
+                }
+            ]
+        },
+        {
+            "id": "380",
+            "name": "BusinessRejectReason",
+            "values": [
+                {
+                    "name": "OTHER",
+                    "value": "0"
+                },
+                {
+                    "name": "UNKOWN_ID",
+                    "value": "1"
+                },
+                {
+                    "name": "UNKNOWN_SECURITY",
+                    "value": "2"
+                },
+                {
+                    "name": "UNSUPPORTED_MESSAGE_TYPE",
+                    "value": "3"
+                },
+                {
+                    "name": "APPLICATION_NOT_AVAILABLE",
+                    "value": "4"
+                },
+                {
+                    "name": "CONDITIONALLY_REQUIRED_FIELD_MISSING",
+                    "value": "5"
+                }
+            ]
+        },
+        {
+            "id": "385",
+            "name": "MsgDirection",
+            "values": [
+                {
+                    "name": "RECEIVE",
+                    "value": "R"
+                },
+                {
+                    "name": "SEND",
+                    "value": "S"
+                }
+            ]
+        },
+        {
+            "id": "388",
+            "name": "DiscretionInst",
+            "values": [
+                {
+                    "name": "RELATED_TO_DISPLAYED_PRICE",
+                    "value": "0"
+                },
+                {
+                    "name": "RELATED_TO_MARKET_PRICE",
+                    "value": "1"
+                },
+                {
+                    "name": "RELATED_TO_PRIMARY_PRICE",
+                    "value": "2"
+                },
+                {
+                    "name": "RELATED_TO_LOCAL_PRIMARY_PRICE",
+                    "value": "3"
+                },
+                {
+                    "name": "RELATED_TO_MIDPOINT_PRICE",
+                    "value": "4"
+                },
+                {
+                    "name": "RELATED_TO_LAST_TRADE_PRICE",
+                    "value": "5"
+                }
+            ]
+        },
+        {
+            "id": "39",
+            "name": "OrdStatus",
+            "values": [
+                {
+                    "name": "NEW",
+                    "value": "0"
+                },
+                {
+                    "name": "PARTIALLY_FILLED",
+                    "value": "1"
+                },
+                {
+                    "name": "FILLED",
+                    "value": "2"
+                },
+                {
+                    "name": "DONE_FOR_DAY",
+                    "value": "3"
+                },
+                {
+                    "name": "CANCELED",
+                    "value": "4"
+                },
+                {
+                    "name": "REPLACED",
+                    "value": "5"
+                },
+                {
+                    "name": "PENDING_CANCEL",
+                    "value": "6"
+                },
+                {
+                    "name": "STOPPED",
+                    "value": "7"
+                },
+                {
+                    "name": "REJECTED",
+                    "value": "8"
+                },
+                {
+                    "name": "SUSPENDED",
+                    "value": "9"
+                },
+                {
+                    "name": "PENDING_NEW",
+                    "value": "A"
+                },
+                {
+                    "name": "CALCULATED",
+                    "value": "B"
+                },
+                {
+                    "name": "EXPIRED",
+                    "value": "C"
+                },
+                {
+                    "name": "ACCEPTED_FOR_BIDDING",
+                    "value": "D"
+                },
+                {
+                    "name": "PENDING_REPLACE",
+                    "value": "E"
+                }
+            ]
+        },
+        {
+            "id": "4",
+            "name": "AdvSide",
+            "values": [
+                {
+                    "name": "BUY",
+                    "value": "B"
+                },
+                {
+                    "name": "SELL",
+                    "value": "S"
+                },
+                {
+                    "name": "TRADE",
+                    "value": "T"
+                },
+                {
+                    "name": "CROSS",
+                    "value": "X"
+                }
+            ]
+        },
+        {
+            "id": "40",
+            "name": "OrdType",
+            "values": [
+                {
+                    "name": "MARKET",
+                    "value": "1"
+                },
+                {
+                    "name": "LIMIT",
+                    "value": "2"
+                },
+                {
+                    "name": "STOP",
+                    "value": "3"
+                },
+                {
+                    "name": "STOP_LIMIT",
+                    "value": "4"
+                },
+                {
+                    "name": "MARKET_ON_CLOSE",
+                    "value": "5"
+                },
+                {
+                    "name": "WITH_OR_WITHOUT",
+                    "value": "6"
+                },
+                {
+                    "name": "LIMIT_OR_BETTER",
+                    "value": "7"
+                },
+                {
+                    "name": "LIMIT_WITH_OR_WITHOUT",
+                    "value": "8"
+                },
+                {
+                    "name": "ON_BASIS",
+                    "value": "9"
+                },
+                {
+                    "name": "ON_CLOSE",
+                    "value": "A"
+                },
+                {
+                    "name": "LIMIT_ON_CLOSE",
+                    "value": "B"
+                },
+                {
+                    "name": "FOREX_C",
+                    "value": "C"
+                },
+                {
+                    "name": "PREVIOUSLY_QUOTED",
+                    "value": "D"
+                },
+                {
+                    "name": "PREVIOUSLY_INDICATED",
+                    "value": "E"
+                },
+                {
+                    "name": "FOREX_F",
+                    "value": "F"
+                },
+                {
+                    "name": "FOREX_G",
+                    "value": "G"
+                },
+                {
+                    "name": "FOREX_H",
+                    "value": "H"
+                },
+                {
+                    "name": "FUNARI",
+                    "value": "I"
+                },
+                {
+                    "name": "PEGGED",
+                    "value": "P"
+                }
+            ]
+        },
+        {
+            "id": "409",
+            "name": "LiquidityIndType",
+            "values": [
+                {
+                    "name": "5_DAY_MOVING_AVERAGE",
+                    "value": "1"
+                },
+                {
+                    "name": "20_DAY_MOVING_AVERAGE",
+                    "value": "2"
+                },
+                {
+                    "name": "NORMAL_MARKET_SIZE",
+                    "value": "3"
+                },
+                {
+                    "name": "OTHER",
+                    "value": "4"
+                }
+            ]
+        },
+        {
+            "id": "411",
+            "name": "ExchangeForPhysical",
+            "values": [
+                {
+                    "name": "NO",
+                    "value": "N"
+                },
+                {
+                    "name": "YES",
+                    "value": "Y"
+                }
+            ]
+        },
+        {
+            "id": "414",
+            "name": "ProgRptReqs",
+            "values": [
+                {
+                    "name": "BUYSIDE_EXPLICITLY_REQUESTS_STATUS_USING_STATUSREQUEST",
+                    "value": "1"
+                },
+                {
+                    "name": "SELLSIDE_PERIODICALLY_SENDS_STATUS_USING_LISTSTATUS_PERIOD_OPTIONALLY_SPECIFIED_IN_PROGRESSPERIOD",
+                    "value": "2"
+                },
+                {
+                    "name": "REAL_TIME_EXECUTION_REPORTS",
+                    "value": "3"
+                }
+            ]
+        },
+        {
+            "id": "416",
+            "name": "IncTaxInd",
+            "values": [
+                {
+                    "name": "NET",
+                    "value": "1"
+                },
+                {
+                    "name": "GROSS",
+                    "value": "2"
+                }
+            ]
+        },
+        {
+            "id": "418",
+            "name": "TradeType",
+            "values": [
+                {
+                    "name": "AGENCY",
+                    "value": "A"
+                },
+                {
+                    "name": "VWAP_GUARANTEE",
+                    "value": "G"
+                },
+                {
+                    "name": "GUARANTEED_CLOSE",
+                    "value": "J"
+                },
+                {
+                    "name": "RISK_TRADE",
+                    "value": "R"
+                }
+            ]
+        },
+        {
+            "id": "419",
+            "name": "BasisPxType",
+            "values": [
+                {
+                    "name": "CLOSING_PRICE_AT_MORNING_SESSION",
+                    "value": "2"
+                },
+                {
+                    "name": "CLOSING_PRICE",
+                    "value": "3"
+                },
+                {
+                    "name": "CURRENT_PRICE",
+                    "value": "4"
+                },
+                {
+                    "name": "SQ",
+                    "value": "5"
+                },
+                {
+                    "name": "VWAP_THROUGH_A_DAY",
+                    "value": "6"
+                },
+                {
+                    "name": "VWAP_THROUGH_A_MORNING_SESSION",
+                    "value": "7"
+                },
+                {
+                    "name": "VWAP_THROUGH_AN_AFTERNOON_SESSION",
+                    "value": "8"
+                },
+                {
+                    "name": "VWAP_THROUGH_A_DAY_EXCEPT_YORI",
+                    "value": "9"
+                },
+                {
+                    "name": "VWAP_THROUGH_A_MORNING_SESSION_EXCEPT_YORI",
+                    "value": "A"
+                },
+                {
+                    "name": "VWAP_THROUGH_AN_AFTERNOON_SESSION_EXCEPT_YORI",
+                    "value": "B"
+                },
+                {
+                    "name": "STRIKE",
+                    "value": "C"
+                },
+                {
+                    "name": "OPEN",
+                    "value": "D"
+                },
+                {
+                    "name": "OTHERS",
+                    "value": "Z"
+                }
+            ]
+        },
+        {
+            "id": "423",
+            "name": "PriceType",
+            "values": [
+                {
+                    "name": "PERCENTAGE",
+                    "value": "1"
+                },
+                {
+                    "name": "PER_SHARE",
+                    "value": "2"
+                },
+                {
+                    "name": "FIXED_AMOUNT",
+                    "value": "3"
+                }
+            ]
+        },
+        {
+            "id": "427",
+            "name": "GTBookingInst",
+            "values": [
+                {
+                    "name": "BOOK_OUT_ALL_TRADES_ON_DAY_OF_EXECUTION",
+                    "value": "0"
+                },
+                {
+                    "name": "ACCUMULATE_EXECUTIONS_UNTIL_ORDER_IS_FILLED_OR_EXPIRES",
+                    "value": "1"
+                },
+                {
+                    "name": "ACCUMULATE_UNTIL_VERBALLY_NOTIFIED_OTHERWISE",
+                    "value": "2"
+                }
+            ]
+        },
+        {
+            "id": "43",
+            "name": "PossDupFlag",
+            "values": [
+                {
+                    "name": "NO",
+                    "value": "N"
+                },
+                {
+                    "name": "YES",
+                    "value": "Y"
+                }
+            ]
+        },
+        {
+            "id": "430",
+            "name": "NetGrossInd",
+            "values": [
+                {
+                    "name": "NET",
+                    "value": "1"
+                },
+                {
+                    "name": "GROSS",
+                    "value": "2"
+                }
+            ]
+        },
+        {
+            "id": "433",
+            "name": "ListExecInstType",
+            "values": [
+                {
+                    "name": "IMMEDIATE",
+                    "value": "1"
+                },
+                {
+                    "name": "WAIT_FOR_EXECUTE_INSTRUCTION",
+                    "value": "2"
+                }
+            ]
+        },
+        {
+            "id": "434",
+            "name": "CxlRejResponseTo",
+            "values": [
+                {
+                    "name": "ORDER_CANCEL_REQUEST",
+                    "value": "1"
+                },
+                {
+                    "name": "ORDER_CANCEL_REPLACE_REQUEST",
+                    "value": "2"
+                }
+            ]
+        },
+        {
+            "id": "442",
+            "name": "MultiLegReportingType",
+            "values": [
+                {
+                    "name": "SINGLE_SECURITY",
+                    "value": "1"
+                },
+                {
+                    "name": "INDIVIDUAL_LEG_OF_A_MULTI_LEG_SECURITY",
+                    "value": "2"
+                },
+                {
+                    "name": "MULTI_LEG_SECURITY",
+                    "value": "3"
+                }
+            ]
+        },
+        {
+            "id": "47",
+            "name": "Rule80A",
+            "values": [
+                {
+                    "name": "AGENCY_SINGLE_ORDER",
+                    "value": "A"
+                },
+                {
+                    "name": "SHORT_EXEMPT_TRANSACTION_B",
+                    "value": "B"
+                },
+                {
+                    "name": "PROGRAM_ORDER_NON_INDEX_ARB_FOR_MEMBER_FIRM_ORG",
+                    "value": "C"
+                },
+                {
+                    "name": "PROGRAM_ORDER_INDEX_ARB_FOR_MEMBER_FIRM_ORG",
+                    "value": "D"
+                },
+                {
+                    "name": "REGISTERED_EQUITY_MARKET_MAKER_TRADES",
+                    "value": "E"
+                },
+                {
+                    "name": "SHORT_EXEMPT_TRANSACTION_F",
+                    "value": "F"
+                },
+                {
+                    "name": "SHORT_EXEMPT_TRANSACTION_H",
+                    "value": "H"
+                },
+                {
+                    "name": "INDIVIDUAL_INVESTOR_SINGLE_ORDER",
+                    "value": "I"
+                },
+                {
+                    "name": "PROGRAM_ORDER_INDEX_ARB_FOR_INDIVIDUAL_CUSTOMER",
+                    "value": "J"
+                },
+                {
+                    "name": "PROGRAM_ORDER_NON_INDEX_ARB_FOR_INDIVIDUAL_CUSTOMER",
+                    "value": "K"
+                },
+                {
+                    "name": "SHORT_EXEMPT_TRANSACTION_FOR_MEMBER_COMPETING_MARKET_MAKER_AFFILIATED_WITH_THE_FIRM_CLEARING_THE_TRADE",
+                    "value": "L"
+                },
+                {
+                    "name": "PROGRAM_ORDER_INDEX_ARB_FOR_OTHER_MEMBER",
+                    "value": "M"
+                },
+                {
+                    "name": "PROGRAM_ORDER_NON_INDEX_ARB_FOR_OTHER_MEMBER",
+                    "value": "N"
+                },
+                {
+                    "name": "COMPETING_DEALER_TRADES_O",
+                    "value": "O"
+                },
+                {
+                    "name": "PRINCIPAL",
+                    "value": "P"
+                },
+                {
+                    "name": "COMPETING_DEALER_TRADES_R",
+                    "value": "R"
+                },
+                {
+                    "name": "SPECIALIST_TRADES",
+                    "value": "S"
+                },
+                {
+                    "name": "COMPETING_DEALER_TRADES_T",
+                    "value": "T"
+                },
+                {
+                    "name": "PROGRAM_ORDER_INDEX_ARB_FOR_OTHER_AGENCY",
+                    "value": "U"
+                },
+                {
+                    "name": "ALL_OTHER_ORDERS_AS_AGENT_FOR_OTHER_MEMBER",
+                    "value": "W"
+                },
+                {
+                    "name": "SHORT_EXEMPT_TRANSACTION_FOR_MEMBER_COMPETING_MARKET_MAKER_NOT_AFFILIATED_WITH_THE_FIRM_CLEARING_THE_TRADE",
+                    "value": "X"
+                },
+                {
+                    "name": "PROGRAM_ORDER_NON_INDEX_ARB_FOR_OTHER_AGENCY",
+                    "value": "Y"
+                },
+                {
+                    "name": "SHORT_EXEMPT_TRANSACTION_FOR_NON_MEMBER_COMPETING_MARKET_MAKER",
+                    "value": "Z"
+                }
+            ]
+        },
+        {
+            "id": "5",
+            "name": "AdvTransType",
+            "values": [
+                {
+                    "name": "CANCEL",
+                    "value": "C"
+                },
+                {
+                    "name": "NEW",
+                    "value": "N"
+                },
+                {
+                    "name": "REPLACE",
+                    "value": "R"
+                }
+            ]
+        },
+        {
+            "id": "54",
+            "name": "Side",
+            "values": [
+                {
+                    "name": "BUY",
+                    "value": "1"
+                },
+                {
+                    "name": "SELL",
+                    "value": "2"
+                },
+                {
+                    "name": "BUY_MINUS",
+                    "value": "3"
+                },
+                {
+                    "name": "SELL_PLUS",
+                    "value": "4"
+                },
+                {
+                    "name": "SELL_SHORT",
+                    "value": "5"
+                },
+                {
+                    "name": "SELL_SHORT_EXEMPT",
+                    "value": "6"
+                },
+                {
+                    "name": "UNDISCLOSED",
+                    "value": "7"
+                },
+                {
+                    "name": "CROSS",
+                    "value": "8"
+                },
+                {
+                    "name": "CROSS_SHORT",
+                    "value": "9"
+                }
+            ]
+        },
+        {
+            "id": "59",
+            "name": "TimeInForce",
+            "values": [
+                {
+                    "name": "DAY",
+                    "value": "0"
+                },
+                {
+                    "name": "GOOD_TILL_CANCEL",
+                    "value": "1"
+                },
+                {
+                    "name": "AT_THE_OPENING",
+                    "value": "2"
+                },
+                {
+                    "name": "IMMEDIATE_OR_CANCEL",
+                    "value": "3"
+                },
+                {
+                    "name": "FILL_OR_KILL",
+                    "value": "4"
+                },
+                {
+                    "name": "GOOD_TILL_CROSSING",
+                    "value": "5"
+                },
+                {
+                    "name": "GOOD_TILL_DATE",
+                    "value": "6"
+                }
+            ]
+        },
+        {
+            "id": "61",
+            "name": "Urgency",
+            "values": [
+                {
+                    "name": "NORMAL",
+                    "value": "0"
+                },
+                {
+                    "name": "FLASH",
+                    "value": "1"
+                },
+                {
+                    "name": "BACKGROUND",
+                    "value": "2"
+                }
+            ]
+        },
+        {
+            "id": "63",
+            "name": "SettlmntTyp",
+            "values": [
+                {
+                    "name": "REGULAR",
+                    "value": "0"
+                },
+                {
+                    "name": "CASH",
+                    "value": "1"
+                },
+                {
+                    "name": "NEXT_DAY",
+                    "value": "2"
+                },
+                {
+                    "name": "T_PLUS_2",
+                    "value": "3"
+                },
+                {
+                    "name": "T_PLUS_3",
+                    "value": "4"
+                },
+                {
+                    "name": "T_PLUS_4",
+                    "value": "5"
+                },
+                {
+                    "name": "FUTURE",
+                    "value": "6"
+                },
+                {
+                    "name": "WHEN_ISSUED",
+                    "value": "7"
+                },
+                {
+                    "name": "SELLERS_OPTION",
+                    "value": "8"
+                },
+                {
+                    "name": "T_PLUS_5",
+                    "value": "9"
+                }
+            ]
+        },
+        {
+            "id": "71",
+            "name": "AllocTransType",
+            "values": [
+                {
+                    "name": "NEW",
+                    "value": "0"
+                },
+                {
+                    "name": "REPLACE",
+                    "value": "1"
+                },
+                {
+                    "name": "CANCEL",
+                    "value": "2"
+                },
+                {
+                    "name": "PRELIMINARY",
+                    "value": "3"
+                },
+                {
+                    "name": "CALCULATED",
+                    "value": "4"
+                },
+                {
+                    "name": "CALCULATED_WITHOUT_PRELIMINARY",
+                    "value": "5"
+                }
+            ]
+        },
+        {
+            "id": "77",
+            "name": "OpenClose",
+            "values": [
+                {
+                    "name": "CLOSE",
+                    "value": "C"
+                },
+                {
+                    "name": "OPEN",
+                    "value": "O"
+                }
+            ]
+        },
+        {
+            "id": "81",
+            "name": "ProcessCode",
+            "values": [
+                {
+                    "name": "REGULAR",
+                    "value": "0"
+                },
+                {
+                    "name": "SOFT_DOLLAR",
+                    "value": "1"
+                },
+                {
+                    "name": "STEP_IN",
+                    "value": "2"
+                },
+                {
+                    "name": "STEP_OUT",
+                    "value": "3"
+                },
+                {
+                    "name": "SOFT_DOLLAR_STEP_IN",
+                    "value": "4"
+                },
+                {
+                    "name": "SOFT_DOLLAR_STEP_OUT",
+                    "value": "5"
+                },
+                {
+                    "name": "PLAN_SPONSOR",
+                    "value": "6"
+                }
+            ]
+        },
+        {
+            "id": "87",
+            "name": "AllocStatus",
+            "values": [
+                {
+                    "name": "ACCEPTED",
+                    "value": "0"
+                },
+                {
+                    "name": "REJECTED",
+                    "value": "1"
+                },
+                {
+                    "name": "PARTIAL_ACCEPT",
+                    "value": "2"
+                },
+                {
+                    "name": "RECEIVED",
+                    "value": "3"
+                }
+            ]
+        },
+        {
+            "id": "88",
+            "name": "AllocRejCode",
+            "values": [
+                {
+                    "name": "UNKNOWN_ACCOUNT",
+                    "value": "0"
+                },
+                {
+                    "name": "INCORRECT_QUANTITY",
+                    "value": "1"
+                },
+                {
+                    "name": "INCORRECT_AVERAGE_PRICE",
+                    "value": "2"
+                },
+                {
+                    "name": "UNKNOWN_EXECUTING_BROKER_MNEMONIC",
+                    "value": "3"
+                },
+                {
+                    "name": "COMMISSION_DIFFERENCE",
+                    "value": "4"
+                },
+                {
+                    "name": "UNKNOWN_ORDERID",
+                    "value": "5"
+                },
+                {
+                    "name": "UNKNOWN_LISTID",
+                    "value": "6"
+                },
+                {
+                    "name": "OTHER",
+                    "value": "7"
+                }
+            ]
+        },
+        {
+            "id": "94",
+            "name": "EmailType",
+            "values": [
+                {
+                    "name": "NEW",
+                    "value": "0"
+                },
+                {
+                    "name": "REPLY",
+                    "value": "1"
+                },
+                {
+                    "name": "ADMIN_REPLY",
+                    "value": "2"
+                }
+            ]
+        },
+        {
+            "id": "97",
+            "name": "PossResend",
+            "values": [
+                {
+                    "name": "NO",
+                    "value": "N"
+                },
+                {
+                    "name": "YES",
+                    "value": "Y"
+                }
+            ]
+        },
+        {
+            "id": "98",
+            "name": "EncryptMethod",
+            "values": [
+                {
+                    "name": "NONE",
+                    "value": "0"
+                },
+                {
+                    "name": "PKCS",
+                    "value": "1"
+                },
+                {
+                    "name": "DES",
+                    "value": "2"
+                },
+                {
+                    "name": "PKCS_DES",
+                    "value": "3"
+                },
+                {
+                    "name": "PGP_DES",
+                    "value": "4"
+                },
+                {
+                    "name": "PGP_DES_MD5",
+                    "value": "5"
+                },
+                {
+                    "name": "PEM_DES_MD5",
+                    "value": "6"
+                }
+            ]
+        }
+    ],
+    "fields": [
+        {
+            "cpptype": "string",
+            "id": "1",
+            "isEnum": false,
+            "name": "Account",
+            "type": "STRING"
+        },
+        {
+            "cpptype": "string",
+            "id": "10",
+            "isEnum": false,
+            "name": "CheckSum",
+            "type": "STRING"
+        },
+        {
+            "cpptype": "string",
+            "id": "100",
+            "isEnum": false,
+            "name": "ExDestination",
+            "type": "EXCHANGE"
+        },
+        {
+            "cpptype": "int",
+            "id": "102",
+            "isEnum": false,
+            "name": "CxlRejReason",
+            "type": "INT"
+        },
+        {
+            "cpptype": "int",
+            "id": "103",
+            "isEnum": false,
+            "name": "OrdRejReason",
+            "type": "INT"
+        },
+        {
+            "cpptype": "char",
+            "id": "104",
+            "isEnum": false,
+            "name": "IOIQualifier",
+            "type": "CHAR"
+        },
+        {
+            "cpptype": "string",
+            "id": "105",
+            "isEnum": false,
+            "name": "WaveNo",
+            "type": "STRING"
+        },
+        {
+            "cpptype": "string",
+            "id": "106",
+            "isEnum": false,
+            "name": "Issuer",
+            "type": "STRING"
+        },
+        {
+            "cpptype": "string",
+            "id": "107",
+            "isEnum": false,
+            "name": "SecurityDesc",
+            "type": "STRING"
+        },
+        {
+            "cpptype": "int",
+            "id": "108",
+            "isEnum": false,
+            "name": "HeartBtInt",
+            "type": "INT"
+        },
+        {
+            "cpptype": "string",
+            "id": "109",
+            "isEnum": false,
+            "name": "ClientID",
+            "type": "STRING"
+        },
+        {
+            "cpptype": "string",
+            "id": "11",
+            "isEnum": false,
+            "name": "ClOrdID",
+            "type": "STRING"
+        },
+        {
+            "cpptype": "double",
+            "id": "110",
+            "isEnum": false,
+            "name": "MinQty",
+            "type": "QTY"
+        },
+        {
+            "cpptype": "double",
+            "id": "111",
+            "isEnum": false,
+            "name": "MaxFloor",
+            "type": "QTY"
+        },
+        {
+            "cpptype": "string",
+            "id": "112",
+            "isEnum": false,
+            "name": "TestReqID",
+            "type": "STRING"
+        },
+        {
+            "cpptype": "bool",
+            "id": "113",
+            "isEnum": false,
+            "name": "ReportToExch",
+            "type": "BOOLEAN"
+        },
+        {
+            "cpptype": "bool",
+            "id": "114",
+            "isEnum": false,
+            "name": "LocateReqd",
+            "type": "BOOLEAN"
+        },
+        {
+            "cpptype": "string",
+            "id": "115",
+            "isEnum": false,
+            "name": "OnBehalfOfCompID",
+            "type": "STRING"
+        },
+        {
+            "cpptype": "string",
+            "id": "116",
+            "isEnum": false,
+            "name": "OnBehalfOfSubID",
+            "type": "STRING"
+        },
+        {
+            "cpptype": "string",
+            "id": "117",
+            "isEnum": false,
+            "name": "QuoteID",
+            "type": "STRING"
+        },
+        {
+            "cpptype": "double",
+            "id": "118",
+            "isEnum": false,
+            "name": "NetMoney",
+            "type": "AMT"
+        },
+        {
+            "cpptype": "double",
+            "id": "119",
+            "isEnum": false,
+            "name": "SettlCurrAmt",
+            "type": "AMT"
+        },
+        {
+            "cpptype": "double",
+            "id": "12",
+            "isEnum": false,
+            "name": "Commission",
+            "type": "AMT"
+        },
+        {
+            "cpptype": "string",
+            "id": "120",
+            "isEnum": false,
+            "name": "SettlCurrency",
+            "type": "CURRENCY"
+        },
+        {
+            "cpptype": "bool",
+            "id": "121",
+            "isEnum": false,
+            "name": "ForexReq",
+            "type": "BOOLEAN"
+        },
+        {
+            "cpptype": "time",
+            "id": "122",
+            "isEnum": false,
+            "name": "OrigSendingTime",
+            "type": "UTCTIMESTAMP"
+        },
+        {
+            "cpptype": "bool",
+            "id": "123",
+            "isEnum": false,
+            "name": "GapFillFlag",
+            "type": "BOOLEAN"
+        },
+        {
+            "cpptype": "int",
+            "id": "124",
+            "isEnum": false,
+            "name": "NoExecs",
+            "type": "INT"
+        },
+        {
+            "cpptype": "char",
+            "id": "125",
+            "isEnum": false,
+            "name": "CxlType",
+            "type": "CHAR"
+        },
+        {
+            "cpptype": "time",
+            "id": "126",
+            "isEnum": false,
+            "name": "ExpireTime",
+            "type": "UTCTIMESTAMP"
+        },
+        {
+            "cpptype": "char",
+            "id": "127",
+            "isEnum": false,
+            "name": "DKReason",
+            "type": "CHAR"
+        },
+        {
+            "cpptype": "string",
+            "id": "128",
+            "isEnum": false,
+            "name": "DeliverToCompID",
+            "type": "STRING"
+        },
+        {
+            "cpptype": "string",
+            "id": "129",
+            "isEnum": false,
+            "name": "DeliverToSubID",
+            "type": "STRING"
+        },
+        {
+            "cpptype": "char",
+            "id": "13",
+            "isEnum": false,
+            "name": "CommType",
+            "type": "CHAR"
+        },
+        {
+            "cpptype": "bool",
+            "id": "130",
+            "isEnum": false,
+            "name": "IOINaturalFlag",
+            "type": "BOOLEAN"
+        },
+        {
+            "cpptype": "string",
+            "id": "131",
+            "isEnum": false,
+            "name": "QuoteReqID",
+            "type": "STRING"
+        },
+        {
+            "cpptype": "double",
+            "id": "132",
+            "isEnum": false,
+            "name": "BidPx",
+            "type": "PRICE"
+        },
+        {
+            "cpptype": "double",
+            "id": "133",
+            "isEnum": false,
+            "name": "OfferPx",
+            "type": "PRICE"
+        },
+        {
+            "cpptype": "double",
+            "id": "134",
+            "isEnum": false,
+            "name": "BidSize",
+            "type": "QTY"
+        },
+        {
+            "cpptype": "double",
+            "id": "135",
+            "isEnum": false,
+            "name": "OfferSize",
+            "type": "QTY"
+        },
+        {
+            "cpptype": "int",
+            "id": "136",
+            "isEnum": false,
+            "name": "NoMiscFees",
+            "type": "INT"
+        },
+        {
+            "cpptype": "double",
+            "id": "137",
+            "isEnum": false,
+            "name": "MiscFeeAmt",
+            "type": "AMT"
+        },
+        {
+            "cpptype": "string",
+            "id": "138",
+            "isEnum": false,
+            "name": "MiscFeeCurr",
+            "type": "CURRENCY"
+        },
+        {
+            "cpptype": "char",
+            "id": "139",
+            "isEnum": false,
+            "name": "MiscFeeType",
+            "type": "CHAR"
+        },
+        {
+            "cpptype": "double",
+            "id": "14",
+            "isEnum": false,
+            "name": "CumQty",
+            "type": "QTY"
+        },
+        {
+            "cpptype": "double",
+            "id": "140",
+            "isEnum": false,
+            "name": "PrevClosePx",
+            "type": "PRICE"
+        },
+        {
+            "cpptype": "bool",
+            "id": "141",
+            "isEnum": false,
+            "name": "ResetSeqNumFlag",
+            "type": "BOOLEAN"
+        },
+        {
+            "cpptype": "string",
+            "id": "142",
+            "isEnum": false,
+            "name": "SenderLocationID",
+            "type": "STRING"
+        },
+        {
+            "cpptype": "string",
+            "id": "143",
+            "isEnum": false,
+            "name": "TargetLocationID",
+            "type": "STRING"
+        },
+        {
+            "cpptype": "string",
+            "id": "144",
+            "isEnum": false,
+            "name": "OnBehalfOfLocationID",
+            "type": "STRING"
+        },
+        {
+            "cpptype": "string",
+            "id": "145",
+            "isEnum": false,
+            "name": "DeliverToLocationID",
+            "type": "STRING"
+        },
+        {
+            "cpptype": "int",
+            "id": "146",
+            "isEnum": false,
+            "name": "NoRelatedSym",
+            "type": "INT"
+        },
+        {
+            "cpptype": "string",
+            "id": "147",
+            "isEnum": false,
+            "name": "Subject",
+            "type": "STRING"
+        },
+        {
+            "cpptype": "string",
+            "id": "148",
+            "isEnum": false,
+            "name": "Headline",
+            "type": "STRING"
+        },
+        {
+            "cpptype": "string",
+            "id": "149",
+            "isEnum": false,
+            "name": "URLLink",
+            "type": "STRING"
+        },
+        {
+            "cpptype": "string",
+            "id": "15",
+            "isEnum": false,
+            "name": "Currency",
+            "type": "CURRENCY"
+        },
+        {
+            "cpptype": "char",
+            "id": "150",
+            "isEnum": false,
+            "name": "ExecType",
+            "type": "CHAR"
+        },
+        {
+            "cpptype": "double",
+            "id": "151",
+            "isEnum": false,
+            "name": "LeavesQty",
+            "type": "QTY"
+        },
+        {
+            "cpptype": "double",
+            "id": "152",
+            "isEnum": false,
+            "name": "CashOrderQty",
+            "type": "QTY"
+        },
+        {
+            "cpptype": "double",
+            "id": "153",
+            "isEnum": false,
+            "name": "AllocAvgPx",
+            "type": "PRICE"
+        },
+        {
+            "cpptype": "double",
+            "id": "154",
+            "isEnum": false,
+            "name": "AllocNetMoney",
+            "type": "AMT"
+        },
+        {
+            "cpptype": "double",
+            "id": "155",
+            "isEnum": false,
+            "name": "SettlCurrFxRate",
+            "type": "FLOAT"
+        },
+        {
+            "cpptype": "char",
+            "id": "156",
+            "isEnum": false,
+            "name": "SettlCurrFxRateCalc",
+            "type": "CHAR"
+        },
+        {
+            "cpptype": "int",
+            "id": "157",
+            "isEnum": false,
+            "name": "NumDaysInterest",
+            "type": "INT"
+        },
+        {
+            "cpptype": "double",
+            "id": "158",
+            "isEnum": false,
+            "name": "AccruedInterestRate",
+            "type": "FLOAT"
+        },
+        {
+            "cpptype": "double",
+            "id": "159",
+            "isEnum": false,
+            "name": "AccruedInterestAmt",
+            "type": "AMT"
+        },
+        {
+            "cpptype": "int",
+            "id": "16",
+            "isEnum": false,
+            "name": "EndSeqNo",
+            "type": "INT"
+        },
+        {
+            "cpptype": "char",
+            "id": "160",
+            "isEnum": false,
+            "name": "SettlInstMode",
+            "type": "CHAR"
+        },
+        {
+            "cpptype": "string",
+            "id": "161",
+            "isEnum": false,
+            "name": "AllocText",
+            "type": "STRING"
+        },
+        {
+            "cpptype": "string",
+            "id": "162",
+            "isEnum": false,
+            "name": "SettlInstID",
+            "type": "STRING"
+        },
+        {
+            "cpptype": "char",
+            "id": "163",
+            "isEnum": false,
+            "name": "SettlInstTransType",
+            "type": "CHAR"
+        },
+        {
+            "cpptype": "string",
+            "id": "164",
+            "isEnum": false,
+            "name": "EmailThreadID",
+            "type": "STRING"
+        },
+        {
+            "cpptype": "char",
+            "id": "165",
+            "isEnum": false,
+            "name": "SettlInstSource",
+            "type": "CHAR"
+        },
+        {
+            "cpptype": "string",
+            "id": "166",
+            "isEnum": false,
+            "name": "SettlLocation",
+            "type": "STRING"
+        },
+        {
+            "cpptype": "string",
+            "id": "167",
+            "isEnum": false,
+            "name": "SecurityType",
+            "type": "STRING"
+        },
+        {
+            "cpptype": "time",
+            "id": "168",
+            "isEnum": false,
+            "name": "EffectiveTime",
+            "type": "UTCTIMESTAMP"
+        },
+        {
+            "cpptype": "int",
+            "id": "169",
+            "isEnum": false,
+            "name": "StandInstDbType",
+            "type": "INT"
+        },
+        {
+            "cpptype": "string",
+            "id": "17",
+            "isEnum": false,
+            "name": "ExecID",
+            "type": "STRING"
+        },
+        {
+            "cpptype": "string",
+            "id": "170",
+            "isEnum": false,
+            "name": "StandInstDbName",
+            "type": "STRING"
+        },
+        {
+            "cpptype": "string",
+            "id": "171",
+            "isEnum": false,
+            "name": "StandInstDbID",
+            "type": "STRING"
+        },
+        {
+            "cpptype": "int",
+            "id": "172",
+            "isEnum": false,
+            "name": "SettlDeliveryType",
+            "type": "INT"
+        },
+        {
+            "cpptype": "string",
+            "id": "173",
+            "isEnum": false,
+            "name": "SettlDepositoryCode",
+            "type": "STRING"
+        },
+        {
+            "cpptype": "string",
+            "id": "174",
+            "isEnum": false,
+            "name": "SettlBrkrCode",
+            "type": "STRING"
+        },
+        {
+            "cpptype": "string",
+            "id": "175",
+            "isEnum": false,
+            "name": "SettlInstCode",
+            "type": "STRING"
+        },
+        {
+            "cpptype": "string",
+            "id": "176",
+            "isEnum": false,
+            "name": "SecuritySettlAgentName",
+            "type": "STRING"
+        },
+        {
+            "cpptype": "string",
+            "id": "177",
+            "isEnum": false,
+            "name": "SecuritySettlAgentCode",
+            "type": "STRING"
+        },
+        {
+            "cpptype": "string",
+            "id": "178",
+            "isEnum": false,
+            "name": "SecuritySettlAgentAcctNum",
+            "type": "STRING"
+        },
+        {
+            "cpptype": "string",
+            "id": "179",
+            "isEnum": false,
+            "name": "SecuritySettlAgentAcctName",
+            "type": "STRING"
+        },
+        {
+            "cpptype": "string",
+            "id": "18",
+            "isEnum": false,
+            "name": "ExecInst",
+            "type": "MULTIPLEVALUESTRING"
+        },
+        {
+            "cpptype": "string",
+            "id": "180",
+            "isEnum": false,
+            "name": "SecuritySettlAgentContactName",
+            "type": "STRING"
+        },
+        {
+            "cpptype": "string",
+            "id": "181",
+            "isEnum": false,
+            "name": "SecuritySettlAgentContactPhone",
+            "type": "STRING"
+        },
+        {
+            "cpptype": "string",
+            "id": "182",
+            "isEnum": false,
+            "name": "CashSettlAgentName",
+            "type": "STRING"
+        },
+        {
+            "cpptype": "string",
+            "id": "183",
+            "isEnum": false,
+            "name": "CashSettlAgentCode",
+            "type": "STRING"
+        },
+        {
+            "cpptype": "string",
+            "id": "184",
+            "isEnum": false,
+            "name": "CashSettlAgentAcctNum",
+            "type": "STRING"
+        },
+        {
+            "cpptype": "string",
+            "id": "185",
+            "isEnum": false,
+            "name": "CashSettlAgentAcctName",
+            "type": "STRING"
+        },
+        {
+            "cpptype": "string",
+            "id": "186",
+            "isEnum": false,
+            "name": "CashSettlAgentContactName",
+            "type": "STRING"
+        },
+        {
+            "cpptype": "string",
+            "id": "187",
+            "isEnum": false,
+            "name": "CashSettlAgentContactPhone",
+            "type": "STRING"
+        },
+        {
+            "cpptype": "double",
+            "id": "188",
+            "isEnum": false,
+            "name": "BidSpotRate",
+            "type": "PRICE"
+        },
+        {
+            "cpptype": "double",
+            "id": "189",
+            "isEnum": false,
+            "name": "BidForwardPoints",
+            "type": "PRICEOFFSET"
+        },
+        {
+            "cpptype": "string",
+            "id": "19",
+            "isEnum": false,
+            "name": "ExecRefID",
+            "type": "STRING"
+        },
+        {
+            "cpptype": "double",
+            "id": "190",
+            "isEnum": false,
+            "name": "OfferSpotRate",
+            "type": "PRICE"
+        },
+        {
+            "cpptype": "double",
+            "id": "191",
+            "isEnum": false,
+            "name": "OfferForwardPoints",
+            "type": "PRICEOFFSET"
+        },
+        {
+            "cpptype": "double",
+            "id": "192",
+            "isEnum": false,
+            "name": "OrderQty2",
+            "type": "QTY"
+        },
+        {
+            "cpptype": "time",
+            "id": "193",
+            "isEnum": false,
+            "name": "FutSettDate2",
+            "type": "LOCALMKTDATE"
+        },
+        {
+            "cpptype": "double",
+            "id": "194",
+            "isEnum": false,
+            "name": "LastSpotRate",
+            "type": "PRICE"
+        },
+        {
+            "cpptype": "double",
+            "id": "195",
+            "isEnum": false,
+            "name": "LastForwardPoints",
+            "type": "PRICEOFFSET"
+        },
+        {
+            "cpptype": "string",
+            "id": "196",
+            "isEnum": false,
+            "name": "AllocLinkID",
+            "type": "STRING"
+        },
+        {
+            "cpptype": "int",
+            "id": "197",
+            "isEnum": false,
+            "name": "AllocLinkType",
+            "type": "INT"
+        },
+        {
+            "cpptype": "string",
+            "id": "198",
+            "isEnum": false,
+            "name": "SecondaryOrderID",
+            "type": "STRING"
+        },
+        {
+            "cpptype": "int",
+            "id": "199",
+            "isEnum": false,
+            "name": "NoIOIQualifiers",
+            "type": "INT"
+        },
+        {
+            "cpptype": "string",
+            "id": "2",
+            "isEnum": false,
+            "name": "AdvId",
+            "type": "STRING"
+        },
+        {
+            "cpptype": "char",
+            "id": "20",
+            "isEnum": false,
+            "name": "ExecTransType",
+            "type": "CHAR"
+        },
+        {
+            "cpptype": "time",
+            "id": "200",
+            "isEnum": false,
+            "name": "MaturityMonthYear",
+            "type": "MONTHYEAR"
+        },
+        {
+            "cpptype": "int",
+            "id": "201",
+            "isEnum": false,
+            "name": "PutOrCall",
+            "type": "INT"
+        },
+        {
+            "cpptype": "double",
+            "id": "202",
+            "isEnum": false,
+            "name": "StrikePrice",
+            "type": "PRICE"
+        },
+        {
+            "cpptype": "int",
+            "id": "203",
+            "isEnum": false,
+            "name": "CoveredOrUncovered",
+            "type": "INT"
+        },
+        {
+            "cpptype": "int",
+            "id": "204",
+            "isEnum": false,
+            "name": "CustomerOrFirm",
+            "type": "INT"
+        },
+        {
+            "cpptype": "int",
+            "id": "205",
+            "isEnum": false,
+            "name": "MaturityDay",
+            "type": "DAYOFMONTH"
+        },
+        {
+            "cpptype": "char",
+            "id": "206",
+            "isEnum": false,
+            "name": "OptAttribute",
+            "type": "CHAR"
+        },
+        {
+            "cpptype": "string",
+            "id": "207",
+            "isEnum": false,
+            "name": "SecurityExchange",
+            "type": "EXCHANGE"
+        },
+        {
+            "cpptype": "bool",
+            "id": "208",
+            "isEnum": false,
+            "name": "NotifyBrokerOfCredit",
+            "type": "BOOLEAN"
+        },
+        {
+            "cpptype": "int",
+            "id": "209",
+            "isEnum": false,
+            "name": "AllocHandlInst",
+            "type": "INT"
+        },
+        {
+            "cpptype": "char",
+            "id": "21",
+            "isEnum": false,
+            "name": "HandlInst",
+            "type": "CHAR"
+        },
+        {
+            "cpptype": "double",
+            "id": "210",
+            "isEnum": false,
+            "name": "MaxShow",
+            "type": "QTY"
+        },
+        {
+            "cpptype": "double",
+            "id": "211",
+            "isEnum": false,
+            "name": "PegDifference",
+            "type": "PRICEOFFSET"
+        },
+        {
+            "cpptype": "int",
+            "id": "212",
+            "isEnum": false,
+            "name": "XmlDataLen",
+            "type": "LENGTH"
+        },
+        {
+            "cpptype": "string",
+            "id": "213",
+            "isEnum": false,
+            "name": "XmlData",
+            "type": "DATA"
+        },
+        {
+            "cpptype": "string",
+            "id": "214",
+            "isEnum": false,
+            "name": "SettlInstRefID",
+            "type": "STRING"
+        },
+        {
+            "cpptype": "int",
+            "id": "215",
+            "isEnum": false,
+            "name": "NoRoutingIDs",
+            "type": "INT"
+        },
+        {
+            "cpptype": "int",
+            "id": "216",
+            "isEnum": false,
+            "name": "RoutingType",
+            "type": "INT"
+        },
+        {
+            "cpptype": "string",
+            "id": "217",
+            "isEnum": false,
+            "name": "RoutingID",
+            "type": "STRING"
+        },
+        {
+            "cpptype": "double",
+            "id": "218",
+            "isEnum": false,
+            "name": "SpreadToBenchmark",
+            "type": "PRICEOFFSET"
+        },
+        {
+            "cpptype": "char",
+            "id": "219",
+            "isEnum": false,
+            "name": "Benchmark",
+            "type": "CHAR"
+        },
+        {
+            "cpptype": "string",
+            "id": "22",
+            "isEnum": false,
+            "name": "IDSource",
+            "type": "STRING"
+        },
+        {
+            "cpptype": "double",
+            "id": "223",
+            "isEnum": false,
+            "name": "CouponRate",
+            "type": "FLOAT"
+        },
+        {
+            "cpptype": "string",
+            "id": "23",
+            "isEnum": false,
+            "name": "IOIid",
+            "type": "STRING"
+        },
+        {
+            "cpptype": "double",
+            "id": "231",
+            "isEnum": false,
+            "name": "ContractMultiplier",
+            "type": "FLOAT"
+        },
+        {
+            "cpptype": "char",
+            "id": "24",
+            "isEnum": false,
+            "name": "IOIOthSvc",
+            "type": "CHAR"
+        },
+        {
+            "cpptype": "char",
+            "id": "25",
+            "isEnum": false,
+            "name": "IOIQltyInd",
+            "type": "CHAR"
+        },
+        {
+            "cpptype": "string",
+            "id": "26",
+            "isEnum": false,
+            "name": "IOIRefID",
+            "type": "STRING"
+        },
+        {
+            "cpptype": "string",
+            "id": "262",
+            "isEnum": false,
+            "name": "MDReqID",
+            "type": "STRING"
+        },
+        {
+            "cpptype": "char",
+            "id": "263",
+            "isEnum": false,
+            "name": "SubscriptionRequestType",
+            "type": "CHAR"
+        },
+        {
+            "cpptype": "int",
+            "id": "264",
+            "isEnum": false,
+            "name": "MarketDepth",
+            "type": "INT"
+        },
+        {
+            "cpptype": "int",
+            "id": "265",
+            "isEnum": false,
+            "name": "MDUpdateType",
+            "type": "INT"
+        },
+        {
+            "cpptype": "bool",
+            "id": "266",
+            "isEnum": false,
+            "name": "AggregatedBook",
+            "type": "BOOLEAN"
+        },
+        {
+            "cpptype": "int",
+            "id": "267",
+            "isEnum": false,
+            "name": "NoMDEntryTypes",
+            "type": "INT"
+        },
+        {
+            "cpptype": "int",
+            "id": "268",
+            "isEnum": false,
+            "name": "NoMDEntries",
+            "type": "INT"
+        },
+        {
+            "cpptype": "char",
+            "id": "269",
+            "isEnum": false,
+            "name": "MDEntryType",
+            "type": "CHAR"
+        },
+        {
+            "cpptype": "string",
+            "id": "27",
+            "isEnum": false,
+            "name": "IOIShares",
+            "type": "STRING"
+        },
+        {
+            "cpptype": "double",
+            "id": "270",
+            "isEnum": false,
+            "name": "MDEntryPx",
+            "type": "PRICE"
+        },
+        {
+            "cpptype": "double",
+            "id": "271",
+            "isEnum": false,
+            "name": "MDEntrySize",
+            "type": "QTY"
+        },
+        {
+            "cpptype": "time",
+            "id": "272",
+            "isEnum": false,
+            "name": "MDEntryDate",
+            "type": "UTCDATE"
+        },
+        {
+            "cpptype": "time",
+            "id": "273",
+            "isEnum": false,
+            "name": "MDEntryTime",
+            "type": "UTCTIMEONLY"
+        },
+        {
+            "cpptype": "char",
+            "id": "274",
+            "isEnum": false,
+            "name": "TickDirection",
+            "type": "CHAR"
+        },
+        {
+            "cpptype": "string",
+            "id": "275",
+            "isEnum": false,
+            "name": "MDMkt",
+            "type": "EXCHANGE"
+        },
+        {
+            "cpptype": "string",
+            "id": "276",
+            "isEnum": false,
+            "name": "QuoteCondition",
+            "type": "MULTIPLEVALUESTRING"
+        },
+        {
+            "cpptype": "string",
+            "id": "277",
+            "isEnum": false,
+            "name": "TradeCondition",
+            "type": "MULTIPLEVALUESTRING"
+        },
+        {
+            "cpptype": "string",
+            "id": "278",
+            "isEnum": false,
+            "name": "MDEntryID",
+            "type": "STRING"
+        },
+        {
+            "cpptype": "char",
+            "id": "279",
+            "isEnum": false,
+            "name": "MDUpdateAction",
+            "type": "CHAR"
+        },
+        {
+            "cpptype": "char",
+            "id": "28",
+            "isEnum": false,
+            "name": "IOITransType",
+            "type": "CHAR"
+        },
+        {
+            "cpptype": "string",
+            "id": "280",
+            "isEnum": false,
+            "name": "MDEntryRefID",
+            "type": "STRING"
+        },
+        {
+            "cpptype": "char",
+            "id": "281",
+            "isEnum": false,
+            "name": "MDReqRejReason",
+            "type": "CHAR"
+        },
+        {
+            "cpptype": "string",
+            "id": "282",
+            "isEnum": false,
+            "name": "MDEntryOriginator",
+            "type": "STRING"
+        },
+        {
+            "cpptype": "string",
+            "id": "283",
+            "isEnum": false,
+            "name": "LocationID",
+            "type": "STRING"
+        },
+        {
+            "cpptype": "string",
+            "id": "284",
+            "isEnum": false,
+            "name": "DeskID",
+            "type": "STRING"
+        },
+        {
+            "cpptype": "char",
+            "id": "285",
+            "isEnum": false,
+            "name": "DeleteReason",
+            "type": "CHAR"
+        },
+        {
+            "cpptype": "char",
+            "id": "286",
+            "isEnum": false,
+            "name": "OpenCloseSettleFlag",
+            "type": "CHAR"
+        },
+        {
+            "cpptype": "int",
+            "id": "287",
+            "isEnum": false,
+            "name": "SellerDays",
+            "type": "INT"
+        },
+        {
+            "cpptype": "string",
+            "id": "288",
+            "isEnum": false,
+            "name": "MDEntryBuyer",
+            "type": "STRING"
+        },
+        {
+            "cpptype": "string",
+            "id": "289",
+            "isEnum": false,
+            "name": "MDEntrySeller",
+            "type": "STRING"
+        },
+        {
+            "cpptype": "char",
+            "id": "29",
+            "isEnum": false,
+            "name": "LastCapacity",
+            "type": "CHAR"
+        },
+        {
+            "cpptype": "int",
+            "id": "290",
+            "isEnum": false,
+            "name": "MDEntryPositionNo",
+            "type": "INT"
+        },
+        {
+            "cpptype": "char",
+            "id": "291",
+            "isEnum": false,
+            "name": "FinancialStatus",
+            "type": "CHAR"
+        },
+        {
+            "cpptype": "char",
+            "id": "292",
+            "isEnum": false,
+            "name": "CorporateAction",
+            "type": "CHAR"
+        },
+        {
+            "cpptype": "double",
+            "id": "293",
+            "isEnum": false,
+            "name": "DefBidSize",
+            "type": "QTY"
+        },
+        {
+            "cpptype": "double",
+            "id": "294",
+            "isEnum": false,
+            "name": "DefOfferSize",
+            "type": "QTY"
+        },
+        {
+            "cpptype": "int",
+            "id": "295",
+            "isEnum": false,
+            "name": "NoQuoteEntries",
+            "type": "INT"
+        },
+        {
+            "cpptype": "int",
+            "id": "296",
+            "isEnum": false,
+            "name": "NoQuoteSets",
+            "type": "INT"
+        },
+        {
+            "cpptype": "int",
+            "id": "297",
+            "isEnum": false,
+            "name": "QuoteAckStatus",
+            "type": "INT"
+        },
+        {
+            "cpptype": "int",
+            "id": "298",
+            "isEnum": false,
+            "name": "QuoteCancelType",
+            "type": "INT"
+        },
+        {
+            "cpptype": "string",
+            "id": "299",
+            "isEnum": false,
+            "name": "QuoteEntryID",
+            "type": "STRING"
+        },
+        {
+            "cpptype": "string",
+            "id": "3",
+            "isEnum": false,
+            "name": "AdvRefID",
+            "type": "STRING"
+        },
+        {
+            "cpptype": "string",
+            "id": "30",
+            "isEnum": false,
+            "name": "LastMkt",
+            "type": "EXCHANGE"
+        },
+        {
+            "cpptype": "int",
+            "id": "300",
+            "isEnum": false,
+            "name": "QuoteRejectReason",
+            "type": "INT"
+        },
+        {
+            "cpptype": "int",
+            "id": "301",
+            "isEnum": false,
+            "name": "QuoteResponseLevel",
+            "type": "INT"
+        },
+        {
+            "cpptype": "string",
+            "id": "302",
+            "isEnum": false,
+            "name": "QuoteSetID",
+            "type": "STRING"
+        },
+        {
+            "cpptype": "int",
+            "id": "303",
+            "isEnum": false,
+            "name": "QuoteRequestType",
+            "type": "INT"
+        },
+        {
+            "cpptype": "int",
+            "id": "304",
+            "isEnum": false,
+            "name": "TotQuoteEntries",
+            "type": "INT"
+        },
+        {
+            "cpptype": "string",
+            "id": "305",
+            "isEnum": false,
+            "name": "UnderlyingIDSource",
+            "type": "STRING"
+        },
+        {
+            "cpptype": "string",
+            "id": "306",
+            "isEnum": false,
+            "name": "UnderlyingIssuer",
+            "type": "STRING"
+        },
+        {
+            "cpptype": "string",
+            "id": "307",
+            "isEnum": false,
+            "name": "UnderlyingSecurityDesc",
+            "type": "STRING"
+        },
+        {
+            "cpptype": "string",
+            "id": "308",
+            "isEnum": false,
+            "name": "UnderlyingSecurityExchange",
+            "type": "EXCHANGE"
+        },
+        {
+            "cpptype": "string",
+            "id": "309",
+            "isEnum": false,
+            "name": "UnderlyingSecurityID",
+            "type": "STRING"
+        },
+        {
+            "cpptype": "double",
+            "id": "31",
+            "isEnum": false,
+            "name": "LastPx",
+            "type": "PRICE"
+        },
+        {
+            "cpptype": "string",
+            "id": "310",
+            "isEnum": false,
+            "name": "UnderlyingSecurityType",
+            "type": "STRING"
+        },
+        {
+            "cpptype": "string",
+            "id": "311",
+            "isEnum": false,
+            "name": "UnderlyingSymbol",
+            "type": "STRING"
+        },
+        {
+            "cpptype": "string",
+            "id": "312",
+            "isEnum": false,
+            "name": "UnderlyingSymbolSfx",
+            "type": "STRING"
+        },
+        {
+            "cpptype": "time",
+            "id": "313",
+            "isEnum": false,
+            "name": "UnderlyingMaturityMonthYear",
+            "type": "MONTHYEAR"
+        },
+        {
+            "cpptype": "int",
+            "id": "314",
+            "isEnum": false,
+            "name": "UnderlyingMaturityDay",
+            "type": "DAYOFMONTH"
+        },
+        {
+            "cpptype": "int",
+            "id": "315",
+            "isEnum": false,
+            "name": "UnderlyingPutOrCall",
+            "type": "INT"
+        },
+        {
+            "cpptype": "double",
+            "id": "316",
+            "isEnum": false,
+            "name": "UnderlyingStrikePrice",
+            "type": "PRICE"
+        },
+        {
+            "cpptype": "char",
+            "id": "317",
+            "isEnum": false,
+            "name": "UnderlyingOptAttribute",
+            "type": "CHAR"
+        },
+        {
+            "cpptype": "string",
+            "id": "318",
+            "isEnum": false,
+            "name": "UnderlyingCurrency",
+            "type": "CURRENCY"
+        },
+        {
+            "cpptype": "double",
+            "id": "319",
+            "isEnum": false,
+            "name": "RatioQty",
+            "type": "QTY"
+        },
+        {
+            "cpptype": "double",
+            "id": "32",
+            "isEnum": false,
+            "name": "LastShares",
+            "type": "QTY"
+        },
+        {
+            "cpptype": "string",
+            "id": "320",
+            "isEnum": false,
+            "name": "SecurityReqID",
+            "type": "STRING"
+        },
+        {
+            "cpptype": "int",
+            "id": "321",
+            "isEnum": false,
+            "name": "SecurityRequestType",
+            "type": "INT"
+        },
+        {
+            "cpptype": "string",
+            "id": "322",
+            "isEnum": false,
+            "name": "SecurityResponseID",
+            "type": "STRING"
+        },
+        {
+            "cpptype": "int",
+            "id": "323",
+            "isEnum": false,
+            "name": "SecurityResponseType",
+            "type": "INT"
+        },
+        {
+            "cpptype": "string",
+            "id": "324",
+            "isEnum": false,
+            "name": "SecurityStatusReqID",
+            "type": "STRING"
+        },
+        {
+            "cpptype": "bool",
+            "id": "325",
+            "isEnum": false,
+            "name": "UnsolicitedIndicator",
+            "type": "BOOLEAN"
+        },
+        {
+            "cpptype": "int",
+            "id": "326",
+            "isEnum": false,
+            "name": "SecurityTradingStatus",
+            "type": "INT"
+        },
+        {
+            "cpptype": "char",
+            "id": "327",
+            "isEnum": false,
+            "name": "HaltReasonChar",
+            "type": "CHAR"
+        },
+        {
+            "cpptype": "bool",
+            "id": "328",
+            "isEnum": false,
+            "name": "InViewOfCommon",
+            "type": "BOOLEAN"
+        },
+        {
+            "cpptype": "bool",
+            "id": "329",
+            "isEnum": false,
+            "name": "DueToRelated",
+            "type": "BOOLEAN"
+        },
+        {
+            "cpptype": "int",
+            "id": "33",
+            "isEnum": false,
+            "name": "LinesOfText",
+            "type": "INT"
+        },
+        {
+            "cpptype": "double",
+            "id": "330",
+            "isEnum": false,
+            "name": "BuyVolume",
+            "type": "QTY"
+        },
+        {
+            "cpptype": "double",
+            "id": "331",
+            "isEnum": false,
+            "name": "SellVolume",
+            "type": "QTY"
+        },
+        {
+            "cpptype": "double",
+            "id": "332",
+            "isEnum": false,
+            "name": "HighPx",
+            "type": "PRICE"
+        },
+        {
+            "cpptype": "double",
+            "id": "333",
+            "isEnum": false,
+            "name": "LowPx",
+            "type": "PRICE"
+        },
+        {
+            "cpptype": "int",
+            "id": "334",
+            "isEnum": false,
+            "name": "Adjustment",
+            "type": "INT"
+        },
+        {
+            "cpptype": "string",
+            "id": "335",
+            "isEnum": false,
+            "name": "TradSesReqID",
+            "type": "STRING"
+        },
+        {
+            "cpptype": "string",
+            "id": "336",
+            "isEnum": false,
+            "name": "TradingSessionID",
+            "type": "STRING"
+        },
+        {
+            "cpptype": "string",
+            "id": "337",
+            "isEnum": false,
+            "name": "ContraTrader",
+            "type": "STRING"
+        },
+        {
+            "cpptype": "int",
+            "id": "338",
+            "isEnum": false,
+            "name": "TradSesMethod",
+            "type": "INT"
+        },
+        {
+            "cpptype": "int",
+            "id": "339",
+            "isEnum": false,
+            "name": "TradSesMode",
+            "type": "INT"
+        },
+        {
+            "cpptype": "int",
+            "id": "34",
+            "isEnum": false,
+            "name": "MsgSeqNum",
+            "type": "INT"
+        },
+        {
+            "cpptype": "int",
+            "id": "340",
+            "isEnum": false,
+            "name": "TradSesStatus",
+            "type": "INT"
+        },
+        {
+            "cpptype": "time",
+            "id": "341",
+            "isEnum": false,
+            "name": "TradSesStartTime",
+            "type": "UTCTIMESTAMP"
+        },
+        {
+            "cpptype": "time",
+            "id": "342",
+            "isEnum": false,
+            "name": "TradSesOpenTime",
+            "type": "UTCTIMESTAMP"
+        },
+        {
+            "cpptype": "time",
+            "id": "343",
+            "isEnum": false,
+            "name": "TradSesPreCloseTime",
+            "type": "UTCTIMESTAMP"
+        },
+        {
+            "cpptype": "time",
+            "id": "344",
+            "isEnum": false,
+            "name": "TradSesCloseTime",
+            "type": "UTCTIMESTAMP"
+        },
+        {
+            "cpptype": "time",
+            "id": "345",
+            "isEnum": false,
+            "name": "TradSesEndTime",
+            "type": "UTCTIMESTAMP"
+        },
+        {
+            "cpptype": "int",
+            "id": "346",
+            "isEnum": false,
+            "name": "NumberOfOrders",
+            "type": "INT"
+        },
+        {
+            "cpptype": "string",
+            "id": "347",
+            "isEnum": false,
+            "name": "MessageEncoding",
+            "type": "STRING"
+        },
+        {
+            "cpptype": "int",
+            "id": "348",
+            "isEnum": false,
+            "name": "EncodedIssuerLen",
+            "type": "LENGTH"
+        },
+        {
+            "cpptype": "string",
+            "id": "349",
+            "isEnum": false,
+            "name": "EncodedIssuer",
+            "type": "DATA"
+        },
+        {
+            "cpptype": "string",
+            "id": "35",
+            "isEnum": false,
+            "name": "MsgType",
+            "type": "STRING"
+        },
+        {
+            "cpptype": "int",
+            "id": "350",
+            "isEnum": false,
+            "name": "EncodedSecurityDescLen",
+            "type": "LENGTH"
+        },
+        {
+            "cpptype": "string",
+            "id": "351",
+            "isEnum": false,
+            "name": "EncodedSecurityDesc",
+            "type": "DATA"
+        },
+        {
+            "cpptype": "int",
+            "id": "352",
+            "isEnum": false,
+            "name": "EncodedListExecInstLen",
+            "type": "LENGTH"
+        },
+        {
+            "cpptype": "string",
+            "id": "353",
+            "isEnum": false,
+            "name": "EncodedListExecInst",
+            "type": "DATA"
+        },
+        {
+            "cpptype": "int",
+            "id": "354",
+            "isEnum": false,
+            "name": "EncodedTextLen",
+            "type": "LENGTH"
+        },
+        {
+            "cpptype": "string",
+            "id": "355",
+            "isEnum": false,
+            "name": "EncodedText",
+            "type": "DATA"
+        },
+        {
+            "cpptype": "int",
+            "id": "356",
+            "isEnum": false,
+            "name": "EncodedSubjectLen",
+            "type": "LENGTH"
+        },
+        {
+            "cpptype": "string",
+            "id": "357",
+            "isEnum": false,
+            "name": "EncodedSubject",
+            "type": "DATA"
+        },
+        {
+            "cpptype": "int",
+            "id": "358",
+            "isEnum": false,
+            "name": "EncodedHeadlineLen",
+            "type": "LENGTH"
+        },
+        {
+            "cpptype": "string",
+            "id": "359",
+            "isEnum": false,
+            "name": "EncodedHeadline",
+            "type": "DATA"
+        },
+        {
+            "cpptype": "int",
+            "id": "36",
+            "isEnum": false,
+            "name": "NewSeqNo",
+            "type": "INT"
+        },
+        {
+            "cpptype": "int",
+            "id": "360",
+            "isEnum": false,
+            "name": "EncodedAllocTextLen",
+            "type": "LENGTH"
+        },
+        {
+            "cpptype": "string",
+            "id": "361",
+            "isEnum": false,
+            "name": "EncodedAllocText",
+            "type": "DATA"
+        },
+        {
+            "cpptype": "int",
+            "id": "362",
+            "isEnum": false,
+            "name": "EncodedUnderlyingIssuerLen",
+            "type": "LENGTH"
+        },
+        {
+            "cpptype": "string",
+            "id": "363",
+            "isEnum": false,
+            "name": "EncodedUnderlyingIssuer",
+            "type": "DATA"
+        },
+        {
+            "cpptype": "int",
+            "id": "364",
+            "isEnum": false,
+            "name": "EncodedUnderlyingSecurityDescLen",
+            "type": "LENGTH"
+        },
+        {
+            "cpptype": "string",
+            "id": "365",
+            "isEnum": false,
+            "name": "EncodedUnderlyingSecurityDesc",
+            "type": "DATA"
+        },
+        {
+            "cpptype": "double",
+            "id": "366",
+            "isEnum": false,
+            "name": "AllocPrice",
+            "type": "PRICE"
+        },
+        {
+            "cpptype": "time",
+            "id": "367",
+            "isEnum": false,
+            "name": "QuoteSetValidUntilTime",
+            "type": "UTCTIMESTAMP"
+        },
+        {
+            "cpptype": "int",
+            "id": "368",
+            "isEnum": false,
+            "name": "QuoteEntryRejectReason",
+            "type": "INT"
+        },
+        {
+            "cpptype": "int",
+            "id": "369",
+            "isEnum": false,
+            "name": "LastMsgSeqNumProcessed",
+            "type": "INT"
+        },
+        {
+            "cpptype": "string",
+            "id": "37",
+            "isEnum": false,
+            "name": "OrderID",
+            "type": "STRING"
+        },
+        {
+            "cpptype": "time",
+            "id": "370",
+            "isEnum": false,
+            "name": "OnBehalfOfSendingTime",
+            "type": "UTCTIMESTAMP"
+        },
+        {
+            "cpptype": "int",
+            "id": "371",
+            "isEnum": false,
+            "name": "RefTagID",
+            "type": "INT"
+        },
+        {
+            "cpptype": "string",
+            "id": "372",
+            "isEnum": false,
+            "name": "RefMsgType",
+            "type": "STRING"
+        },
+        {
+            "cpptype": "int",
+            "id": "373",
+            "isEnum": false,
+            "name": "SessionRejectReason",
+            "type": "INT"
+        },
+        {
+            "cpptype": "char",
+            "id": "374",
+            "isEnum": false,
+            "name": "BidRequestTransType",
+            "type": "CHAR"
+        },
+        {
+            "cpptype": "string",
+            "id": "375",
+            "isEnum": false,
+            "name": "ContraBroker",
+            "type": "STRING"
+        },
+        {
+            "cpptype": "string",
+            "id": "376",
+            "isEnum": false,
+            "name": "ComplianceID",
+            "type": "STRING"
+        },
+        {
+            "cpptype": "bool",
+            "id": "377",
+            "isEnum": false,
+            "name": "SolicitedFlag",
+            "type": "BOOLEAN"
+        },
+        {
+            "cpptype": "int",
+            "id": "378",
+            "isEnum": false,
+            "name": "ExecRestatementReason",
+            "type": "INT"
+        },
+        {
+            "cpptype": "string",
+            "id": "379",
+            "isEnum": false,
+            "name": "BusinessRejectRefID",
+            "type": "STRING"
+        },
+        {
+            "cpptype": "double",
+            "id": "38",
+            "isEnum": false,
+            "name": "OrderQty",
+            "type": "QTY"
+        },
+        {
+            "cpptype": "int",
+            "id": "380",
+            "isEnum": false,
+            "name": "BusinessRejectReason",
+            "type": "INT"
+        },
+        {
+            "cpptype": "double",
+            "id": "381",
+            "isEnum": false,
+            "name": "GrossTradeAmt",
+            "type": "AMT"
+        },
+        {
+            "cpptype": "int",
+            "id": "382",
+            "isEnum": false,
+            "name": "NoContraBrokers",
+            "type": "INT"
+        },
+        {
+            "cpptype": "int",
+            "id": "383",
+            "isEnum": false,
+            "name": "MaxMessageSize",
+            "type": "INT"
+        },
+        {
+            "cpptype": "int",
+            "id": "384",
+            "isEnum": false,
+            "name": "NoMsgTypes",
+            "type": "INT"
+        },
+        {
+            "cpptype": "char",
+            "id": "385",
+            "isEnum": false,
+            "name": "MsgDirection",
+            "type": "CHAR"
+        },
+        {
+            "cpptype": "int",
+            "id": "386",
+            "isEnum": false,
+            "name": "NoTradingSessions",
+            "type": "INT"
+        },
+        {
+            "cpptype": "double",
+            "id": "387",
+            "isEnum": false,
+            "name": "TotalVolumeTraded",
+            "type": "QTY"
+        },
+        {
+            "cpptype": "char",
+            "id": "388",
+            "isEnum": false,
+            "name": "DiscretionInst",
+            "type": "CHAR"
+        },
+        {
+            "cpptype": "double",
+            "id": "389",
+            "isEnum": false,
+            "name": "DiscretionOffset",
+            "type": "PRICEOFFSET"
+        },
+        {
+            "cpptype": "char",
+            "id": "39",
+            "isEnum": false,
+            "name": "OrdStatus",
+            "type": "CHAR"
+        },
+        {
+            "cpptype": "string",
+            "id": "390",
+            "isEnum": false,
+            "name": "BidID",
+            "type": "STRING"
+        },
+        {
+            "cpptype": "string",
+            "id": "391",
+            "isEnum": false,
+            "name": "ClientBidID",
+            "type": "STRING"
+        },
+        {
+            "cpptype": "string",
+            "id": "392",
+            "isEnum": false,
+            "name": "ListName",
+            "type": "STRING"
+        },
+        {
+            "cpptype": "int",
+            "id": "393",
+            "isEnum": false,
+            "name": "TotalNumSecurities",
+            "type": "INT"
+        },
+        {
+            "cpptype": "int",
+            "id": "394",
+            "isEnum": false,
+            "name": "BidType",
+            "type": "INT"
+        },
+        {
+            "cpptype": "int",
+            "id": "395",
+            "isEnum": false,
+            "name": "NumTickets",
+            "type": "INT"
+        },
+        {
+            "cpptype": "double",
+            "id": "396",
+            "isEnum": false,
+            "name": "SideValue1",
+            "type": "AMT"
+        },
+        {
+            "cpptype": "double",
+            "id": "397",
+            "isEnum": false,
+            "name": "SideValue2",
+            "type": "AMT"
+        },
+        {
+            "cpptype": "int",
+            "id": "398",
+            "isEnum": false,
+            "name": "NoBidDescriptors",
+            "type": "INT"
+        },
+        {
+            "cpptype": "int",
+            "id": "399",
+            "isEnum": false,
+            "name": "BidDescriptorType",
+            "type": "INT"
+        },
+        {
+            "cpptype": "char",
+            "id": "4",
+            "isEnum": false,
+            "name": "AdvSide",
+            "type": "CHAR"
+        },
+        {
+            "cpptype": "char",
+            "id": "40",
+            "isEnum": false,
+            "name": "OrdType",
+            "type": "CHAR"
+        },
+        {
+            "cpptype": "string",
+            "id": "400",
+            "isEnum": false,
+            "name": "BidDescriptor",
+            "type": "STRING"
+        },
+        {
+            "cpptype": "int",
+            "id": "401",
+            "isEnum": false,
+            "name": "SideValueInd",
+            "type": "INT"
+        },
+        {
+            "cpptype": "double",
+            "id": "402",
+            "isEnum": false,
+            "name": "LiquidityPctLow",
+            "type": "FLOAT"
+        },
+        {
+            "cpptype": "double",
+            "id": "403",
+            "isEnum": false,
+            "name": "LiquidityPctHigh",
+            "type": "FLOAT"
+        },
+        {
+            "cpptype": "double",
+            "id": "404",
+            "isEnum": false,
+            "name": "LiquidityValue",
+            "type": "AMT"
+        },
+        {
+            "cpptype": "double",
+            "id": "405",
+            "isEnum": false,
+            "name": "EFPTrackingError",
+            "type": "FLOAT"
+        },
+        {
+            "cpptype": "double",
+            "id": "406",
+            "isEnum": false,
+            "name": "FairValue",
+            "type": "AMT"
+        },
+        {
+            "cpptype": "double",
+            "id": "407",
+            "isEnum": false,
+            "name": "OutsideIndexPct",
+            "type": "FLOAT"
+        },
+        {
+            "cpptype": "double",
+            "id": "408",
+            "isEnum": false,
+            "name": "ValueOfFutures",
+            "type": "AMT"
+        },
+        {
+            "cpptype": "int",
+            "id": "409",
+            "isEnum": false,
+            "name": "LiquidityIndType",
+            "type": "INT"
+        },
+        {
+            "cpptype": "string",
+            "id": "41",
+            "isEnum": false,
+            "name": "OrigClOrdID",
+            "type": "STRING"
+        },
+        {
+            "cpptype": "double",
+            "id": "410",
+            "isEnum": false,
+            "name": "WtAverageLiquidity",
+            "type": "FLOAT"
+        },
+        {
+            "cpptype": "bool",
+            "id": "411",
+            "isEnum": false,
+            "name": "ExchangeForPhysical",
+            "type": "BOOLEAN"
+        },
+        {
+            "cpptype": "double",
+            "id": "412",
+            "isEnum": false,
+            "name": "OutMainCntryUIndex",
+            "type": "AMT"
+        },
+        {
+            "cpptype": "double",
+            "id": "413",
+            "isEnum": false,
+            "name": "CrossPercent",
+            "type": "FLOAT"
+        },
+        {
+            "cpptype": "int",
+            "id": "414",
+            "isEnum": false,
+            "name": "ProgRptReqs",
+            "type": "INT"
+        },
+        {
+            "cpptype": "int",
+            "id": "415",
+            "isEnum": false,
+            "name": "ProgPeriodInterval",
+            "type": "INT"
+        },
+        {
+            "cpptype": "int",
+            "id": "416",
+            "isEnum": false,
+            "name": "IncTaxInd",
+            "type": "INT"
+        },
+        {
+            "cpptype": "int",
+            "id": "417",
+            "isEnum": false,
+            "name": "NumBidders",
+            "type": "INT"
+        },
+        {
+            "cpptype": "char",
+            "id": "418",
+            "isEnum": false,
+            "name": "TradeType",
+            "type": "CHAR"
+        },
+        {
+            "cpptype": "char",
+            "id": "419",
+            "isEnum": false,
+            "name": "BasisPxType",
+            "type": "CHAR"
+        },
+        {
+            "cpptype": "time",
+            "id": "42",
+            "isEnum": false,
+            "name": "OrigTime",
+            "type": "UTCTIMESTAMP"
+        },
+        {
+            "cpptype": "int",
+            "id": "420",
+            "isEnum": false,
+            "name": "NoBidComponents",
+            "type": "INT"
+        },
+        {
+            "cpptype": "string",
+            "id": "421",
+            "isEnum": false,
+            "name": "Country",
+            "type": "STRING"
+        },
+        {
+            "cpptype": "int",
+            "id": "422",
+            "isEnum": false,
+            "name": "TotNoStrikes",
+            "type": "INT"
+        },
+        {
+            "cpptype": "int",
+            "id": "423",
+            "isEnum": false,
+            "name": "PriceType",
+            "type": "INT"
+        },
+        {
+            "cpptype": "double",
+            "id": "424",
+            "isEnum": false,
+            "name": "DayOrderQty",
+            "type": "QTY"
+        },
+        {
+            "cpptype": "double",
+            "id": "425",
+            "isEnum": false,
+            "name": "DayCumQty",
+            "type": "QTY"
+        },
+        {
+            "cpptype": "double",
+            "id": "426",
+            "isEnum": false,
+            "name": "DayAvgPx",
+            "type": "PRICE"
+        },
+        {
+            "cpptype": "int",
+            "id": "427",
+            "isEnum": false,
+            "name": "GTBookingInst",
+            "type": "INT"
+        },
+        {
+            "cpptype": "int",
+            "id": "428",
+            "isEnum": false,
+            "name": "NoStrikes",
+            "type": "INT"
+        },
+        {
+            "cpptype": "int",
+            "id": "429",
+            "isEnum": false,
+            "name": "ListStatusType",
+            "type": "INT"
+        },
+        {
+            "cpptype": "bool",
+            "id": "43",
+            "isEnum": false,
+            "name": "PossDupFlag",
+            "type": "BOOLEAN"
+        },
+        {
+            "cpptype": "int",
+            "id": "430",
+            "isEnum": false,
+            "name": "NetGrossInd",
+            "type": "INT"
+        },
+        {
+            "cpptype": "int",
+            "id": "431",
+            "isEnum": false,
+            "name": "ListOrderStatus",
+            "type": "INT"
+        },
+        {
+            "cpptype": "time",
+            "id": "432",
+            "isEnum": false,
+            "name": "ExpireDate",
+            "type": "LOCALMKTDATE"
+        },
+        {
+            "cpptype": "char",
+            "id": "433",
+            "isEnum": false,
+            "name": "ListExecInstType",
+            "type": "CHAR"
+        },
+        {
+            "cpptype": "char",
+            "id": "434",
+            "isEnum": false,
+            "name": "CxlRejResponseTo",
+            "type": "CHAR"
+        },
+        {
+            "cpptype": "double",
+            "id": "435",
+            "isEnum": false,
+            "name": "UnderlyingCouponRate",
+            "type": "FLOAT"
+        },
+        {
+            "cpptype": "double",
+            "id": "436",
+            "isEnum": false,
+            "name": "UnderlyingContractMultiplier",
+            "type": "FLOAT"
+        },
+        {
+            "cpptype": "double",
+            "id": "437",
+            "isEnum": false,
+            "name": "ContraTradeQty",
+            "type": "QTY"
+        },
+        {
+            "cpptype": "time",
+            "id": "438",
+            "isEnum": false,
+            "name": "ContraTradeTime",
+            "type": "UTCTIMESTAMP"
+        },
+        {
+            "cpptype": "string",
+            "id": "439",
+            "isEnum": false,
+            "name": "ClearingFirm",
+            "type": "STRING"
+        },
+        {
+            "cpptype": "double",
+            "id": "44",
+            "isEnum": false,
+            "name": "Price",
+            "type": "PRICE"
+        },
+        {
+            "cpptype": "string",
+            "id": "440",
+            "isEnum": false,
+            "name": "ClearingAccount",
+            "type": "STRING"
+        },
+        {
+            "cpptype": "int",
+            "id": "441",
+            "isEnum": false,
+            "name": "LiquidityNumSecurities",
+            "type": "INT"
+        },
+        {
+            "cpptype": "char",
+            "id": "442",
+            "isEnum": false,
+            "name": "MultiLegReportingType",
+            "type": "CHAR"
+        },
+        {
+            "cpptype": "time",
+            "id": "443",
+            "isEnum": false,
+            "name": "StrikeTime",
+            "type": "UTCTIMESTAMP"
+        },
+        {
+            "cpptype": "string",
+            "id": "444",
+            "isEnum": false,
+            "name": "ListStatusText",
+            "type": "STRING"
+        },
+        {
+            "cpptype": "int",
+            "id": "445",
+            "isEnum": false,
+            "name": "EncodedListStatusTextLen",
+            "type": "LENGTH"
+        },
+        {
+            "cpptype": "string",
+            "id": "446",
+            "isEnum": false,
+            "name": "EncodedListStatusText",
+            "type": "DATA"
+        },
+        {
+            "cpptype": "int",
+            "id": "45",
+            "isEnum": false,
+            "name": "RefSeqNum",
+            "type": "INT"
+        },
+        {
+            "cpptype": "string",
+            "id": "46",
+            "isEnum": false,
+            "name": "RelatdSym",
+            "type": "STRING"
+        },
+        {
+            "cpptype": "char",
+            "id": "47",
+            "isEnum": false,
+            "name": "Rule80A",
+            "type": "CHAR"
+        },
+        {
+            "cpptype": "string",
+            "id": "48",
+            "isEnum": false,
+            "name": "SecurityID",
+            "type": "STRING"
+        },
+        {
+            "cpptype": "string",
+            "id": "49",
+            "isEnum": false,
+            "name": "SenderCompID",
+            "type": "STRING"
+        },
+        {
+            "cpptype": "string",
+            "id": "5",
+            "isEnum": false,
+            "name": "AdvTransType",
+            "type": "STRING"
+        },
+        {
+            "cpptype": "string",
+            "id": "50",
+            "isEnum": false,
+            "name": "SenderSubID",
+            "type": "STRING"
+        },
+        {
+            "cpptype": "time",
+            "id": "51",
+            "isEnum": false,
+            "name": "SendingDate",
+            "type": "LOCALMKTDATE"
+        },
+        {
+            "cpptype": "time",
+            "id": "52",
+            "isEnum": false,
+            "name": "SendingTime",
+            "type": "UTCTIMESTAMP"
+        },
+        {
+            "cpptype": "double",
+            "id": "53",
+            "isEnum": false,
+            "name": "Shares",
+            "type": "QTY"
+        },
+        {
+            "cpptype": "char",
+            "id": "54",
+            "isEnum": false,
+            "name": "Side",
+            "type": "CHAR"
+        },
+        {
+            "cpptype": "string",
+            "id": "55",
+            "isEnum": false,
+            "name": "Symbol",
+            "type": "STRING"
+        },
+        {
+            "cpptype": "string",
+            "id": "56",
+            "isEnum": false,
+            "name": "TargetCompID",
+            "type": "STRING"
+        },
+        {
+            "cpptype": "string",
+            "id": "57",
+            "isEnum": false,
+            "name": "TargetSubID",
+            "type": "STRING"
+        },
+        {
+            "cpptype": "string",
+            "id": "58",
+            "isEnum": false,
+            "name": "Text",
+            "type": "STRING"
+        },
+        {
+            "cpptype": "char",
+            "id": "59",
+            "isEnum": false,
+            "name": "TimeInForce",
+            "type": "CHAR"
+        },
+        {
+            "cpptype": "double",
+            "id": "6",
+            "isEnum": false,
+            "name": "AvgPx",
+            "type": "PRICE"
+        },
+        {
+            "cpptype": "time",
+            "id": "60",
+            "isEnum": false,
+            "name": "TransactTime",
+            "type": "UTCTIMESTAMP"
+        },
+        {
+            "cpptype": "char",
+            "id": "61",
+            "isEnum": false,
+            "name": "Urgency",
+            "type": "CHAR"
+        },
+        {
+            "cpptype": "time",
+            "id": "62",
+            "isEnum": false,
+            "name": "ValidUntilTime",
+            "type": "UTCTIMESTAMP"
+        },
+        {
+            "cpptype": "char",
+            "id": "63",
+            "isEnum": false,
+            "name": "SettlmntTyp",
+            "type": "CHAR"
+        },
+        {
+            "cpptype": "time",
+            "id": "64",
+            "isEnum": false,
+            "name": "FutSettDate",
+            "type": "LOCALMKTDATE"
+        },
+        {
+            "cpptype": "string",
+            "id": "65",
+            "isEnum": false,
+            "name": "SymbolSfx",
+            "type": "STRING"
+        },
+        {
+            "cpptype": "string",
+            "id": "66",
+            "isEnum": false,
+            "name": "ListID",
+            "type": "STRING"
+        },
+        {
+            "cpptype": "int",
+            "id": "67",
+            "isEnum": false,
+            "name": "ListSeqNo",
+            "type": "INT"
+        },
+        {
+            "cpptype": "int",
+            "id": "68",
+            "isEnum": false,
+            "name": "TotNoOrders",
+            "type": "INT"
+        },
+        {
+            "cpptype": "string",
+            "id": "69",
+            "isEnum": false,
+            "name": "ListExecInst",
+            "type": "STRING"
+        },
+        {
+            "cpptype": "int",
+            "id": "7",
+            "isEnum": false,
+            "name": "BeginSeqNo",
+            "type": "INT"
+        },
+        {
+            "cpptype": "string",
+            "id": "70",
+            "isEnum": false,
+            "name": "AllocID",
+            "type": "STRING"
+        },
+        {
+            "cpptype": "char",
+            "id": "71",
+            "isEnum": false,
+            "name": "AllocTransType",
+            "type": "CHAR"
+        },
+        {
+            "cpptype": "string",
+            "id": "72",
+            "isEnum": false,
+            "name": "RefAllocID",
+            "type": "STRING"
+        },
+        {
+            "cpptype": "int",
+            "id": "73",
+            "isEnum": false,
+            "name": "NoOrders",
+            "type": "INT"
+        },
+        {
+            "cpptype": "int",
+            "id": "74",
+            "isEnum": false,
+            "name": "AvgPrxPrecision",
+            "type": "INT"
+        },
+        {
+            "cpptype": "time",
+            "id": "75",
+            "isEnum": false,
+            "name": "TradeDate",
+            "type": "LOCALMKTDATE"
+        },
+        {
+            "cpptype": "string",
+            "id": "76",
+            "isEnum": false,
+            "name": "ExecBroker",
+            "type": "STRING"
+        },
+        {
+            "cpptype": "char",
+            "id": "77",
+            "isEnum": false,
+            "name": "OpenClose",
+            "type": "CHAR"
+        },
+        {
+            "cpptype": "int",
+            "id": "78",
+            "isEnum": false,
+            "name": "NoAllocs",
+            "type": "INT"
+        },
+        {
+            "cpptype": "string",
+            "id": "79",
+            "isEnum": false,
+            "name": "AllocAccount",
+            "type": "STRING"
+        },
+        {
+            "cpptype": "string",
+            "id": "8",
+            "isEnum": false,
+            "name": "BeginString",
+            "type": "STRING"
+        },
+        {
+            "cpptype": "double",
+            "id": "80",
+            "isEnum": false,
+            "name": "AllocShares",
+            "type": "QTY"
+        },
+        {
+            "cpptype": "char",
+            "id": "81",
+            "isEnum": false,
+            "name": "ProcessCode",
+            "type": "CHAR"
+        },
+        {
+            "cpptype": "int",
+            "id": "82",
+            "isEnum": false,
+            "name": "NoRpts",
+            "type": "INT"
+        },
+        {
+            "cpptype": "int",
+            "id": "83",
+            "isEnum": false,
+            "name": "RptSeq",
+            "type": "INT"
+        },
+        {
+            "cpptype": "double",
+            "id": "84",
+            "isEnum": false,
+            "name": "CxlQty",
+            "type": "QTY"
+        },
+        {
+            "cpptype": "int",
+            "id": "85",
+            "isEnum": false,
+            "name": "NoDlvyInst",
+            "type": "INT"
+        },
+        {
+            "cpptype": "string",
+            "id": "86",
+            "isEnum": false,
+            "name": "DlvyInst",
+            "type": "STRING"
+        },
+        {
+            "cpptype": "int",
+            "id": "87",
+            "isEnum": false,
+            "name": "AllocStatus",
+            "type": "INT"
+        },
+        {
+            "cpptype": "int",
+            "id": "88",
+            "isEnum": false,
+            "name": "AllocRejCode",
+            "type": "INT"
+        },
+        {
+            "cpptype": "string",
+            "id": "89",
+            "isEnum": false,
+            "name": "Signature",
+            "type": "DATA"
+        },
+        {
+            "cpptype": "int",
+            "id": "9",
+            "isEnum": false,
+            "name": "BodyLength",
+            "type": "INT"
+        },
+        {
+            "cpptype": "int",
+            "id": "90",
+            "isEnum": false,
+            "name": "SecureDataLen",
+            "type": "LENGTH"
+        },
+        {
+            "cpptype": "string",
+            "id": "91",
+            "isEnum": false,
+            "name": "SecureData",
+            "type": "DATA"
+        },
+        {
+            "cpptype": "string",
+            "id": "92",
+            "isEnum": false,
+            "name": "BrokerOfCredit",
+            "type": "STRING"
+        },
+        {
+            "cpptype": "int",
+            "id": "93",
+            "isEnum": false,
+            "name": "SignatureLength",
+            "type": "LENGTH"
+        },
+        {
+            "cpptype": "char",
+            "id": "94",
+            "isEnum": false,
+            "name": "EmailType",
+            "type": "CHAR"
+        },
+        {
+            "cpptype": "int",
+            "id": "95",
+            "isEnum": false,
+            "name": "RawDataLength",
+            "type": "LENGTH"
+        },
+        {
+            "cpptype": "string",
+            "id": "96",
+            "isEnum": false,
+            "name": "RawData",
+            "type": "DATA"
+        },
+        {
+            "cpptype": "bool",
+            "id": "97",
+            "isEnum": false,
+            "name": "PossResend",
+            "type": "BOOLEAN"
+        },
+        {
+            "cpptype": "int",
+            "id": "98",
+            "isEnum": false,
+            "name": "EncryptMethod",
+            "type": "INT"
+        },
+        {
+            "cpptype": "double",
+            "id": "99",
+            "isEnum": false,
+            "name": "StopPx",
+            "type": "PRICE"
+        }
+    ],
+    "messages": [
+        {
+            "fields": [
+                1001,
+                "112",
+                1002
+            ],
+            "id": "0",
+            "name": "Heartbeat",
+            "requiredFields": [
+                1001,
+                1002
+            ]
+        },
+        {
+            "fields": [
+                1001,
+                "112",
+                1002
+            ],
+            "id": "1",
+            "name": "TestRequest",
+            "requiredFields": [
+                1001,
+                "112",
+                1002
+            ]
+        },
+        {
+            "fields": [
+                1001,
+                "7",
+                "16",
+                1002
+            ],
+            "id": "2",
+            "name": "ResendRequest",
+            "requiredFields": [
+                1001,
+                "7",
+                "16",
+                1002
+            ]
+        },
+        {
+            "fields": [
+                1001,
+                "45",
+                "371",
+                "372",
+                "373",
+                "58",
+                "354",
+                "355",
+                1002
+            ],
+            "id": "3",
+            "name": "Reject",
+            "requiredFields": [
+                1001,
+                "45",
+                1002
+            ]
+        },
+        {
+            "fields": [
+                1001,
+                "123",
+                "36",
+                1002
+            ],
+            "id": "4",
+            "name": "SequenceReset",
+            "requiredFields": [
+                1001,
+                "36",
+                1002
+            ]
+        },
+        {
+            "fields": [
+                1001,
+                "58",
+                "354",
+                "355",
+                1002
+            ],
+            "id": "5",
+            "name": "Logout",
+            "requiredFields": [
+                1001,
+                1002
+            ]
+        },
+        {
+            "fields": [
+                1001,
+                "23",
+                "28",
+                "26",
+                "55",
+                "65",
+                "48",
+                "22",
+                "167",
+                "200",
+                "205",
+                "201",
+                "202",
+                "206",
+                "231",
+                "223",
+                "207",
+                "106",
+                "348",
+                "349",
+                "107",
+                "350",
+                "351",
+                "54",
+                "27",
+                "44",
+                "15",
+                "62",
+                "25",
+                "130",
+                "199",
+                "58",
+                "354",
+                "355",
+                "60",
+                "149",
+                "215",
+                "218",
+                "219",
+                1002
+            ],
+            "id": "6",
+            "name": "IOI",
+            "requiredFields": [
+                1001,
+                "23",
+                "28",
+                "55",
+                "54",
+                "27",
+                1002
+            ]
+        },
+        {
+            "fields": [
+                1001,
+                "2",
+                "5",
+                "3",
+                "55",
+                "65",
+                "48",
+                "22",
+                "167",
+                "200",
+                "205",
+                "201",
+                "202",
+                "206",
+                "231",
+                "223",
+                "207",
+                "106",
+                "348",
+                "349",
+                "107",
+                "350",
+                "351",
+                "4",
+                "53",
+                "44",
+                "15",
+                "75",
+                "60",
+                "58",
+                "354",
+                "355",
+                "149",
+                "30",
+                "336",
+                1002
+            ],
+            "id": "7",
+            "name": "Advertisement",
+            "requiredFields": [
+                1001,
+                "2",
+                "5",
+                "55",
+                "4",
+                "53",
+                1002
+            ]
+        },
+        {
+            "fields": [
+                1001,
+                "37",
+                "198",
+                "11",
+                "41",
+                "109",
+                "76",
+                "382",
+                "66",
+                "17",
+                "20",
+                "19",
+                "150",
+                "39",
+                "103",
+                "378",
+                "1",
+                "63",
+                "64",
+                "55",
+                "65",
+                "48",
+                "22",
+                "167",
+                "200",
+                "205",
+                "201",
+                "202",
+                "206",
+                "231",
+                "223",
+                "207",
+                "106",
+                "348",
+                "349",
+                "107",
+                "350",
+                "351",
+                "54",
+                "38",
+                "152",
+                "40",
+                "44",
+                "99",
+                "211",
+                "388",
+                "389",
+                "15",
+                "376",
+                "377",
+                "59",
+                "168",
+                "432",
+                "126",
+                "18",
+                "47",
+                "32",
+                "31",
+                "194",
+                "195",
+                "30",
+                "336",
+                "29",
+                "151",
+                "14",
+                "6",
+                "424",
+                "425",
+                "426",
+                "427",
+                "75",
+                "60",
+                "113",
+                "12",
+                "13",
+                "381",
+                "119",
+                "120",
+                "155",
+                "156",
+                "21",
+                "110",
+                "111",
+                "77",
+                "210",
+                "58",
+                "354",
+                "355",
+                "193",
+                "192",
+                "439",
+                "440",
+                "442",
+                1002
+            ],
+            "id": "8",
+            "name": "ExecutionReport",
+            "requiredFields": [
+                1001,
+                "37",
+                "17",
+                "20",
+                "150",
+                "39",
+                "55",
+                "54",
+                "151",
+                "14",
+                "6",
+                1002
+            ]
+        },
+        {
+            "fields": [
+                1001,
+                "37",
+                "198",
+                "11",
+                "41",
+                "39",
+                "109",
+                "76",
+                "66",
+                "1",
+                "60",
+                "434",
+                "102",
+                "58",
+                "354",
+                "355",
+                1002
+            ],
+            "id": "9",
+            "name": "OrderCancelReject",
+            "requiredFields": [
+                1001,
+                "37",
+                "11",
+                "41",
+                "39",
+                "434",
+                1002
+            ]
+        },
+        {
+            "fields": [
+                1001,
+                "98",
+                "108",
+                "95",
+                "96",
+                "141",
+                "383",
+                "384",
+                1002
+            ],
+            "id": "A",
+            "name": "Logon",
+            "requiredFields": [
+                1001,
+                "98",
+                "108",
+                1002
+            ]
+        },
+        {
+            "fields": [
+                1001,
+                "42",
+                "61",
+                "148",
+                "358",
+                "359",
+                "215",
+                "146",
+                "33",
+                "149",
+                "95",
+                "96",
+                1002
+            ],
+            "id": "B",
+            "name": "News",
+            "requiredFields": [
+                1001,
+                "148",
+                "33",
+                1002
+            ]
+        },
+        {
+            "fields": [
+                1001,
+                "164",
+                "94",
+                "42",
+                "147",
+                "356",
+                "357",
+                "215",
+                "146",
+                "37",
+                "11",
+                "33",
+                "95",
+                "96",
+                1002
+            ],
+            "id": "C",
+            "name": "Email",
+            "requiredFields": [
+                1001,
+                "164",
+                "94",
+                "147",
+                "33",
+                1002
+            ]
+        },
+        {
+            "fields": [
+                1001,
+                "11",
+                "109",
+                "76",
+                "1",
+                "78",
+                "63",
+                "64",
+                "21",
+                "18",
+                "110",
+                "111",
+                "100",
+                "386",
+                "81",
+                "55",
+                "65",
+                "48",
+                "22",
+                "167",
+                "200",
+                "205",
+                "201",
+                "202",
+                "206",
+                "231",
+                "223",
+                "207",
+                "106",
+                "348",
+                "349",
+                "107",
+                "350",
+                "351",
+                "140",
+                "54",
+                "114",
+                "60",
+                "38",
+                "152",
+                "40",
+                "44",
+                "99",
+                "15",
+                "376",
+                "377",
+                "23",
+                "117",
+                "59",
+                "168",
+                "432",
+                "126",
+                "427",
+                "12",
+                "13",
+                "47",
+                "121",
+                "120",
+                "58",
+                "354",
+                "355",
+                "193",
+                "192",
+                "77",
+                "203",
+                "204",
+                "210",
+                "211",
+                "388",
+                "389",
+                "439",
+                "440",
+                1002
+            ],
+            "id": "D",
+            "name": "NewOrderSingle",
+            "requiredFields": [
+                1001,
+                "11",
+                "21",
+                "55",
+                "54",
+                "60",
+                "40",
+                1002
+            ]
+        },
+        {
+            "fields": [
+                1001,
+                "66",
+                "390",
+                "391",
+                "414",
+                "394",
+                "415",
+                "433",
+                "69",
+                "352",
+                "353",
+                "68",
+                "73",
+                1002
+            ],
+            "id": "E",
+            "name": "NewOrderList",
+            "requiredFields": [
+                1001,
+                "66",
+                "394",
+                "68",
+                "73",
+                1002
+            ]
+        },
+        {
+            "fields": [
+                1001,
+                "41",
+                "37",
+                "11",
+                "66",
+                "1",
+                "109",
+                "76",
+                "55",
+                "65",
+                "48",
+                "22",
+                "167",
+                "200",
+                "205",
+                "201",
+                "202",
+                "206",
+                "231",
+                "223",
+                "207",
+                "106",
+                "348",
+                "349",
+                "107",
+                "350",
+                "351",
+                "54",
+                "60",
+                "38",
+                "152",
+                "376",
+                "377",
+                "58",
+                "354",
+                "355",
+                1002
+            ],
+            "id": "F",
+            "name": "OrderCancelRequest",
+            "requiredFields": [
+                1001,
+                "41",
+                "11",
+                "55",
+                "54",
+                "60",
+                1002
+            ]
+        },
+        {
+            "fields": [
+                1001,
+                "37",
+                "109",
+                "76",
+                "41",
+                "11",
+                "66",
+                "1",
+                "78",
+                "63",
+                "64",
+                "21",
+                "18",
+                "110",
+                "111",
+                "100",
+                "386",
+                "55",
+                "65",
+                "48",
+                "22",
+                "167",
+                "200",
+                "205",
+                "201",
+                "202",
+                "206",
+                "231",
+                "223",
+                "207",
+                "106",
+                "348",
+                "349",
+                "107",
+                "350",
+                "351",
+                "54",
+                "60",
+                "38",
+                "152",
+                "40",
+                "44",
+                "99",
+                "211",
+                "388",
+                "389",
+                "376",
+                "377",
+                "15",
+                "59",
+                "168",
+                "432",
+                "126",
+                "427",
+                "12",
+                "13",
+                "47",
+                "121",
+                "120",
+                "58",
+                "354",
+                "355",
+                "193",
+                "192",
+                "77",
+                "203",
+                "204",
+                "210",
+                "114",
+                "439",
+                "440",
+                1002
+            ],
+            "id": "G",
+            "name": "OrderCancelReplaceRequest",
+            "requiredFields": [
+                1001,
+                "41",
+                "11",
+                "21",
+                "55",
+                "54",
+                "60",
+                "40",
+                1002
+            ]
+        },
+        {
+            "fields": [
+                1001,
+                "37",
+                "11",
+                "109",
+                "1",
+                "76",
+                "55",
+                "65",
+                "48",
+                "22",
+                "167",
+                "200",
+                "205",
+                "201",
+                "202",
+                "206",
+                "231",
+                "223",
+                "207",
+                "106",
+                "348",
+                "349",
+                "107",
+                "350",
+                "351",
+                "54",
+                1002
+            ],
+            "id": "H",
+            "name": "OrderStatusRequest",
+            "requiredFields": [
+                1001,
+                "11",
+                "55",
+                "54",
+                1002
+            ]
+        },
+        {
+            "fields": [
+                1001,
+                "70",
+                "71",
+                "72",
+                "196",
+                "197",
+                "73",
+                "124",
+                "54",
+                "55",
+                "65",
+                "48",
+                "22",
+                "167",
+                "200",
+                "205",
+                "201",
+                "202",
+                "206",
+                "231",
+                "223",
+                "207",
+                "106",
+                "348",
+                "349",
+                "107",
+                "350",
+                "351",
+                "53",
+                "30",
+                "336",
+                "6",
+                "15",
+                "74",
+                "75",
+                "60",
+                "63",
+                "64",
+                "381",
+                "118",
+                "77",
+                "58",
+                "354",
+                "355",
+                "157",
+                "158",
+                "78",
+                1002
+            ],
+            "id": "J",
+            "name": "Allocation",
+            "requiredFields": [
+                1001,
+                "70",
+                "71",
+                "54",
+                "55",
+                "53",
+                "6",
+                "75",
+                1002
+            ]
+        },
+        {
+            "fields": [
+                1001,
+                "66",
+                "60",
+                "58",
+                "354",
+                "355",
+                1002
+            ],
+            "id": "K",
+            "name": "ListCancelRequest",
+            "requiredFields": [
+                1001,
+                "66",
+                "60",
+                1002
+            ]
+        },
+        {
+            "fields": [
+                1001,
+                "66",
+                "391",
+                "390",
+                "60",
+                "58",
+                "354",
+                "355",
+                1002
+            ],
+            "id": "L",
+            "name": "ListExecute",
+            "requiredFields": [
+                1001,
+                "66",
+                "60",
+                1002
+            ]
+        },
+        {
+            "fields": [
+                1001,
+                "66",
+                "58",
+                "354",
+                "355",
+                1002
+            ],
+            "id": "M",
+            "name": "ListStatusRequest",
+            "requiredFields": [
+                1001,
+                "66",
+                1002
+            ]
+        },
+        {
+            "fields": [
+                1001,
+                "66",
+                "429",
+                "82",
+                "431",
+                "83",
+                "444",
+                "445",
+                "446",
+                "60",
+                "68",
+                "73",
+                1002
+            ],
+            "id": "N",
+            "name": "ListStatus",
+            "requiredFields": [
+                1001,
+                "66",
+                "429",
+                "82",
+                "431",
+                "83",
+                "68",
+                "73",
+                1002
+            ]
+        },
+        {
+            "fields": [
+                1001,
+                "109",
+                "76",
+                "70",
+                "75",
+                "60",
+                "87",
+                "88",
+                "58",
+                "354",
+                "355",
+                1002
+            ],
+            "id": "P",
+            "name": "AllocationInstructionAck",
+            "requiredFields": [
+                1001,
+                "70",
+                "75",
+                "87",
+                1002
+            ]
+        },
+        {
+            "fields": [
+                1001,
+                "37",
+                "17",
+                "127",
+                "55",
+                "65",
+                "48",
+                "22",
+                "167",
+                "200",
+                "205",
+                "201",
+                "202",
+                "206",
+                "231",
+                "223",
+                "207",
+                "106",
+                "348",
+                "349",
+                "107",
+                "350",
+                "351",
+                "54",
+                "38",
+                "152",
+                "32",
+                "31",
+                "58",
+                "354",
+                "355",
+                1002
+            ],
+            "id": "Q",
+            "name": "DontKnowTrade",
+            "requiredFields": [
+                1001,
+                "37",
+                "17",
+                "127",
+                "55",
+                "54",
+                1002
+            ]
+        },
+        {
+            "fields": [
+                1001,
+                "131",
+                "146",
+                1002
+            ],
+            "id": "R",
+            "name": "QuoteRequest",
+            "requiredFields": [
+                1001,
+                "131",
+                "146",
+                1002
+            ]
+        },
+        {
+            "fields": [
+                1001,
+                "131",
+                "117",
+                "301",
+                "336",
+                "55",
+                "65",
+                "48",
+                "22",
+                "167",
+                "200",
+                "205",
+                "201",
+                "202",
+                "206",
+                "231",
+                "223",
+                "207",
+                "106",
+                "348",
+                "349",
+                "107",
+                "350",
+                "351",
+                "132",
+                "133",
+                "134",
+                "135",
+                "62",
+                "188",
+                "190",
+                "189",
+                "191",
+                "60",
+                "64",
+                "40",
+                "193",
+                "192",
+                "15",
+                1002
+            ],
+            "id": "S",
+            "name": "Quote",
+            "requiredFields": [
+                1001,
+                "117",
+                "55",
+                1002
+            ]
+        },
+        {
+            "fields": [
+                1001,
+                "162",
+                "163",
+                "214",
+                "160",
+                "165",
+                "79",
+                "166",
+                "75",
+                "70",
+                "30",
+                "336",
+                "54",
+                "167",
+                "168",
+                "60",
+                "109",
+                "76",
+                "169",
+                "170",
+                "171",
+                "172",
+                "173",
+                "174",
+                "175",
+                "176",
+                "177",
+                "178",
+                "179",
+                "180",
+                "181",
+                "182",
+                "183",
+                "184",
+                "185",
+                "186",
+                "187",
+                1002
+            ],
+            "id": "T",
+            "name": "SettlementInstructions",
+            "requiredFields": [
+                1001,
+                "162",
+                "163",
+                "214",
+                "160",
+                "165",
+                "79",
+                "60",
+                1002
+            ]
+        },
+        {
+            "fields": [
+                1001,
+                "262",
+                "263",
+                "264",
+                "265",
+                "266",
+                "267",
+                "146",
+                1002
+            ],
+            "id": "V",
+            "name": "MarketDataRequest",
+            "requiredFields": [
+                1001,
+                "262",
+                "263",
+                "264",
+                "267",
+                "146",
+                1002
+            ]
+        },
+        {
+            "fields": [
+                1001,
+                "262",
+                "55",
+                "65",
+                "48",
+                "22",
+                "167",
+                "200",
+                "205",
+                "201",
+                "202",
+                "206",
+                "231",
+                "223",
+                "207",
+                "106",
+                "348",
+                "349",
+                "107",
+                "350",
+                "351",
+                "291",
+                "292",
+                "387",
+                "268",
+                1002
+            ],
+            "id": "W",
+            "name": "MarketDataSnapshotFullRefresh",
+            "requiredFields": [
+                1001,
+                "55",
+                "268",
+                1002
+            ]
+        },
+        {
+            "fields": [
+                1001,
+                "262",
+                "268",
+                1002
+            ],
+            "id": "X",
+            "name": "MarketDataIncrementalRefresh",
+            "requiredFields": [
+                1001,
+                "268",
+                1002
+            ]
+        },
+        {
+            "fields": [
+                1001,
+                "262",
+                "281",
+                "58",
+                "354",
+                "355",
+                1002
+            ],
+            "id": "Y",
+            "name": "MarketDataRequestReject",
+            "requiredFields": [
+                1001,
+                "262",
+                1002
+            ]
+        },
+        {
+            "fields": [
+                1001,
+                "131",
+                "117",
+                "298",
+                "301",
+                "336",
+                "295",
+                1002
+            ],
+            "id": "Z",
+            "name": "QuoteCancel",
+            "requiredFields": [
+                1001,
+                "117",
+                "298",
+                "295",
+                1002
+            ]
+        },
+        {
+            "fields": [
+                1001,
+                "117",
+                "55",
+                "65",
+                "48",
+                "22",
+                "167",
+                "200",
+                "205",
+                "201",
+                "202",
+                "206",
+                "231",
+                "223",
+                "207",
+                "106",
+                "348",
+                "349",
+                "107",
+                "350",
+                "351",
+                "54",
+                "336",
+                1002
+            ],
+            "id": "a",
+            "name": "QuoteStatusRequest",
+            "requiredFields": [
+                1001,
+                "55",
+                1002
+            ]
+        },
+        {
+            "fields": [
+                1001,
+                "131",
+                "117",
+                "297",
+                "300",
+                "301",
+                "336",
+                "58",
+                "296",
+                1002
+            ],
+            "id": "b",
+            "name": "QuoteAcknowledgement",
+            "requiredFields": [
+                1001,
+                "297",
+                1002
+            ]
+        },
+        {
+            "fields": [
+                1001,
+                "320",
+                "321",
+                "55",
+                "65",
+                "48",
+                "22",
+                "167",
+                "200",
+                "205",
+                "201",
+                "202",
+                "206",
+                "231",
+                "223",
+                "207",
+                "106",
+                "348",
+                "349",
+                "107",
+                "350",
+                "351",
+                "15",
+                "58",
+                "354",
+                "355",
+                "336",
+                "146",
+                1002
+            ],
+            "id": "c",
+            "name": "SecurityDefinitionRequest",
+            "requiredFields": [
+                1001,
+                "320",
+                "321",
+                1002
+            ]
+        },
+        {
+            "fields": [
+                1001,
+                "320",
+                "322",
+                "323",
+                "393",
+                "55",
+                "65",
+                "48",
+                "22",
+                "167",
+                "200",
+                "205",
+                "201",
+                "202",
+                "206",
+                "231",
+                "223",
+                "207",
+                "106",
+                "348",
+                "349",
+                "107",
+                "350",
+                "351",
+                "15",
+                "336",
+                "58",
+                "354",
+                "355",
+                "146",
+                1002
+            ],
+            "id": "d",
+            "name": "SecurityDefinition",
+            "requiredFields": [
+                1001,
+                "320",
+                "322",
+                "393",
+                1002
+            ]
+        },
+        {
+            "fields": [
+                1001,
+                "324",
+                "55",
+                "65",
+                "48",
+                "22",
+                "167",
+                "200",
+                "205",
+                "201",
+                "202",
+                "206",
+                "231",
+                "223",
+                "207",
+                "106",
+                "348",
+                "349",
+                "107",
+                "350",
+                "351",
+                "15",
+                "263",
+                "336",
+                1002
+            ],
+            "id": "e",
+            "name": "SecurityStatusRequest",
+            "requiredFields": [
+                1001,
+                "324",
+                "55",
+                "263",
+                1002
+            ]
+        },
+        {
+            "fields": [
+                1001,
+                "324",
+                "55",
+                "65",
+                "48",
+                "22",
+                "167",
+                "200",
+                "205",
+                "201",
+                "202",
+                "206",
+                "231",
+                "223",
+                "207",
+                "106",
+                "348",
+                "349",
+                "107",
+                "350",
+                "351",
+                "15",
+                "336",
+                "325",
+                "326",
+                "291",
+                "292",
+                "327",
+                "328",
+                "329",
+                "330",
+                "331",
+                "332",
+                "333",
+                "31",
+                "60",
+                "334",
+                1002
+            ],
+            "id": "f",
+            "name": "SecurityStatus",
+            "requiredFields": [
+                1001,
+                "55",
+                1002
+            ]
+        },
+        {
+            "fields": [
+                1001,
+                "335",
+                "336",
+                "338",
+                "339",
+                "263",
+                1002
+            ],
+            "id": "g",
+            "name": "TradingSessionStatusRequest",
+            "requiredFields": [
+                1001,
+                "335",
+                "263",
+                1002
+            ]
+        },
+        {
+            "fields": [
+                1001,
+                "335",
+                "336",
+                "338",
+                "339",
+                "325",
+                "340",
+                "341",
+                "342",
+                "343",
+                "344",
+                "345",
+                "387",
+                "58",
+                "354",
+                "355",
+                1002
+            ],
+            "id": "h",
+            "name": "TradingSessionStatus",
+            "requiredFields": [
+                1001,
+                "336",
+                "340",
+                1002
+            ]
+        },
+        {
+            "fields": [
+                1001,
+                "131",
+                "117",
+                "301",
+                "293",
+                "294",
+                "296",
+                1002
+            ],
+            "id": "i",
+            "name": "MassQuote",
+            "requiredFields": [
+                1001,
+                "117",
+                "296",
+                1002
+            ]
+        },
+        {
+            "fields": [
+                1001,
+                "45",
+                "372",
+                "379",
+                "380",
+                "58",
+                "354",
+                "355",
+                1002
+            ],
+            "id": "j",
+            "name": "BusinessMessageReject",
+            "requiredFields": [
+                1001,
+                "372",
+                "380",
+                1002
+            ]
+        },
+        {
+            "fields": [
+                1001,
+                "390",
+                "391",
+                "374",
+                "392",
+                "393",
+                "394",
+                "395",
+                "15",
+                "396",
+                "397",
+                "398",
+                "420",
+                "409",
+                "410",
+                "411",
+                "412",
+                "413",
+                "414",
+                "415",
+                "416",
+                "121",
+                "417",
+                "75",
+                "418",
+                "419",
+                "443",
+                "58",
+                "354",
+                "355",
+                1002
+            ],
+            "id": "k",
+            "name": "BidRequest",
+            "requiredFields": [
+                1001,
+                "391",
+                "374",
+                "393",
+                "394",
+                "418",
+                "419",
+                1002
+            ]
+        },
+        {
+            "fields": [
+                1001,
+                "390",
+                "391",
+                "420",
+                1002
+            ],
+            "id": "l",
+            "name": "BidResponse",
+            "requiredFields": [
+                1001,
+                "420",
+                1002
+            ]
+        },
+        {
+            "fields": [
+                1001,
+                "66",
+                "422",
+                "428",
+                1002
+            ],
+            "id": "m",
+            "name": "ListStrikePrice",
+            "requiredFields": [
+                1001,
+                "66",
+                "422",
+                "428",
+                1002
+            ]
+        }
+    ],
+    "version": "FIX.4.2"
+}
