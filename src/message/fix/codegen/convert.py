@@ -103,11 +103,11 @@ class XMLProtocol:
         self.fields = sorted(self.fields,  key=lambda f: f.id) 
         self.enums = sorted(self.enums, key = lambda e: e.id)
         header = Message()
-        header.id = '1001'
+        header.id = 1001
         header.name = 'header'
         self.parseObject(self.root.find('header'), header, False)
         trailer = Message()
-        trailer.id = '1002'
+        trailer.id = 1002
         trailer.name = 'trailer'
         self.parseObject(self.root.find('trailer'), trailer, False)
         self.parseMessage()
@@ -157,7 +157,7 @@ class XMLProtocol:
         fields = self.root.find('fields')
         for field in fields:
             f = Field()
-            f.id = field.get('number')
+            f.id = int(field.get('number'))
             f.name = field.get('name')
             f.type = field.get('type')
             f.cpptype = self.cppType[f.type]
