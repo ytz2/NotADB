@@ -62,7 +62,8 @@ class XMLProtocol:
             "version": self.version,
             "messages": todict(self.messages),
             "fields": todict(self.fields),
-            "enums": todict(self.enums)
+            "enums": todict(self.enums),
+            "groups": todict(self.groups)
         }
         return json.dumps(d)
 
