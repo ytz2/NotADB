@@ -31,10 +31,11 @@
 *.out
 *.app
 # build
-build/
+/bazel-*
 # IDE
 .cproject
-.idea/
+/.idea
 .project
-.settings/
+/.settings
+/.vscode
 
