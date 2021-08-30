@@ -31,3 +31,13 @@ http_archive(
     strip_prefix = "glog-0.5.0",
     urls = ["https://github.com/google/glog/archive/v0.5.0.zip"],
 )
+
+
+http_archive(
+    name = "com_github_jbeder_yaml_cpp",
+    sha256 = "1df36d25ff796a79bee69ea42ee2b86be09ac9f3582efaf5a26037f09033297b",
+    strip_prefix = "yaml-cpp-yaml-cpp-0.6.4",
+    urls = [
+        "https://github.com/sammi/yaml-cpp/archive/yaml-cpp-0.6.4.tar.gz",
+    ],
+)

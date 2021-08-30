@@ -1,6 +1,7 @@
 /* Copyright 2020 Yanhua Liu */
 
 #pragma once
+
 #include <algorithm>
 #include <array>
 // here we assume message size is smaller than 1MB, consider to change this one
@@ -12,7 +13,7 @@ namespace tcp {
 // a binary buffer for async read
 class MessageBuffer {
  public:
-  char* getBufferForRead(std::size_t size) {
+  char *getBufferForRead(std::size_t size) {
     if (msgBufEnd_ + size < safeLast_) return data_ + msgBufEnd_;
     // we might read out of boundary, move memory
     auto relative = msgBufEnd_ - msgBufStart_;
@@ -21,17 +22,19 @@ class MessageBuffer {
     msgBufEnd_ = relative;
     return data_ + msgBufEnd_;
   }
-  const char* getCurrentBuffer(std::size_t& size) {  // NOLINT
+
+  const char *getCurrentBuffer(std::size_t &size) {  // NOLINT
     size = msgBufEnd_ - msgBufStart_;
     return data_ + msgBufStart_;
   }
+
   // consume number of chars, move the msgBufStart ahead
   void consume(std::size_t size) { msgBufStart_ += size; }
 
   // add more data into the buffer
   void produce(std::size_t size) { msgBufEnd_ += size; }
 
-  char* getWriteBuffer() { return writeData_; }
+  char *getWriteBuffer() { return writeData_; }
 
  private:
   char data_[MESSAGE_BUFFER_SIZE];

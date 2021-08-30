@@ -2,5 +2,5 @@
 #include "MessageFactory.h"
 
 namespace lib {
-    namespace message {} /* namespace message */
+namespace message {} /* namespace message */
 } /* namespace lib */

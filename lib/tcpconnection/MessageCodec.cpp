@@ -6,6 +6,7 @@
 
 #include <utility>
 #include <vector>
+
 namespace lib {
 namespace tcp {
 
@@ -13,6 +14,7 @@ static int flat_header_length = 10;
 static int flat_msgType_length = 4;
 static int flat_msgLen_length = 6;
 static int maxFlatMsgBufferSize = 10;
+
 BufferPtr FlatMessageDecoder::writeBuffer(interface::IMessagePtr msg) {
   std::string tmp;
   if (!msg->ToString(tmp)) return nullptr;

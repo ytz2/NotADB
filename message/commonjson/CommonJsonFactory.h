@@ -17,14 +17,18 @@ class CommonJsonFactory : public interface::IMessageFactory {
   interface::IMessagePtr createMessageByID(int id) override {
     return std::make_shared<CommonJsonMessage>();
   }
-  interface::IMessagePtr createMessageByName(const std::string& name) override {
+
+  interface::IMessagePtr createMessageByName(const std::string &name) override {
     return std::make_shared<CommonJsonMessage>();
   }
+
   const std::string getProtocolName() const { return "CommonJsonMessage"; }
-  static CommonJsonFactory* getInstance() {
+
+  static CommonJsonFactory *getInstance() {
     static CommonJsonFactory fact;
     return &fact;
   }
+
   virtual ~CommonJsonFactory() {}
 };
 

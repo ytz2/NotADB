@@ -11,6 +11,7 @@ namespace tcp {
 using boost::asio::ip::tcp;
 
 static std::size_t chunk_read_size = 1024;
+
 TcpSession::TcpSession(boost::asio::ip::tcp::socket skt, MessageCodecPtr codec,
                        const std::string &name)
     : interface::ISession(name, false), socket_(std::move(skt)), codec_(codec) {
