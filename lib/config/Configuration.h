@@ -11,6 +11,8 @@
 #include <yaml-cpp/yaml.h>
 #include <exception>
 #include <memory>
+#include <iostream>
+#include <list>
 
 namespace lib {
 namespace config {
@@ -21,6 +23,8 @@ class Configuration {
   typedef YAML::iterator Iterator;
   typedef std::shared_ptr<Node> NodePtr;
  public:
+  Configuration() = default;
+  Configuration(std::istream &input);
   Configuration(const std::string &path);
   Configuration(const Node &node);
 
@@ -29,16 +33,17 @@ class Configuration {
   // user needs to provides >> operators
   template<typename T>
   bool get(const std::string &path, T &data) const {
-    Node node;
-    if (!find(path, node)) {
-      LOG(ERROR) << path << "does not exist";
+    Configuration::Node node;
+    node.reset(find(path));
+    if (!node) {
+      LOG(ERROR) << path << " does not exist";
       return false;
     }
     try {
-      node >> data;
+      data = node.as<T>();
     }
     catch (YAML::ParserException &e) {
-      LOG(ERROR) << path << "does not exist";
+      LOG(ERROR) << path << " cannot be parsed: " << e.what();
       return false;
     }
     catch (std::exception &e) {
@@ -53,9 +58,10 @@ class Configuration {
   }
 
   bool getConfig(const std::string &path, Configuration &config) const;
+  bool getConfigs(const std::string &path, std::vector<Configuration> &configs) const;
 
  private:
-  bool find(const std::string &path, Node &node) const;
+  Node find(const std::string &path) const;
 
  protected:
   Node node_;

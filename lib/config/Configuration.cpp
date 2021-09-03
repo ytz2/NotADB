@@ -9,9 +9,19 @@
 namespace lib {
 namespace config {
 
+Configuration::Configuration(std::istream &input) {
+  try {
+    node_ = YAML::Load(input);
+  } catch (YAML::ParserException &e) {
+    throw std::runtime_error(e.what());
+  } catch (...) {
+    throw std::runtime_error("unknown error");
+  }
+}
+
 Configuration::Configuration(const std::string &path) {
   try {
-    node_ = YAML::Load(path);
+    node_ = YAML::LoadFile(path);
     // do stuff
   } catch (YAML::ParserException &e) {
     throw std::runtime_error(e.what());
@@ -21,24 +31,29 @@ Configuration::Configuration(const std::string &path) {
 }
 
 Configuration::Configuration(const Node &node)
-    : node_(node) {}
+    : node_(node) {
+}
 
-bool Configuration::find(const std::string &path, Configuration::Node &node) const {
-  node = node_;
-  std::vector<std::string> tokens;
+Configuration::Node Configuration::find(const std::string &path) const {
+  Configuration::Node tmp;
+  tmp.reset(node_);
+
+  if (path.empty()) return tmp;
+  std::list<std::string> tokens;
   boost::split(tokens, path, boost::is_any_of("\t.\\,|"));
+
   for (const auto &each : tokens) {
-    if (node[each])
-      node = node[each];
-    else
-      return false;
+    tmp.reset(tmp[each]);
+    if (!tmp)
+      return tmp;
   }
-  return true;
+  return tmp;
 }
 
 bool Configuration::getConfig(const std::string &path, Configuration &config) const {
   Configuration::Node node;
-  if (!find(path, node))
+  node.reset(find(path));
+  if (!node)
     return false;
   config = Configuration(node);
   return true;
