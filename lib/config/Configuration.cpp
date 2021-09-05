@@ -58,5 +58,19 @@ bool Configuration::getConfig(const std::string &path, Configuration &config) co
   config = Configuration(node);
   return true;
 }
+
+bool Configuration::getConfigs(const std::string &path, std::vector<Configuration> &configs) const {
+  Configuration::Node node;
+  node.reset(find(path));
+  if (!node || !node.IsSequence())
+    return false;
+  for(size_t i = 0; i < node.size(); i++) {
+    Configuration::Node tmp;
+    tmp.reset(node[i]);
+    configs.push_back(Configuration(tmp));
+  }
+  return true;
+}
+
 }
 }

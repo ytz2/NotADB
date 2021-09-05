@@ -41,3 +41,9 @@ http_archive(
         "https://github.com/sammi/yaml-cpp/archive/yaml-cpp-0.6.4.tar.gz",
     ],
 )
+
+git_repository(
+    name = "gtest",
+    remote = "https://github.com/google/googletest",
+    branch = "v1.10.x",
+)
