@@ -1,5 +1,6 @@
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 load("@bazel_tools//tools/build_defs/repo:git.bzl", "git_repository")
+load("@bazel_tools//tools/build_defs/repo:git.bzl", "new_git_repository")
 
 http_archive(
     name = "com_github_jsoncpp",
@@ -46,4 +47,28 @@ git_repository(
     name = "gtest",
     remote = "https://github.com/google/googletest",
     branch = "v1.10.x",
+)
+
+new_git_repository(
+    name = "com_github_edenhill_librdkafka",
+    remote = "https://github.com/edenhill/librdkafka.git",
+    tag = "v1.7.0",
+    build_file = "//third_party:librdkafka.BUILD",
+)
+
+bind(
+    name = "kafka",
+    actual = "@com_github_edenhill_librdkafka//:kafka",
+)
+
+bind(
+    name = "kafkacpp",
+    actual = "@com_github_edenhill_librdkafka//:kafkacpp",
+)
+
+new_git_repository(
+    name = "com_github_morganstanley_moderncppkafka",
+    remote = "https://github.com/morganstanley/modern-cpp-kafka.git",
+    tag = "v2021.08.25",
+    build_file = "//third_party:moderncppkafka.BUILD",
 )
