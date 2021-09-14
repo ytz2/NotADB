@@ -12,22 +12,28 @@
 #endif
 
 #include "kafka/KafkaProducer.h"
+#include <glog/logging.h>
+#include "interface/message.h"
+#include "lib/config/Configuration.h"
 
 #include <iostream>
 #include <string>
 
 namespace lib {
-namespace tcp {
+namespace kafka {
+
 class Producer {
  public:
   Producer() {
+    LOG(INFO) << producer_;
+  };
+  virtual ~Producer() {
     if (producer_)
-      return;
-    std::cout << producer_;
-  }
+      delete producer_;
+  };
 
  private:
-  kafka::KafkaProducer *producer_;
+  ::kafka::KafkaProducer *producer_ = nullptr;
 };
 
 }
