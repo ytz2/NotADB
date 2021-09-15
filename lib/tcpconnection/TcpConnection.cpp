@@ -39,7 +39,7 @@ void TcpSession::handle_read(const boost::system::error_code &error,
       disconnect();
       return;
     }
-    for (const auto each : msgs) {
+    for (const auto &each: msgs) {
       onMessage(each);
     }
     socket_.async_read_some(
@@ -59,7 +59,7 @@ bool TcpSession::send(const interface::IMessagePtr msg) {
                            [this, msg](const boost::system::error_code &err,
                                        std::size_t transferred) {
                              if (!err) {
-                               for (auto each : this->sessionCallbacks_) {
+                               for (auto each: this->sessionCallbacks_) {
                                  each->onMessageSent(shared_from_this(), msg);
                                }
                              } else {
@@ -116,7 +116,7 @@ bool TcpServer::start() {
 
 void TcpServer::stop() {
   IAcceptor::stop();
-  for (auto &each : this->sessions_) {
+  for (auto &each: this->sessions_) {
     each.second->disconnect();
   }
   sessions_.clear();
@@ -154,12 +154,12 @@ void TcpServer::accept() {
       LOG(INFO) << "session " << name << " has been established";
       sessions_[name] = session;
       // give listners to child
-      for (auto s : sessionCallbacks_) {
+      for (auto s: sessionCallbacks_) {
         session->registerSessionCallback(s);
       }
       // also register myself
       session->registerSessionCallback(shared_from_this());
-      for (auto l : appCallbacks_) {
+      for (auto l: appCallbacks_) {
         session->registerListner(l);
       }
       if (!session->start()) {

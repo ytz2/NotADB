@@ -22,7 +22,7 @@ class CommonJsonFactory : public interface::IMessageFactory {
     return std::make_shared<CommonJsonMessage>();
   }
 
-  const std::string getProtocolName() const { return "CommonJsonMessage"; }
+  const std::string getProtocolName() const override { return "CommonJsonMessage"; }
 
   static CommonJsonFactory *getInstance() {
     static CommonJsonFactory fact;

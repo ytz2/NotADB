@@ -53,15 +53,15 @@ class TcpClientSession : public TcpSession {
   explicit TcpClientSession(boost::asio::io_service &io,  // NOLINT
                             const std::string &name, const std::string &host,
                             const std::string &port, MessageCodecPtr codec)
-      : TcpSession(std::move(boost::asio::ip::tcp::socket(io)), codec, name),
+      : TcpSession(boost::asio::ip::tcp::socket(io), codec, name),
+        manualllyStopped_(false),
         io_(io),
         host_(host),
         port_(port),
         retryTimer_(std::make_shared<boost::asio::deadline_timer>(io)),
         timeouter_(std::make_shared<boost::asio::deadline_timer>(io)),
         retryInterval_(100),
-        timeoutInterval_(100),
-        manualllyStopped_(false) {}
+        timeoutInterval_(100) {}
 
   bool start() override;
 
@@ -114,9 +114,9 @@ class TcpServer : public std::enable_shared_from_this<TcpServer>,
 
   explicit TcpServer(boost::asio::io_context &io_context, int port,  // NOLINT
                      MessageCodecPtr codec)
-      : codec_(codec),
-        acceptor_(io_context, boost::asio::ip::tcp::endpoint(
-            boost::asio::ip::tcp::v4(), port)) {
+      : acceptor_(io_context, boost::asio::ip::tcp::endpoint(
+      boost::asio::ip::tcp::v4(), port)),
+        codec_(codec) {
     LOG(INFO) << "Tcp Server start will listen on " << port;
   }
 

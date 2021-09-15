@@ -14,7 +14,7 @@ class SimpleClientListener : public interface::IListener,
   bool shouldProcess(const interface::IMessagePtr) override { return true; }
 
   virtual bool onMessage(interface::ISessionPtr session,
-                         const interface::IMessagePtr msg) {
+                         const interface::IMessagePtr msg) override {
     string body;
     if (msg->ToString(body)) {
       LOG(INFO) << "Received message from connection " << session->name()

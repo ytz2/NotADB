@@ -69,6 +69,7 @@ bind(
 new_git_repository(
     name = "com_github_morganstanley_moderncppkafka",
     remote = "https://github.com/morganstanley/modern-cpp-kafka.git",
-    tag = "v2021.08.25",
+    commit = "82bdae9a29fda7bac94a40c80cc2e6ff3bda51bd",
     build_file = "//third_party:moderncppkafka.BUILD",
+    shallow_since = "1631534515 +0800",
 )

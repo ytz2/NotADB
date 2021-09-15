@@ -16,6 +16,8 @@ class IMessage {
   virtual const std::string GetMessageName() = 0;
 
   virtual ~IMessage() {}
+
+  virtual const std::string GetProtocol()  = 0;
 };
 
 typedef std::shared_ptr<IMessage> IMessagePtr;
