@@ -42,7 +42,7 @@ Configuration::Node Configuration::find(const std::string &path) const {
   std::list<std::string> tokens;
   boost::split(tokens, path, boost::is_any_of("\t.\\,|"));
 
-  for (const auto &each : tokens) {
+  for (const auto &each: tokens) {
     tmp.reset(tmp[each]);
     if (!tmp)
       return tmp;
@@ -64,7 +64,7 @@ bool Configuration::getConfigs(const std::string &path, std::vector<Configuratio
   node.reset(find(path));
   if (!node || !node.IsSequence())
     return false;
-  for(size_t i = 0; i < node.size(); i++) {
+  for (size_t i = 0; i < node.size(); i++) {
     Configuration::Node tmp;
     tmp.reset(node[i]);
     configs.push_back(Configuration(tmp));

@@ -35,7 +35,7 @@ class CommonJsonMessage : public interface::IMessage, public Json::Value {
 
   virtual const std::string GetMessageName() override { return "CommonJson"; }
 
-  virtual const std::string GetProtocol()  override { return "CommonJson"; };
+  virtual const std::string GetProtocol() override { return "CommonJson"; };
 };
 
 } /* namespace commonjson */

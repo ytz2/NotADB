@@ -100,7 +100,7 @@ class ISession : public ICallbackContainer,
  protected:
   // ICallbackContainer
   void onMessage(const IMessagePtr msg) override {
-    for (auto l : appCallbacks_) {
+    for (auto l: appCallbacks_) {
       if (l->shouldProcess(msg)) {
         l->onMessage(shared_from_this(), msg);
       }
@@ -109,14 +109,14 @@ class ISession : public ICallbackContainer,
 
   void onDisconnect() override {
     connected_ = false;
-    for (auto l : sessionCallbacks_) {
+    for (auto l: sessionCallbacks_) {
       l->onDisconnect(shared_from_this());
     }
   }
 
   void onConnected() override {
     connected_ = true;
-    for (auto l : sessionCallbacks_) {
+    for (auto l: sessionCallbacks_) {
       l->onConnect(shared_from_this());
     }
   }
@@ -141,7 +141,7 @@ class IAcceptor {
   virtual void stop() {
     ready_ = false;
     std::lock_guard<std::mutex> lk(lock_);
-    for (auto &session : sessions_) {
+    for (auto &session: sessions_) {
       if (session.second->connected()) {
         session.second->disconnect();
       }
@@ -156,7 +156,7 @@ class IAcceptor {
     if (!ready_) return false;
     bool res = true;
     std::lock_guard<std::mutex> lk(lock_);
-    for (auto &session : sessions_) {
+    for (auto &session: sessions_) {
       if (session.second->connected()) {
         res = res && session.second->send(msg);
       }
