@@ -7,7 +7,7 @@ genrule(
 
 genrule(
     name = "librdkafka++-a",
-    cmd = "cd external/com_github_edenhill_librdkafka && ./configure && make && mv src/librdkafka++.a ../../$@",
+    cmd = "cd external/com_github_edenhill_librdkafka && ./configure && make && mv src-cpp/librdkafka++.a ../../$@",
     srcs = glob(["**"]),
     outs = ["src/librdkafka++.a"],
 )
@@ -41,6 +41,7 @@ cc_library(
     include_prefix = 'librdkafka',
     deps = [
       ":librdkafka",
+      ":librdkafka++",
       ":kafka",
     ],
     visibility = ["//visibility:public"],
