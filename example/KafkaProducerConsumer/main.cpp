@@ -22,7 +22,7 @@ consumer:
   kafkaPollTimeoutMs: 100
   settings:
     - bootstrap.servers:localhost:29092
-    - enable.idempotence:true
+    - enable.auto.commit:true
 )";
 
 class KafkaListener : public interface::IListener {
@@ -48,7 +48,7 @@ class KafkaListener : public interface::IListener {
 
 int main() {
   std::istringstream is(configStr);
-  lib::config::Configuration root(configStr);
+  lib::config::Configuration root(is);
   lib::config::Configuration consumerConfig, producerConfig;
   if (!root.getConfig("producer", producerConfig) || !root.getConfig("consumer", consumerConfig)) {
     LOG(ERROR) << "cannot init config";
@@ -68,7 +68,10 @@ int main() {
     auto &v = *msg;
     v["msg"] = "heartbeat";
     producer->sendSync("test", msg);
-    std::this_thread::sleep_for(2000ms);
+    std::string buff;
+    msg->ToString(buff);
+    LOG(INFO) << "published to kafka" << buff;
+    std::this_thread::sleep_for(1000ms);
   }
   return 0;
 }

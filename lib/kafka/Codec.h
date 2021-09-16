@@ -45,7 +45,7 @@ class FlatMessageCodec : public MessageCodec {
 class CodecFactory {
  public:
   static MessageCodecPtr createCodec(const std::string &protocol) {
-    if (protocol == "CommonJson")
+    if (protocol == "CommonJson" || protocol == "CommonJsonMessage")
       return std::make_shared<FlatMessageCodec>(protocol); // only support json now
     return nullptr;
   }

@@ -13,6 +13,7 @@ namespace kafka {
 Consumer::Consumer(config::Configuration config)
     : interface::ISession("KafkaConsumer") {
   init(config);
+  connected_ = false;
 }
 
 Consumer::~Consumer() {
@@ -45,6 +46,7 @@ bool Consumer::start() {
 }
 
 void Consumer::consume() {
+  LOG(INFO) << name_ << "starts to poll to consume";
   while (connected_) {
     try {
       auto records = consumer_->poll(std::chrono::milliseconds(kafkaPollTimeout_));
@@ -103,7 +105,7 @@ void Consumer::init(config::Configuration config) {
     if (!each.get("protocol", protocol))
       throw std::runtime_error("no entry to protocol under topics");
     auto codec = CodecFactory::createCodec(protocol);
-    if (codec)
+    if (!codec)
       throw std::runtime_error(protocol + " is not supported");
     codecs_[topic] = codec;
   }
