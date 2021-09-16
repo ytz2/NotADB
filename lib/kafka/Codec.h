@@ -5,6 +5,7 @@
 #ifndef DISTRIBUTED_STREAMING_CODEC_H
 #define DISTRIBUTED_STREAMING_CODEC_H
 #include "interface/message.h"
+#include "kafka/ConsumerRecord.h"
 #include <unordered_map>
 #include <memory>
 
@@ -22,6 +23,7 @@ class MessageCodec {
   explicit MessageCodec(const std::string &protocol) : protocol_(protocol) {}
   virtual ~MessageCodec() = default;
   virtual interface::IMessagePtr deserialize(const std::string &string) = 0;
+  virtual interface::IMessagePtr deserialize(const ::kafka::ConsumerRecord &record) = 0;
   virtual bool serialize(interface::IMessagePtr, std::string &buffer) = 0;
  protected:
   std::string protocol_;
@@ -36,6 +38,7 @@ class FlatMessageCodec : public MessageCodec {
   }
   virtual ~FlatMessageCodec() = default;
   virtual interface::IMessagePtr deserialize(const std::string &string) override;
+  virtual interface::IMessagePtr deserialize(const ::kafka::ConsumerRecord &record) override;
   virtual bool serialize(interface::IMessagePtr, std::string &buffer) override;
 };
 

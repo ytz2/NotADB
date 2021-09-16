@@ -48,8 +48,12 @@ bool Producer::send(const interface::IMessagePtr msg) {
 }
 
 bool Producer::start() {
+  if (!producer_)
+    return false;
   // nothing we can do here
-  return producer_ != nullptr;
+  connected_ = true;
+  onConnected();
+  return true;
 }
 
 MessageCodecPtr Producer::getCodec(const interface::IMessagePtr msg) {
@@ -69,13 +73,13 @@ bool Producer::writeToBuffer(const interface::IMessagePtr msg, std::string &buff
   return codec->serialize(msg, buffer);
 }
 
-bool Producer::sendSync(const std::string &topic, const interface::IMessagePtr msg) {
+bool Producer::sendSync(const std::string &topic, const interface::IMessagePtr msg, std::string key) {
   if (!writeToBuffer(msg, buffer_)) {
     LOG(ERROR) << "Failed to write to buffer";
     return false;
   }
   auto record = ::kafka::ProducerRecord(topic,
-                                        ::kafka::NullKey,
+                                        key.empty() ? ::kafka::NullKey : ::kafka::Value(key.c_str(), key.size()),
                                         ::kafka::Value(buffer_.c_str(), buffer_.size()));
   // Send the message.
   try {
@@ -90,18 +94,21 @@ bool Producer::sendSync(const std::string &topic, const interface::IMessagePtr m
   return true;
 }
 
-bool Producer::sendAsync(const std::string &topic, const interface::IMessagePtr msg) {
+bool Producer::sendAsync(const std::string &topic, const interface::IMessagePtr msg, std::string key) {
   auto buffer = std::make_shared<std::string>();
+  auto keyBuffer = std::make_shared<std::string>(key);
   if (!writeToBuffer(msg, *buffer)) {
     LOG(ERROR) << "Failed to write to buffer";
     return false;
   }
   auto record = ::kafka::ProducerRecord(topic,
-                                        ::kafka::NullKey,
+                                        key.empty() ? ::kafka::NullKey : ::kafka::Value(keyBuffer->c_str(),
+                                                                                        keyBuffer->size()),
                                         ::kafka::Value(buffer->c_str(), buffer->size()));
   producer_->send(record,
       // lib drawback, need to capture the buffer as this is async and we do not want to destroy it
-                  [buffer, msg, this](const ::kafka::Producer::RecordMetadata &metadata, const ::kafka::Error &error) {
+                  [keyBuffer, buffer, msg, this](const ::kafka::Producer::RecordMetadata &metadata,
+                                                 const ::kafka::Error &error) {
                     if (!error) {
                       for (auto each: this->sessionCallbacks_) {
                         each->onMessageSent(shared_from_this(), msg);

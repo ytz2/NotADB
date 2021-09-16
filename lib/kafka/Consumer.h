@@ -1,0 +1,52 @@
+//
+// Created by Yanhua Liu on 9/15/21.
+//
+
+#ifndef DISTRIBUTED_STREAMING_LIB_KAFKA_CONSUMER_H_
+#define DISTRIBUTED_STREAMING_LIB_KAFKA_CONSUMER_H_
+#ifdef DEBUG
+#undef DEBUG
+#endif
+
+#include "kafka/KafkaConsumer.h"
+#include "lib/config/Configuration.h"
+#include <glog/logging.h>
+#include "interface/message.h"
+#include "interface/connection.h"
+#include "Codec.h"
+#include <iostream>
+#include <string>
+#include <thread>
+#include <atomic>
+
+namespace lib {
+namespace kafka {
+class Consumer : public interface::ISession {
+ public:
+  Consumer() = delete;
+  virtual ~Consumer();
+  explicit Consumer(config::Configuration config);
+
+  // ISession
+  virtual bool send(const interface::IMessagePtr msg) override { return false; };
+  virtual bool start() override;
+  virtual void disconnect() override;
+
+ protected:
+  void consume();
+
+ private:
+  void init(config::Configuration config);
+  void handleRecord(const ::kafka::ConsumerRecord &record);
+  interface::IMessagePtr decode(const ::kafka::ConsumerRecord &record);
+
+ private:
+  ::kafka::KafkaConsumer *consumer_ = nullptr;
+  std::unordered_map<std::string /*topic*/, MessageCodecPtr /*codec*/> codecs_;
+  std::thread thread_;
+  size_t kafkaPollTimeout_ = 100;
+};
+}
+}
+
+#endif //DISTRIBUTED_STREAMING_LIB_KAFKA_CONSUMER_H_

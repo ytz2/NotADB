@@ -34,9 +34,12 @@ class Producer : public interface::ISession {
   virtual bool start() override;
 
   // send to topic
-  virtual bool sendSync(const std::string &topic, const interface::IMessagePtr msg);
+  virtual bool sendSync(const std::string &topic, const interface::IMessagePtr msg, std::string key = "");
 
-  virtual bool sendAsync(const std::string &topic, const interface::IMessagePtr msg);
+  virtual bool sendAsync(const std::string &topic, const interface::IMessagePtr msg, std::string key = "");
+
+ protected:
+  virtual void onMessage(const interface::IMessagePtr msg) override { /*noop*/}
 
  private:
   void init(config::Configuration config);

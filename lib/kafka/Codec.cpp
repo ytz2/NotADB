@@ -6,10 +6,15 @@
 namespace lib {
 namespace kafka {
 
-interface::IMessagePtr FlatMessageCodec::deserialize(const std::string &string) {
+interface::IMessagePtr FlatMessageCodec::deserialize(const std::string &val) {
   int msgID = 0;
-  return message::MessageFactory::getInstance()->createMessageByProtocolMsgID(
+  auto msg = message::MessageFactory::getInstance()->createMessageByProtocolMsgID(
       protocol_, msgID);
+  return msg && msg->FromString(val) ? msg : nullptr;
+}
+
+interface::IMessagePtr FlatMessageCodec::deserialize(const ::kafka::ConsumerRecord &record) {
+  return deserialize(record.value().toString());
 }
 
 bool FlatMessageCodec::serialize(interface::IMessagePtr msg, std::string &buffer) {
