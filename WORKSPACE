@@ -1,6 +1,15 @@
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 load("@bazel_tools//tools/build_defs/repo:git.bzl", "git_repository")
 load("@bazel_tools//tools/build_defs/repo:git.bzl", "new_git_repository")
+http_archive(
+    name = "rules_foreign_cc",
+    strip_prefix = "rules_foreign_cc-7da37f815b3b58e05308fbf4940c327c3cb0669b",
+    url = "https://github.com/bazelbuild/rules_foreign_cc/archive/7da37f815b3b58e05308fbf4940c327c3cb0669b.tar.gz",
+)
+
+load("@rules_foreign_cc//foreign_cc:repositories.bzl", "rules_foreign_cc_dependencies")
+
+rules_foreign_cc_dependencies()
 
 http_archive(
     name = "com_github_jsoncpp",
@@ -50,26 +59,44 @@ git_repository(
 )
 
 new_git_repository(
-    name = "com_github_edenhill_librdkafka",
-    remote = "https://github.com/edenhill/librdkafka.git",
-    tag = "v1.7.0",
-    build_file = "//third_party:librdkafka.BUILD",
-)
-
-bind(
-    name = "kafka",
-    actual = "@com_github_edenhill_librdkafka//:kafka",
-)
-
-bind(
-    name = "kafkacpp",
-    actual = "@com_github_edenhill_librdkafka//:kafkacpp",
-)
-
-new_git_repository(
     name = "com_github_morganstanley_moderncppkafka",
     remote = "https://github.com/morganstanley/modern-cpp-kafka.git",
     commit = "82bdae9a29fda7bac94a40c80cc2e6ff3bda51bd",
     build_file = "//third_party:moderncppkafka.BUILD",
     shallow_since = "1631534515 +0800",
 )
+
+http_archive(
+    name = "librdkafka",
+    build_file_content = """load("@rules_foreign_cc//foreign_cc:defs.bzl", "cmake")
+
+filegroup(
+    name = "sources",
+    srcs = glob(["**"]),
+)
+
+cmake(
+    name = "librdkafka",
+    cache_entries = {
+        "RDKAFKA_BUILD_STATIC": "ON",
+        "RDKAFKA_BUILD_TESTS": "OFF",
+        "RDKAFKA_BUILD_EXAMPLES": "OFF",
+        "WITH_ZLIB": "OFF",
+        "WITH_ZSTD": "OFF",
+        "WITH_SSL": "OFF",
+        "WITH_SASL": "OFF",
+        "ENABLE_LZ4_EXT": "OFF",
+        "WITH_LIBDL": "OFF",
+    },
+    lib_source = ":sources",
+    out_static_libs = [
+        "librdkafka++.a",
+        "librdkafka.a",
+    ],
+    visibility = ["//visibility:public"],
+)
+""",
+    strip_prefix = "librdkafka-1.7.0",
+    urls = ["https://github.com/edenhill/librdkafka/archive/v1.7.0.tar.gz"],
+)
+

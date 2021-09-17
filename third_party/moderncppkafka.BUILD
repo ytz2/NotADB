@@ -6,8 +6,7 @@ cc_library(
             "-std=c++17",
     ],
     deps = [
-        "//external:kafka",
-        "//external:kafkacpp",
+        "@librdkafka//:librdkafka",
     ],
     visibility = ["//visibility:public"],
 )

@@ -63,10 +63,12 @@ int main() {
     LOG(ERROR) << "Failed to start the consumer and producer";
     return -1;
   }
+  int seq = 0;
   while(1) {
     auto msg = std::make_shared<lib::message::commonjson::CommonJsonMessage>();
     auto &v = *msg;
     v["msg"] = "heartbeat";
+    v["seq"] = ++seq;
     producer->sendSync("test", msg);
     std::string buff;
     msg->ToString(buff);
