@@ -35,6 +35,11 @@ http_archive(
     urls = ["https://github.com/gflags/gflags/archive/v2.2.2.tar.gz"],
 )
 
+bind(
+    name = "gflags",
+    actual = "@com_github_gflags_gflags//:gflags",
+)
+
 http_archive(
     name = "com_github_google_glog",
     sha256 = "21bc744fb7f2fa701ee8db339ded7dce4f975d0d55837a97be7d46e8382dea5a",
@@ -42,6 +47,10 @@ http_archive(
     urls = ["https://github.com/google/glog/archive/v0.5.0.zip"],
 )
 
+bind(
+    name = "glog",
+    actual = "@com_github_google_glog//:glog",
+)
 
 http_archive(
     name = "com_github_jbeder_yaml_cpp",
@@ -53,9 +62,14 @@ http_archive(
 )
 
 git_repository(
-    name = "gtest",
+    name = "com_google_googletest",
     remote = "https://github.com/google/googletest",
     branch = "v1.10.x",
+)
+
+bind(
+    name = "gtest",
+    actual = "@com_google_googletest//:gtest",
 )
 
 new_git_repository(
@@ -100,3 +114,76 @@ cmake(
     urls = ["https://github.com/edenhill/librdkafka/archive/v1.7.0.tar.gz"],
 )
 
+
+http_archive(
+    name = "com_github_facebook_rocksdb",
+    url = "https://github.com/facebook/rocksdb/archive/v6.8.1.tar.gz",
+    strip_prefix = "rocksdb-6.8.1",
+    sha256 = "ca192a06ed3bcb9f09060add7e9d0daee1ae7a8705a3d5ecbe41867c5e2796a2",
+    build_file = "//third_party/com_github_facebook_rocksdb:rocksdb.BUILD",
+)
+
+bind(
+    name = "rocksdb",
+    actual = "@com_github_facebook_rocksdb//:rocksdb",
+)
+
+# snappy
+http_archive(
+    name = "com_github_google_snappy",
+    url = "https://github.com/google/snappy/archive/ed3b7b2.tar.gz",
+    strip_prefix = "snappy-ed3b7b242bd24de2ca6750c73f64bee5b7505944",
+    sha256 = "88a644b224f54edcd57d01074c2d6fd6858888e915c21344b8622c133c35a337",
+    build_file = "//third_party:snappy.BUILD",
+)
+
+# zlib
+new_git_repository(
+    name = "com_github_madler_zlib",
+    remote = "https://github.com/madler/zlib.git",
+    tag = "v1.2.11",
+    #sha256 = "629380c90a77b964d896ed37163f5c3a34f6e6d897311f1df2a7016355c45eff",
+    build_file = "//third_party:zlib.BUILD",
+)
+
+bind(
+    name = "zlib",
+    actual = "@com_github_madler_zlib//:zlib",
+)
+
+bind(
+    name = "snappy",
+    actual = "@com_github_google_snappy//:snappy",
+)
+
+bind(
+    name = "snappy_config",
+    actual = "//third_party/snappy_config:config"
+)
+
+# lz4
+http_archive(
+    name = "com_github_lz4_lz4",
+    urls = ["https://github.com/lz4/lz4/archive/v1.9.2.tar.gz"],
+    strip_prefix = "lz4-1.9.2",
+    build_file = "//third_party:lz4.BUILD",
+    sha256 = "658ba6191fa44c92280d4aa2c271b0f4fbc0e34d249578dd05e50e76d0e5efcc",
+)
+bind(
+    name = "lz4",
+    actual = "@com_github_lz4_lz4//:lz4",
+)
+
+#zstd
+http_archive(
+    name = "com_github_facebook_zstd",
+    urls = ["https://github.com/facebook/zstd/archive/v1.4.4.tar.gz",],
+    strip_prefix = "zstd-1.4.4",
+    build_file = "//third_party:zstd.BUILD",
+    sha256 = "a364f5162c7d1a455cc915e8e3cf5f4bd8b75d09bc0f53965b0c9ca1383c52c8",
+)
+
+bind(
+    name = "zstd",
+    actual = "@com_github_facebook_zstd//:zstd",
+)
