@@ -1,7 +1,3 @@
-//
-// Created by Yanhua Liu on 8/24/21.
-//
-
 #include "Configuration.h"
 #include <boost/algorithm/string.hpp>
 #include <vector>

@@ -1,6 +1,3 @@
-//
-// Created by Yanhua Liu on 9/14/21.
-//
 #include "Codec.h"
 #include "message/MessageFactory.h"
 namespace lib {

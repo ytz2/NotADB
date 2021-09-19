@@ -1,7 +1,3 @@
-//
-// Created by Yanhua Liu on 9/15/21.
-//
-
 #include "Consumer.h"
 #include <boost/algorithm/string.hpp>
 #include <vector>
