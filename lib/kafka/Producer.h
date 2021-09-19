@@ -1,11 +1,4 @@
-//
-// Created by Danni Song on 9/12/21.
-//
-
-#ifndef DISTRIBUTED_STREAMING_LIB_KAFKA_PRODUCER_H_
-#define DISTRIBUTED_STREAMING_LIB_KAFKA_PRODUCER_H_
-
-// resolve the conflict due to modern cpp kafka conflict
+#pragma once
 
 #ifdef DEBUG
 #undef DEBUG
@@ -53,5 +46,3 @@ class Producer : public interface::ISession {
 
 }
 }
-
-#endif //DISTRIBUTED_STREAMING_LIB_KAFKA_PRODUCER_H_

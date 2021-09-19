@@ -1,9 +1,4 @@
-//
-// Created by Yanhua Liu on 9/14/21.
-//
-
-#ifndef DISTRIBUTED_STREAMING_CODEC_H
-#define DISTRIBUTED_STREAMING_CODEC_H
+#pragma once
 #include "interface/message.h"
 #include "kafka/ConsumerRecord.h"
 #include <unordered_map>
@@ -52,5 +47,3 @@ class CodecFactory {
 };
 }
 }
-
-#endif //DISTRIBUTED_STREAMING_CODEC_H

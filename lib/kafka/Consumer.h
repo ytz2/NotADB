@@ -1,9 +1,4 @@
-//
-// Created by Yanhua Liu on 9/15/21.
-//
-
-#ifndef DISTRIBUTED_STREAMING_LIB_KAFKA_CONSUMER_H_
-#define DISTRIBUTED_STREAMING_LIB_KAFKA_CONSUMER_H_
+#pragma once
 #ifdef DEBUG
 #undef DEBUG
 #endif
@@ -48,5 +43,3 @@ class Consumer : public interface::ISession {
 };
 }
 }
-
-#endif //DISTRIBUTED_STREAMING_LIB_KAFKA_CONSUMER_H_

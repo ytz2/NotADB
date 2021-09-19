@@ -1,7 +1,4 @@
-/* Copyright 2020 Yanhua Liu */
-#ifndef SRC_MESSAGE_MESSAGEFACTORY_H_
-#define SRC_MESSAGE_MESSAGEFACTORY_H_
-
+#pragma once
 #include <string>
 #include <unordered_map>
 
@@ -44,5 +41,3 @@ class MessageFactory {
 
 } /* namespace message */
 } /* namespace lib */
-
-#endif /* SRC_MESSAGE_MESSAGEFACTORY_H_ */

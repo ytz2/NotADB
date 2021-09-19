@@ -1,9 +1,4 @@
-//
-// Created by Yanhua Liu on 8/24/21.
-//
-
-#ifndef DISTRIBUTED_STREAMING_CONFIGURATION_H
-#define DISTRIBUTED_STREAMING_CONFIGURATION_H
+#pragma once
 
 #include <string>
 #include <fstream>
@@ -69,5 +64,3 @@ class Configuration {
 
 }
 }
-
-#endif
