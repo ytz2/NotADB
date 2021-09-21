@@ -28,10 +28,11 @@ class iRocksDB {
                               const std::string &col
   ) = 0;
 
-  virtual rocksdb::Status multiGet(const std::vector<std::string> &key,
+  virtual std::vector<rocksdb::Status> multiGet(const std::vector<std::string> &key,
                                    std::vector<std::string> &value,
                                    const std::string &col
   ) = 0;
+
 
   virtual rocksdb::Status write(rocksdb::WriteBatch *updates) = 0;
 

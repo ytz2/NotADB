@@ -11,7 +11,9 @@ namespace engine {
 class SimpleRocksDB : public interface::iRocksDB {
  public:
   explicit SimpleRocksDB(config::Configuration config);
+
   SimpleRocksDB() = delete;
+
   virtual ~SimpleRocksDB();
 
   virtual rocksdb::Status get(const std::string &key,
@@ -19,7 +21,7 @@ class SimpleRocksDB : public interface::iRocksDB {
                               const std::string &col
   ) override;
 
-  virtual rocksdb::Status multiGet(const std::vector<std::string> &keys,
+  virtual std::vector<rocksdb::Status> multiGet(const std::vector<std::string> &keys,
                                    std::vector<std::string> &values,
                                    const std::string &col
   ) override;

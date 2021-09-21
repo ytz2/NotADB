@@ -83,11 +83,11 @@ rocksdb::Status SimpleRocksDB::get(const std::string &key,
   return rocksDB_->Get(readOptions_, cf, key, &value);
 }
 
-rocksdb::Status SimpleRocksDB::multiGet(const std::vector<std::string> &keys,
+std::vector<rocksdb::Status> SimpleRocksDB::multiGet(const std::vector<std::string> &keys,
                                         std::vector<std::string> &values,
                                         const std::string &col) {
   auto cf = getHandle(col);
-  if (!cf) return rocksdb::Status::NotFound();
+  if (!cf) return std::vector<rocksdb::Status>(keys.size(), rocksdb::Status::NotFound());
 
   std::vector<rocksdb::Slice> skeys;
   std::vector<rocksdb::PinnableSlice> svalues;
@@ -99,13 +99,13 @@ rocksdb::Status SimpleRocksDB::multiGet(const std::vector<std::string> &keys,
   rocksDB_->MultiGet(readOptions_, cf, keys.size(), skeys.data(), svalues.data(), statuses.data());
   for (const auto &each: statuses) {
     if (!each.ok())
-      return each;
+      return statuses;
   }
   values.clear();
   for (const auto &each: svalues) {
     values.push_back(each.ToString());
   }
-  return rocksdb::Status::OK();;
+  return statuses;
 }
 
 rocksdb::Status SimpleRocksDB::write(rocksdb::WriteBatch *updates) {
@@ -197,6 +197,5 @@ rocksdb::Status SimpleRocksDB::delete_column(const std::string &col) {
   columnFamilies_.erase(col);
   return rocksdb::Status::OK();
 }
-
 }
 }
