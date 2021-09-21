@@ -1,4 +1,3 @@
-/* Copyright 2020 Yanhua Liu */
 #pragma once
 
 #include <json/json.h>

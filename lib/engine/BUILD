@@ -10,6 +10,9 @@ cc_library(
     ]),
     visibility = ["//visibility:public"],
     deps = [
+        "//message:message",
+        "//interface:interface",
+        "//lib/config:config_lib",
         "@com_github_google_glog//:glog",
         "@com_github_facebook_rocksdb//:rocksdb",
     ],
