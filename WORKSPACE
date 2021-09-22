@@ -5,6 +5,7 @@ http_archive(
     name = "rules_foreign_cc",
     strip_prefix = "rules_foreign_cc-7da37f815b3b58e05308fbf4940c327c3cb0669b",
     url = "https://github.com/bazelbuild/rules_foreign_cc/archive/7da37f815b3b58e05308fbf4940c327c3cb0669b.tar.gz",
+    sha256 = "b68aa8c2bd24b2ac694cdbb5be382de4819e626c9d75f89478f3766e28849362",
 )
 
 load("@rules_foreign_cc//foreign_cc:repositories.bzl", "rules_foreign_cc_dependencies")
@@ -16,6 +17,7 @@ http_archive(
     url = "https://github.com/open-source-parsers/jsoncpp/archive/1.8.4.zip",
     build_file = "//third_party:jsoncpp.BUILD",
     strip_prefix = "jsoncpp-1.8.4",
+    sha256 = "2979436dbd4c48a3284dca9fa8f212298425ba3920ed6bacdda8905a94b111a8",
 )
 
 git_repository(
@@ -54,17 +56,17 @@ bind(
 
 http_archive(
     name = "com_github_jbeder_yaml_cpp",
-    sha256 = "1df36d25ff796a79bee69ea42ee2b86be09ac9f3582efaf5a26037f09033297b",
-    strip_prefix = "yaml-cpp-yaml-cpp-0.6.4",
+    strip_prefix = "yaml-cpp-yaml-cpp-0.7.0",
     urls = [
-        "https://github.com/sammi/yaml-cpp/archive/yaml-cpp-0.6.4.tar.gz",
+        "https://github.com/jbeder/yaml-cpp/archive/yaml-cpp-0.7.0.tar.gz",
     ],
 )
 
 git_repository(
     name = "com_google_googletest",
     remote = "https://github.com/google/googletest",
-    branch = "v1.10.x",
+    commit = "703bd9caab50b139428cea1aaff9974ebee5742e",
+    shallow_since = "1570114335 -0400",
 )
 
 bind(
@@ -82,6 +84,7 @@ new_git_repository(
 
 http_archive(
     name = "librdkafka",
+    sha256 = "c71b8c5ff419da80c31bb8d3036a408c87ad523e0c7588e7660ee5f3c8973057",
     build_file_content = """load("@rules_foreign_cc//foreign_cc:defs.bzl", "cmake")
 
 filegroup(
@@ -141,8 +144,8 @@ http_archive(
 new_git_repository(
     name = "com_github_madler_zlib",
     remote = "https://github.com/madler/zlib.git",
-    tag = "v1.2.11",
-    #sha256 = "629380c90a77b964d896ed37163f5c3a34f6e6d897311f1df2a7016355c45eff",
+    commit = "cacf7f1d4e3d44d871b605da3b647f07d718623f",
+    shallow_since = "1484501380 -0800",
     build_file = "//third_party:zlib.BUILD",
 )
 
@@ -192,7 +195,8 @@ bind(
 new_git_repository(
     name = "com_github_hash_ring",
     remote = "https://github.com/chrismoos/hash-ring.git",
-    tag = "v1.0.2",
+    commit = "4c429cb229910b01c4a032ecfb1282066142614b",
+    shallow_since = "1449726148 -0700",
     build_file = "//third_party:hashring.BUILD",
 )
 

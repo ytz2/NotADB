@@ -6,7 +6,7 @@
 #include <boost/algorithm/string.hpp>
 
 const static std::string example = R"(
-development:
+development: &base
   database: myapp_development
   adapter:  postgres
   host:     localhost
@@ -14,6 +14,8 @@ development:
     - 123
     - 124
     - 125
+
+production: *base
 
 test:
   database: myapp_test
@@ -39,6 +41,8 @@ TEST(ConfigurationTest, getVal) {
   EXPECT_TRUE(root.get("test.ports", tokens) && tokens.size() == 1 && boost::join(tokens, ",") == "321");
   EXPECT_FALSE(root.get("hello", token));
   EXPECT_FALSE(root.get("development.ports", token));
+  tokens.clear();
+  EXPECT_TRUE(root.get("production.ports", tokens) && tokens.size() == 3 && boost::join(tokens, ",") == "123,124,125");
 }
 
 TEST(ConfigurationTest, getConfig) {
