@@ -1,11 +1,6 @@
-//
-// Created by Yanhua Liu on 9/20/21.
-//
-
-#ifndef NOTADB_LIB_ENGINE_ROCKSDBFACTORY_H_
-#define NOTADB_LIB_ENGINE_ROCKSDBFACTORY_H_
+#pragma once
 #include "SimpleRocksDB.h"
-
+#include "AsyncRocksDB.h"
 namespace lib {
 namespace engine {
 interface::iRocksDBPtr CreateDB(config::Configuration config) {
@@ -15,9 +10,9 @@ interface::iRocksDBPtr CreateDB(config::Configuration config) {
   }
   if (type == "SimpleKV")
     return std::make_shared<SimpleRocksDB>(config);
+  if (type == "AsyncKV")
+    return std::make_shared<AsyncRocksDB>(config);
   return nullptr;
 }
 }
 }
-
-#endif //NOTADB_LIB_ENGINE_ROCKSDBFACTORY_H_

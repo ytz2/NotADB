@@ -187,3 +187,12 @@ bind(
     name = "zstd",
     actual = "@com_github_facebook_zstd//:zstd",
 )
+
+#hash ring
+new_git_repository(
+    name = "com_github_hash_ring",
+    remote = "https://github.com/chrismoos/hash-ring.git",
+    tag = "v1.0.2",
+    build_file = "//third_party:hashring.BUILD",
+)
+
