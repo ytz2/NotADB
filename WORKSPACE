@@ -60,6 +60,10 @@ bind(
     actual = "@boost//:algorithm",
 )
 
+bind(
+    name = "boost_crc",
+    actual = "@boost//:crc",
+)
 
 http_archive(
     name = "com_github_gflags_gflags",
@@ -224,8 +228,8 @@ bind(
 
 http_archive(
     name = "avro_archive",
-    url = "https://github.com/apache/avro/archive/release-1.8.2.tar.gz",
-    strip_prefix = "avro-release-1.8.2",
-    sha256 = "19040889f2c822445b6ccf14e6f13ccf2d7851458790ae1539a2688d21c76ae0",
+    url = "https://github.com/apache/avro/archive/release-1.10.2.tar.gz",
+    strip_prefix = "avro-release-1.10.2",
     build_file = "//third_party:avro.BUILD",
+    sha256 = "c849ef7f7af58ce66e7b999b8d9815507d69ae434e7e058a44f7818515455a03",
 )
