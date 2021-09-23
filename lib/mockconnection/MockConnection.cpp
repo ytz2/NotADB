@@ -105,7 +105,6 @@ void MockConnection::poll() {
     q.pop();
     onMessage(m);
   }
-  boost::system::error_code err;
   t_->expires_from_now(boost::posix_time::millisec(10));
   t_->async_wait([this](const boost::system::error_code &e) { this->poll(); });
 }

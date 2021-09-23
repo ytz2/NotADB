@@ -30,6 +30,37 @@ git_repository(
 load("@com_github_nelhage_rules_boost//:boost/boost.bzl", "boost_deps")
 boost_deps()
 
+bind(
+    name = "boost_system",
+    actual = "@boost//:program_options",
+)
+
+bind(
+    name = "boost_program_options",
+    actual = "@boost//:program_options",
+)
+
+bind(
+    name = "boost_format",
+    actual = "@boost//:format",
+)
+
+bind(
+    name = "boost_ptr_container",
+    actual = "@boost//:ptr_container",
+)
+
+bind(
+    name = "boost_iostreams",
+    actual = "@boost//:iostreams",
+)
+
+bind(
+    name = "boost_algorithm",
+    actual = "@boost//:algorithm",
+)
+
+
 http_archive(
     name = "com_github_gflags_gflags",
     sha256 = "34af2f15cf7367513b352bdcd2493ab14ce43692d2dcd9dfc499492966c64dcf",
@@ -191,12 +222,10 @@ bind(
     actual = "@com_github_facebook_zstd//:zstd",
 )
 
-#hash ring
-new_git_repository(
-    name = "com_github_hash_ring",
-    remote = "https://github.com/chrismoos/hash-ring.git",
-    commit = "4c429cb229910b01c4a032ecfb1282066142614b",
-    shallow_since = "1449726148 -0700",
-    build_file = "//third_party:hashring.BUILD",
+http_archive(
+    name = "avro_archive",
+    url = "https://github.com/apache/avro/archive/release-1.8.2.tar.gz",
+    strip_prefix = "avro-release-1.8.2",
+    sha256 = "19040889f2c822445b6ccf14e6f13ccf2d7851458790ae1539a2688d21c76ae0",
+    build_file = "//third_party:avro.BUILD",
 )
-
