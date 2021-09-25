@@ -9,4 +9,7 @@ cc_test (
         "@com_github_google_glog//:glog",
          "//lib/route:route_lib",
     ],
+    copts = [
+        "-Wno-macro-redefined",
+    ],
 )

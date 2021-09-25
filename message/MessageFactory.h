@@ -4,6 +4,7 @@
 
 #include "interface/message.h"
 #include "message/commonjson/CommonJsonFactory.h"
+#include "message/avro/AvroFactory.h"
 
 namespace lib {
 namespace message {
@@ -34,6 +35,8 @@ class MessageFactory {
   MessageFactory() {
     auto jfactory = commonjson::CommonJsonFactory::getInstance();
     factories_[jfactory->getProtocolName()] = jfactory;
+    auto afactory = avromsg::AvroFactory::getInstance();
+    factories_[afactory->getProtocolName()] = afactory;
   }
 
   std::unordered_map<std::string, interface::IMessageFactory *> factories_;

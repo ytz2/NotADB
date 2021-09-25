@@ -294,7 +294,7 @@ cc_library(
         "//external:glog",
         "//external:gtest",
         "//external:snappy",
-        "//external:zlib",
+        "//external:madler_zlib",
         "//external:lz4",
         "//external:zstd",
     ],

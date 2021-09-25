@@ -46,7 +46,7 @@ class iRocksDB {
                               const std::string &col
   ) = 0;
 
-  virtual rocksdb::Status remove(const std::string &&key,
+  virtual rocksdb::Status remove(const std::string &key,
                                  const std::string &col
   ) = 0;
 

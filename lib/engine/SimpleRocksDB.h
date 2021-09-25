@@ -38,7 +38,7 @@ class SimpleRocksDB : public interface::iRocksDB {
                               const std::string &col
   ) override;
 
-  virtual rocksdb::Status remove(const std::string &&key,
+  virtual rocksdb::Status remove(const std::string &key,
                                  const std::string &col
   ) override;
 

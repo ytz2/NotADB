@@ -1,0 +1,87 @@
+[
+  {
+    "type": "record",
+    "name": "KeyValue",
+    "fields": [
+      {
+        "name": "key",
+        "type": "string"
+      },
+      {
+        "name": "value",
+        "type": "string"
+      }
+    ]
+  },
+  {
+    "type": "record",
+    "name": "PutOne",
+    "fields": [
+      {
+        "name": "key",
+        "type": "string"
+      },
+      {
+        "name": "value",
+        "type": "string"
+      },
+      {
+        "name": "column",
+        "type": "string"
+      }
+    ]
+  },
+  {
+    "type": "record",
+    "name": "WriteMany",
+    "fields": [
+      {
+        "name": "keyValues",
+        "type": {
+          "type": "array",
+          "items" : "KeyValue"
+        }
+      },
+      {
+        "name": "column",
+        "type": "string"
+      }
+    ]
+  },
+  {
+    "type": "record",
+    "name": "RemoveOne",
+    "fields": [
+      {
+        "name": "key",
+        "type": "string"
+      },
+      {
+        "name": "column",
+        "type": "string"
+      }
+    ]
+  },
+  {
+    "type": "record",
+    "name": "RemoveRange",
+    "fields": [
+      {
+        "name": "column",
+        "type": "string"
+      },
+      {
+        "name": "begin",
+        "type": "string"
+      },
+      {
+        "name": "end",
+        "type": "string"
+      },
+      {
+        "name": "deleteFileInRange",
+        "type": "boolean"
+      }
+    ]
+  }
+]

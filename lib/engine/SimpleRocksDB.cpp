@@ -133,7 +133,7 @@ rocksdb::Status SimpleRocksDB::put(const std::string &key,
   return rocksDB_->Put(writeOptions_, cf, key, value);
 }
 
-rocksdb::Status SimpleRocksDB::remove(const std::string &&key,
+rocksdb::Status SimpleRocksDB::remove(const std::string &key,
                                       const std::string &col) {
   auto cf = getHandle(col);
   if (!cf) return rocksdb::Status::NotFound();

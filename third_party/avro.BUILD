@@ -87,7 +87,7 @@ cc_library(
         "-Wno-unused-const-variable",
     ],
     deps = [
-        "//external:zlib",
+        "//external:madler_zlib",
         "//external:snappy",
         "//external:boost_algorithm",
         "//external:boost_crc",

@@ -1,0 +1,71 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "io.grpc.notadb";
+option java_outer_classname = "NotADB";
+option objc_class_prefix = "";
+
+package NotADB;
+
+// The greeting service definition.
+service NotADB {
+  rpc Get (GetRequest) returns (GetResponse) {}
+  rpc MultiGet (MultiGetRequest) returns (MultiGetResponse) {}
+  rpc Write (WriteRequest) returns (WriteResponse) {}
+  rpc Put (PutRequest) returns (PutResponse) {}
+  rpc RemoveRange (RemoveRangeRequest) returns (RemoveRangeResponse) {}
+  rpc Remove (RemoveRequest) returns (RemoveResponse) {}
+}
+
+message GetRequest {
+  string key = 1;
+  string column = 2;
+}
+
+message GetResponse {
+  string value = 1;
+}
+
+message MultiGetRequest {
+  repeated string key = 1;
+  string column = 2;
+}
+
+message MultiGetResponse {
+  repeated string value = 1;
+}
+
+message WriteRequest {
+  repeated string keys = 1;
+  repeated string values = 2;
+  string column = 3;
+}
+
+message WriteResponse {
+}
+
+message PutRequest {
+  string key = 1;
+  string value = 2;
+  string column = 3;
+}
+
+message PutResponse {
+}
+
+message RemoveRequest {
+  string key = 1;
+  string column = 2;
+}
+
+message RemoveResponse {
+}
+
+message RemoveRangeRequest {
+  string begin = 1;
+  string end = 2;
+  string column = 3;
+}
+
+message RemoveRangeResponse {
+}

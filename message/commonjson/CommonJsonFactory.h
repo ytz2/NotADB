@@ -1,7 +1,4 @@
-/* Copyright 2020 Yanhua Liu */
-#ifndef SRC_MESSAGE_COMMONJSON_COMMONJSONFACTORY_H_
-#define SRC_MESSAGE_COMMONJSON_COMMONJSONFACTORY_H_
-
+#pragma once
 #include <memory>
 #include <string>
 
@@ -36,4 +33,3 @@ class CommonJsonFactory : public interface::IMessageFactory {
 } /* namespace message */
 } /* namespace lib */
 
-#endif /* SRC_MESSAGE_COMMONJSON_COMMONJSONFACTORY_H_ */

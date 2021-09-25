@@ -12,6 +12,21 @@ load("@rules_foreign_cc//foreign_cc:repositories.bzl", "rules_foreign_cc_depende
 
 rules_foreign_cc_dependencies()
 
+# grpc
+http_archive(
+    name = "com_github_grpc_grpc",
+    urls = [
+        "https://github.com/grpc/grpc/archive/refs/tags/v1.40.0.tar.gz",
+    ],
+    strip_prefix = "grpc-1.40.0",
+    sha256 = "13e7c6460cd979726e5b3b129bb01c34532f115883ac696a75eb7f1d6a9765ed",
+)
+
+load("@com_github_grpc_grpc//bazel:grpc_deps.bzl", "grpc_deps")
+grpc_deps()
+load("@com_github_grpc_grpc//bazel:grpc_extra_deps.bzl", "grpc_extra_deps")
+grpc_extra_deps()
+
 http_archive(
     name = "com_github_jsoncpp",
     url = "https://github.com/open-source-parsers/jsoncpp/archive/1.8.4.zip",
@@ -175,19 +190,7 @@ http_archive(
     build_file = "//third_party:snappy.BUILD",
 )
 
-# zlib
-new_git_repository(
-    name = "com_github_madler_zlib",
-    remote = "https://github.com/madler/zlib.git",
-    commit = "cacf7f1d4e3d44d871b605da3b647f07d718623f",
-    shallow_since = "1484501380 -0800",
-    build_file = "//third_party:zlib.BUILD",
-)
 
-bind(
-    name = "zlib",
-    actual = "@com_github_madler_zlib//:zlib",
-)
 
 bind(
     name = "snappy",
@@ -233,3 +236,18 @@ http_archive(
     build_file = "//third_party:avro.BUILD",
     sha256 = "c849ef7f7af58ce66e7b999b8d9815507d69ae434e7e058a44f7818515455a03",
 )
+
+ # zlib
+#new_git_repository(
+#    name = "com_github_madler_zlib",
+#    remote = "https://github.com/madler/zlib.git",
+#    commit = "cacf7f1d4e3d44d871b605da3b647f07d718623f",
+#    shallow_since = "1484501380 -0800",
+#    build_file = "//third_party:zlib.BUILD",
+#)
+
+# use //external:madler_zlib which is from grpc
+#bind(
+#    name = "zlib",
+#    actual = "@com_github_madler_zlib//:zlib",
+#)
