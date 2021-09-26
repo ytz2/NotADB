@@ -23,6 +23,10 @@ class Configuration {
   Configuration(const std::string &path);
   Configuration(const Node &node);
 
+  Configuration clone(const Configuration& rh){
+    return Configuration(rh.node_);
+  }
+
   virtual ~Configuration() {};
 
   // user needs to provides >> operators

@@ -26,8 +26,6 @@ class SimpleRocksDB : public interface::iRocksDB {
                                    const std::string &col
   ) override;
 
-  virtual rocksdb::Status write(rocksdb::WriteBatch *updates) override;
-
   virtual rocksdb::Status write(const std::vector<std::string> &keys,
                                 const std::vector<std::string> &values,
                                 const std::string &col
@@ -44,8 +42,7 @@ class SimpleRocksDB : public interface::iRocksDB {
 
   virtual rocksdb::Status remove_range(const std::string &col,
                                        const std::string &begin,
-                                       const std::string &end,
-                                       bool deleteFileInRange
+                                       const std::string &end
   ) override;
 
   virtual std::shared_ptr<rocksdb::Iterator> new_iterator(const std::string &col) override;

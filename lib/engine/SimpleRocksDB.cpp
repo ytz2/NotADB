@@ -108,10 +108,6 @@ std::vector<rocksdb::Status> SimpleRocksDB::multiGet(const std::vector<std::stri
   return statuses;
 }
 
-rocksdb::Status SimpleRocksDB::write(rocksdb::WriteBatch *updates) {
-  return rocksDB_->Write(writeOptions_, updates);
-}
-
 rocksdb::Status SimpleRocksDB::write(const std::vector<std::string> &keys,
                                      const std::vector<std::string> &values,
                                      const std::string &col) {
@@ -142,18 +138,10 @@ rocksdb::Status SimpleRocksDB::remove(const std::string &key,
 
 rocksdb::Status SimpleRocksDB::remove_range(const std::string &col,
                                             const std::string &begin,
-                                            const std::string &end,
-                                            bool deleteFileInRange
-) {
+                                            const std::string &end) {
   auto cf = getHandle(col);
   if (!cf) return rocksdb::Status::NotFound();
   rocksdb::Slice b(begin), e(end);
-  if (deleteFileInRange) {
-    auto s = rocksdb::DeleteFilesInRange(rocksDB_, cf, &b, &e, false);
-    if (!s.ok()) {
-      return s;
-    }
-  }
   return rocksDB_->DeleteRange(writeOptions_, cf, b, e);
 }
 

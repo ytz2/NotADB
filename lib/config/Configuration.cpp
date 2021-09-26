@@ -27,7 +27,8 @@ Configuration::Configuration(const std::string &path) {
 }
 
 Configuration::Configuration(const Node &node)
-    : node_(node) {
+{
+  node_.reset(node);
 }
 
 Configuration::Node Configuration::find(const std::string &path) const {

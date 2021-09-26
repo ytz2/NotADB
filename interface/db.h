@@ -18,6 +18,16 @@
 
 namespace interface {
 
+// TODO support write batch
+// boost::any is a solution
+class WriteBatch{
+ public:
+  virtual void write(const std::vector<std::string> &keys,  const std::vector<std::string> &values) = 0;
+  virtual void put(const std::string& key, const std::string& value) = 0;
+  virtual void remove(const std::string &key) = 0;
+  virtual void remove_range(const std::string &begin, const std::string &end) = 0;
+};
+
 // customize the usage of RocksDB
 class iRocksDB {
  public:
@@ -32,9 +42,6 @@ class iRocksDB {
                                    std::vector<std::string> &value,
                                    const std::string &col
   ) = 0;
-
-
-  virtual rocksdb::Status write(rocksdb::WriteBatch *updates) = 0;
 
   virtual rocksdb::Status write(const std::vector<std::string> &keys,
                                 const std::vector<std::string> &values,
@@ -52,8 +59,7 @@ class iRocksDB {
 
   virtual rocksdb::Status remove_range(const std::string &col,
                                        const std::string &begin,
-                                       const std::string &end,
-                                       bool deleteFileInRange
+                                       const std::string &end
   ) = 0;
 
   virtual std::shared_ptr<rocksdb::Iterator> new_iterator(const std::string& col)
