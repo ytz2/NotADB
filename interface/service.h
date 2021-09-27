@@ -16,7 +16,8 @@ class IService {
   virtual bool initialize() = 0;
   // service name
   virtual const std::string& name() = 0;
-  // readiness probe
+  // readiness probe, if some high error rate detected, service can
+  // reset its status to let k8s or other mgmt kill the container
   virtual const ServingStatus status() const = 0;
 };
 }
