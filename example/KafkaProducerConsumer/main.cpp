@@ -23,6 +23,7 @@ consumer:
   settings:
     - bootstrap.servers:localhost:29092
     - enable.auto.commit:true
+    - group.id:1
 )";
 
 class KafkaListener : public interface::IListener {

@@ -7,12 +7,12 @@
 
 namespace lib {
 namespace engine {
-
+// local kv db, no replication
 class SimpleRocksDB : public interface::iRocksDB {
  public:
   explicit SimpleRocksDB(config::Configuration config);
 
-  SimpleRocksDB() = delete;
+  SimpleRocksDB() = default;
 
   virtual ~SimpleRocksDB();
 
@@ -22,8 +22,8 @@ class SimpleRocksDB : public interface::iRocksDB {
   ) override;
 
   virtual std::vector<rocksdb::Status> multiGet(const std::vector<std::string> &keys,
-                                   std::vector<std::string> &values,
-                                   const std::string &col
+                                                std::vector<std::string> &values,
+                                                const std::string &col
   ) override;
 
   virtual rocksdb::Status write(const std::vector<std::string> &keys,
@@ -49,7 +49,7 @@ class SimpleRocksDB : public interface::iRocksDB {
 
   virtual rocksdb::Status add_column(const std::string &col) override;
   virtual rocksdb::Status delete_column(const std::string &col) override;
-
+  virtual void serve() override {}
  protected:
   virtual void init(config::Configuration config);
  private:

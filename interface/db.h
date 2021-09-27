@@ -67,6 +67,7 @@ class iRocksDB {
 
   virtual rocksdb::Status add_column(const std::string& col) = 0;
   virtual rocksdb::Status delete_column(const std::string& col) = 0;
+  virtual void serve() = 0;
 };
 
 typedef std::shared_ptr<iRocksDB> iRocksDBPtr;

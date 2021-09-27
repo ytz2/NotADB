@@ -1,5 +1,6 @@
 #include "SimpleRocksDB.h"
 #include <glog/logging.h>
+#include <algorithm>
 
 namespace lib {
 namespace engine {
@@ -24,6 +25,12 @@ void SimpleRocksDB::init(config::Configuration config) {
   dboptions.IncreaseParallelism();
   dboptions.OptimizeLevelStyleCompaction();
   dboptions.create_if_missing = false;
+
+  // we create by ourself
+  std::vector<std::string> cols;
+  if (!config.get("dbColumns", cols)) {
+    throw std::runtime_error("config does not contains dbColumns");
+  }
 
   // List Column Family
   std::vector<std::string> column_family_names;
@@ -51,12 +58,19 @@ void SimpleRocksDB::init(config::Configuration config) {
     } else {
       throw std::runtime_error("cannot reopen db " + dbPath_);
     }
-  } else {
-    // we create by ourself
-    std::vector<std::string> cols;
-    if (!config.get("dbColumns", cols)) {
-      throw std::runtime_error("config does not contains dbColumns");
+    // check if we need to create cols per config
+    for (const auto &configuredCol: cols) {
+      if (std::find(std::begin(column_family_names), std::end(column_family_names), configuredCol)
+          != std::end(column_family_names))
+        continue;
+      if (!add_column(configuredCol).ok()) {
+        LOG(ERROR) << "cannot add " << configuredCol;
+        throw std::runtime_error("db init exception: " + configuredCol + " cannot be created");
+      } else {
+        LOG(INFO) << "successfully added " << configuredCol;
+      }
     }
+  } else {
     dboptions.create_if_missing = true;
     auto s = rocksdb::DB::Open(dboptions, dbPath_, &rocksDB_);
     if (!s.ok()) {
@@ -84,8 +98,8 @@ rocksdb::Status SimpleRocksDB::get(const std::string &key,
 }
 
 std::vector<rocksdb::Status> SimpleRocksDB::multiGet(const std::vector<std::string> &keys,
-                                        std::vector<std::string> &values,
-                                        const std::string &col) {
+                                                     std::vector<std::string> &values,
+                                                     const std::string &col) {
   auto cf = getHandle(col);
   if (!cf) return std::vector<rocksdb::Status>(keys.size(), rocksdb::Status::NotFound());
 

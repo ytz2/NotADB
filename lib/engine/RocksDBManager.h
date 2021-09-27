@@ -8,7 +8,7 @@ namespace engine {
 // use this one to enforce singleton of db instance on app level
 class RocksDBManager {
  public:
-  RocksDBManager& getInstance() {
+  RocksDBManager &getInstance() {
     static RocksDBManager;
     return RocksDBManager;
   }
@@ -17,7 +17,7 @@ class RocksDBManager {
     config_ = config.clone();
   }
 
-  interface::iRocksDBPtr getDB(const std::string& name) {
+  interface::iRocksDBPtr getDB(const std::string &name) {
     if (!dbs_.count(name)) {
       config::Configuration conf;
       if (!config.getConfig(name, conf)) {

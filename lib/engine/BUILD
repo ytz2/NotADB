@@ -10,9 +10,10 @@ cc_library(
     ]),
     visibility = ["//visibility:public"],
     deps = [
-        "//message:message",
         "//interface:interface",
+        "//message:message",
         "//lib/config:config_lib",
+        "//lib/kafka:kafka_lib",
         "@com_github_google_glog//:glog",
         "@com_github_facebook_rocksdb//:rocksdb",
     ],

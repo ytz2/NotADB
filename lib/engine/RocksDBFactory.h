@@ -1,6 +1,6 @@
 #pragma once
 #include "SimpleRocksDB.h"
-#include "AsyncRocksDB.h"
+#include "ReplicableRocksDB.h"
 namespace lib {
 namespace engine {
 interface::iRocksDBPtr CreateDB(config::Configuration config) {
@@ -11,7 +11,7 @@ interface::iRocksDBPtr CreateDB(config::Configuration config) {
   if (type == "SimpleKV")
     return std::make_shared<SimpleRocksDB>(config);
   if (type == "AsyncKV")
-    return std::make_shared<AsyncRocksDB>(config);
+    return std::make_shared<ReplicableRocksDB>(config);
   return nullptr;
 }
 }
