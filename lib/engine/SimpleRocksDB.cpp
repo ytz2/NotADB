@@ -18,6 +18,9 @@ SimpleRocksDB::~SimpleRocksDB() {
 }
 
 void SimpleRocksDB::init(config::Configuration config) {
+  if (!config.get("dbName", name_)) {
+    throw  std::runtime_error("config does not contains dbName");
+  }
   if (!config.get("dbPath", dbPath_)) {
     throw std::runtime_error("config does not contains dbPath");
   }

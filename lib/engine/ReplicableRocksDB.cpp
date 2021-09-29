@@ -57,7 +57,7 @@ void ReplicableRocksDB::serve() {
   if (!consumer_started) {
     throw std::runtime_error("cannot start kafka consumer");
   }
-  LOG(INFO) << "db warm up done";
+  LOG(INFO) << name_ << " warm up done";
 }
 
 // kafka callback

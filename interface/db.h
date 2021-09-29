@@ -33,6 +33,7 @@ class iRocksDB {
  public:
   iRocksDB() = default;
   virtual ~iRocksDB()  {};
+  virtual const std::string name() const = 0;
   virtual rocksdb::Status get(const std::string &key,
                               std::string &value,
                               const std::string &col

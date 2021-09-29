@@ -50,6 +50,10 @@ class SimpleRocksDB : public interface::iRocksDB {
   virtual rocksdb::Status add_column(const std::string &col) override;
   virtual rocksdb::Status delete_column(const std::string &col) override;
   virtual void serve() override {}
+  virtual const std::string name() const override {
+    return name_;
+  }
+
  protected:
   virtual void init(config::Configuration config);
  private:
@@ -64,6 +68,7 @@ class SimpleRocksDB : public interface::iRocksDB {
   rocksdb::ReadOptions readOptions_;
   rocksdb::WriteOptions writeOptions_;
   rocksdb::ColumnFamilyOptions colDataOption_; //unified option
+  std::string name_;
 };
 
 }
