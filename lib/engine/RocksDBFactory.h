@@ -10,7 +10,7 @@ interface::iRocksDBPtr CreateDB(config::Configuration config) {
   }
   if (type == "SimpleKV")
     return std::make_shared<SimpleRocksDB>(config);
-  if (type == "AsyncKV")
+  if (type == "Replicable")
     return std::make_shared<ReplicableRocksDB>(config);
   return nullptr;
 }

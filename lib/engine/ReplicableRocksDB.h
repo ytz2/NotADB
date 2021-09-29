@@ -3,6 +3,7 @@
 #include "SimpleRocksDB.h"
 #include "lib/kafka/Consumer.h"
 #include "lib/kafka/Producer.h"
+#include <unordered_map>
 
 namespace lib {
 namespace engine {
@@ -11,7 +12,7 @@ namespace engine {
 name: xyz
 shardID: 1
 dbPath: /tmp/test_rocksdb_example
-dbType: SimpleKV
+dbType: Replicable
 dbColumns:
   - foo
   - bar
@@ -41,7 +42,7 @@ class ReplicableRocksDB : public SimpleRocksDB,
   explicit ReplicableRocksDB(config::Configuration config);
   virtual ~ReplicableRocksDB() = default;
   virtual void serve() override;
- public: // IListeneer
+ public: // IListener
   bool start() override { return true; }
   virtual bool shouldProcess(const interface::IMessagePtr msg) override;
   virtual bool onMessage(interface::ISessionPtr session,
@@ -50,7 +51,7 @@ class ReplicableRocksDB : public SimpleRocksDB,
   virtual void init(config::Configuration config) override;
 
  private:
-  std::string kafkaTopic_;
+  std::unordered_map<std::string /*topic*/, lib::kafka::MessageCodecPtr /*codec*/> codecs_;
   std::unique_ptr<lib::kafka::Consumer> kakfaConsumer_ = nullptr;
   std::unique_ptr<lib::kafka::Producer> kakfaProducer_ = nullptr;
 };

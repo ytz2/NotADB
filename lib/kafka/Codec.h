@@ -37,11 +37,26 @@ class FlatMessageCodec : public MessageCodec {
   virtual bool serialize(interface::IMessagePtr, std::string &buffer) override;
 };
 
+class AvroBinaryMessageCodec : public MessageCodec {
+ public:
+  explicit AvroBinaryMessageCodec(const std::string &protocol)
+      : MessageCodec(protocol) {
+  }
+  virtual ~AvroBinaryMessageCodec() = default;
+  virtual interface::IMessagePtr deserialize(const std::string &string) override;
+  virtual interface::IMessagePtr deserialize(const ::kafka::ConsumerRecord &record) override;
+  virtual bool serialize(interface::IMessagePtr, std::string &buffer) override;
+};
+
 class CodecFactory {
  public:
   static MessageCodecPtr createCodec(const std::string &protocol) {
-    if (protocol == "CommonJson" || protocol == "CommonJsonMessage")
-      return std::make_shared<FlatMessageCodec>(protocol); // only support json now
+    if (protocol == "CommonJson" || protocol == "CommonJsonMessage"){
+      return std::make_shared<FlatMessageCodec>(protocol);
+    }
+    if (protocol == "Avro") {
+      return std::make_shared<AvroBinaryMessageCodec>(protocol);
+    }
     return nullptr;
   }
 };

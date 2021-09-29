@@ -13,9 +13,22 @@ void ReplicableRocksDB::init(config::Configuration config) {
   //       2) shard key init
   //       3) order policy init
   SimpleRocksDB::init(config);
-  if (!config.get("topic", kafkaTopic_)) {
-    throw std::runtime_error("does not have topic in config for replicable db");
+  std::vector<config::Configuration> configs;
+  if (!config.getConfigs("topics", configs)) {
+    throw std::runtime_error("does not have topics in config for replicable db");
   }
+  for (const auto &each: configs) {
+    std::string topic, protocol;
+    if (!each.get("topic", topic))
+      throw std::runtime_error("no entry to topic under topics");
+    if (!each.get("protocol", protocol))
+      throw std::runtime_error("no entry to protocol under topics");
+    auto codec = lib::kafka::CodecFactory::createCodec(protocol);
+    if (!codec)
+      throw std::runtime_error(protocol + " is not supported");
+    codecs_[topic] = codec;
+  }
+
   lib::config::Configuration consumerConfig, producerConfig;
   if (!config.getConfig("producer", producerConfig) || !config.getConfig("consumer", consumerConfig)) {
     throw std::runtime_error("does not have producer/consumer in config for replicable db");
@@ -44,6 +57,7 @@ void ReplicableRocksDB::serve() {
   if (!consumer_started) {
     throw std::runtime_error("cannot start kafka consumer");
   }
+  LOG(INFO) << "db warm up done";
 }
 
 // kafka callback
