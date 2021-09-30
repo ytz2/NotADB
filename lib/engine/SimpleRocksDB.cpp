@@ -17,6 +17,14 @@ SimpleRocksDB::~SimpleRocksDB() {
     delete rocksDB_;
 }
 
+rocksdb::Options SimpleRocksDB::getDBOptions(config::Configuration config) {
+  rocksdb::Options dboptions;
+  dboptions.IncreaseParallelism();
+  dboptions.OptimizeLevelStyleCompaction();
+  dboptions.create_if_missing = false;
+  return dboptions;
+}
+
 void SimpleRocksDB::init(config::Configuration config) {
   if (!config.get("dbName", name_)) {
     throw  std::runtime_error("config does not contains dbName");
@@ -24,11 +32,7 @@ void SimpleRocksDB::init(config::Configuration config) {
   if (!config.get("dbPath", dbPath_)) {
     throw std::runtime_error("config does not contains dbPath");
   }
-  rocksdb::Options dboptions;
-  dboptions.IncreaseParallelism();
-  dboptions.OptimizeLevelStyleCompaction();
-  dboptions.create_if_missing = false;
-
+  rocksdb::Options dboptions = getDBOptions(config);
   // we create by ourself
   std::vector<std::string> cols;
   if (!config.get("dbColumns", cols)) {

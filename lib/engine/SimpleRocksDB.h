@@ -56,6 +56,7 @@ class SimpleRocksDB : public interface::iRocksDB {
 
  protected:
   virtual void init(config::Configuration config);
+  virtual rocksdb::Options getDBOptions(config::Configuration config);
  private:
   rocksdb::ColumnFamilyHandle *getHandle(const std::string &col) {
     if (!columnFamilies_.count(col)) return nullptr;

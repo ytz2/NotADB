@@ -49,7 +49,7 @@ class ReplicableRocksDB : public SimpleRocksDB,
                          const interface::IMessagePtr msg) override;
  protected:
   virtual void init(config::Configuration config) override;
-
+  virtual rocksdb::Options getDBOptions(config::Configuration config) override;
  private:
   std::unordered_map<std::string /*topic*/, lib::kafka::MessageCodecPtr /*codec*/> codecs_;
   std::unique_ptr<lib::kafka::Consumer> kakfaConsumer_ = nullptr;

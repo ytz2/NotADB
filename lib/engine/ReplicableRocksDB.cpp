@@ -7,6 +7,13 @@ ReplicableRocksDB::ReplicableRocksDB(config::Configuration config) {
   init(config);
 }
 
+rocksdb::Options ReplicableRocksDB::getDBOptions(config::Configuration config) {
+  auto options = SimpleRocksDB::getDBOptions(config);
+
+  LOG(INFO) << "DBOptions is using ReplicableRocksDB override";
+  return options;
+}
+
 void ReplicableRocksDB::init(config::Configuration config) {
   // bootstrap db first
   // TODO: 1) shard id init shard id
