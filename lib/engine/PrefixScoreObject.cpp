@@ -1,7 +1,4 @@
 #include "PrefixScoreObject.h"
-#include <cctype>
-#include <cmath>
-#include <boost/lexical_cast.hpp>
 #include <glog/logging.h>
 
 namespace lib {
@@ -12,15 +9,7 @@ PrefixScoreObject::PrefixScoreObject(char delim)
     : delim_(delim) {}
 
 bool PrefixScoreObject::validate(const std::string &input) const {
-  // sanity check just in case wrong key is written into db
-  // 1. it must have two delim
-  auto first = input.find(delim_);
-  if (first == std::string::npos || input.size() == first + 1)
-    return false;
-  // 2. verify the first char after the first delim is numerical, simple check
-  if (!std::isdigit(input.at(first + 1)))
-    return false;
-  return true;
+  return ComparatorUtil::validateKVValue(input, delim_);
 }
 /*
  *  prefix 1

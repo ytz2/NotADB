@@ -3,6 +3,7 @@
 #include "SimpleRocksDB.h"
 #include "lib/kafka/Consumer.h"
 #include "lib/kafka/Producer.h"
+#include "Comparator.h"
 #include <unordered_map>
 
 namespace lib {
@@ -54,6 +55,7 @@ class ReplicableRocksDB : public SimpleRocksDB,
   std::unordered_map<std::string /*topic*/, lib::kafka::MessageCodecPtr /*codec*/> codecs_;
   std::unique_ptr<lib::kafka::Consumer> kakfaConsumer_ = nullptr;
   std::unique_ptr<lib::kafka::Producer> kakfaProducer_ = nullptr;
+  Comparator *comparator_ = nullptr;
 };
 }
 }

@@ -1,6 +1,7 @@
 #include <string>
 #include "gtest/gtest.h"
 #include "lib/engine/PrefixScoreObject.h"
+#include "lib/engine/KeyScore.h"
 #include <iostream>
 
 TEST(PrefixScoreObject, parse) {
@@ -55,6 +56,44 @@ TEST(PrefixScoreObject, compare) {
   {
     rocksdb::Slice input1 = "test1-1234-obj1";
     rocksdb::Slice input2 = "test1-1234-obj2";
+    ASSERT_EQ( cmp.Compare(input1, input2), -1);
+    ASSERT_EQ( cmp.Compare(input2, input1), 1);
+  }
+  {
+    rocksdb::Slice input1 = "test1-1234";
+    rocksdb::Slice input2 = "test1-1235";
+    ASSERT_EQ( cmp.Compare(input1, input2), -1);
+    ASSERT_EQ( cmp.Compare(input2, input1), 1);
+  }
+}
+
+TEST(KeyScore, parse) {
+  lib::engine::comparator::KeyScore cmp('-');
+  std::string key;
+  int64_t score;
+  rocksdb::Slice input = "test-1234";
+  cmp.parse(input, key, score);
+  ASSERT_STREQ(key.c_str(), "test");
+  ASSERT_EQ(score, 1234);
+}
+
+TEST(KeyScore, validate) {
+  lib::engine::comparator::KeyScore cmp('-');
+  ASSERT_TRUE(cmp.validate("test-1234"));
+  ASSERT_FALSE(cmp.validate("test"));
+  ASSERT_FALSE(cmp.validate("test-1234a"));
+}
+
+TEST(KeyScore, compare) {
+  lib::engine::comparator::KeyScore cmp('-');
+  {
+    rocksdb::Slice input1 = "test-1234";
+    rocksdb::Slice input2 = "test-1234";
+    ASSERT_EQ( cmp.Compare(input1, input2), 0);
+  }
+  {
+    rocksdb::Slice input1 = "test1-1234";
+    rocksdb::Slice input2 = "test2-1234";
     ASSERT_EQ( cmp.Compare(input1, input2), -1);
     ASSERT_EQ( cmp.Compare(input2, input1), 1);
   }

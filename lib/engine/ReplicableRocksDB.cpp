@@ -1,6 +1,7 @@
 #include "ReplicableRocksDB.h"
 #include <chrono>
 #include <thread>
+#include "ComparatorFactory.h"
 namespace lib {
 namespace engine {
 ReplicableRocksDB::ReplicableRocksDB(config::Configuration config) {
@@ -9,7 +10,22 @@ ReplicableRocksDB::ReplicableRocksDB(config::Configuration config) {
 
 rocksdb::Options ReplicableRocksDB::getDBOptions(config::Configuration config) {
   auto options = SimpleRocksDB::getDBOptions(config);
+  config::Configuration conf;
+  if (config.getConfig("comparator", conf)) {
+    std::string delimStr;
+    std::string comparatorStr;
 
+    if (!conf.get("type", comparatorStr) || !conf.get("delim", delimStr) || delimStr.size() != 1) {
+      throw std::runtime_error("comparator config either has no type or delim");
+    }
+    // a little werid to create in get function, todo: move out
+    comparator_ = ComparatorFactory::createComparator(comparatorStr, delimStr[0]);
+    if (!comparator_) {
+      throw std::runtime_error(comparatorStr + " is not supported");
+    }
+    LOG(INFO) << "initialized " << name_ << " with comparator " << comparatorStr;
+    options.comparator = comparator_;
+  }
   LOG(INFO) << "DBOptions is using ReplicableRocksDB override";
   return options;
 }

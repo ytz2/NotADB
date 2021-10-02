@@ -18,6 +18,9 @@ dbColumns:
 topics:
   - topic: test
     protocol: Avro
+comparator:
+  type: KeyValue
+  delim: "-"
 producer:
   settings:
     - bootstrap.servers:localhost:29092
