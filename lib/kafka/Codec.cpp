@@ -1,6 +1,5 @@
 #include "Codec.h"
 #include "message/MessageFactory.h"
-#include <glog/logging.h>
 namespace lib {
 namespace kafka {
 
@@ -12,7 +11,8 @@ interface::IMessagePtr FlatMessageCodec::deserialize(const std::string &val) {
 }
 
 interface::IMessagePtr FlatMessageCodec::deserialize(const ::kafka::ConsumerRecord &record) {
-  return deserialize(record.value().toString());
+  std::string val((char *) record.value().data(), record.value().size());
+  return deserialize(val);
 }
 
 bool FlatMessageCodec::serialize(interface::IMessagePtr msg, std::string &buffer) {
@@ -22,8 +22,10 @@ bool FlatMessageCodec::serialize(interface::IMessagePtr msg, std::string &buffer
 
 interface::IMessagePtr AvroBinaryMessageCodec::deserialize(const std::string &val) {
   int msgID = 0;
-  if (val.size() < 4)
+  if (val.size() < 4) {
+    LOG(ERROR) << "value " << val << " has invalid format";
     return nullptr;
+  }
   std::string idStr = val.substr(0, 4);
   try {
     msgID = std::stoi(idStr);
@@ -33,11 +35,20 @@ interface::IMessagePtr AvroBinaryMessageCodec::deserialize(const std::string &va
   }
   auto msg = message::MessageFactory::getInstance()->createMessageByProtocolMsgID(
       protocol_, msgID);
-  return msg && msg->FromString(val.substr(4)) ? msg : nullptr;
+  if (!msg) {
+    LOG(ERROR) << "cannot create msg " << msgID << " for protocol " << protocol_;
+  }
+  auto token = val.substr(4);
+  if (!msg->FromString(token)) {
+    LOG(ERROR) << msg->GetMessageName() << " failed to deserialize " << token;
+    return nullptr;
+  }
+  return msg;
 }
 
 interface::IMessagePtr AvroBinaryMessageCodec::deserialize(const ::kafka::ConsumerRecord &record) {
-  return deserialize(record.value().toString());
+  std::string val((char *) record.value().data(), record.value().size());
+  return deserialize(val);
 }
 
 // not that efficient , todo: migrate to boost buffer
@@ -49,7 +60,7 @@ bool AvroBinaryMessageCodec::serialize(interface::IMessagePtr msg, std::string &
   char buff[5];
   sprintf(buff, "%04d", msg->GetMessageID()); // yeah, ugly c, but thread safe
   std::string tmp;
-  if (!msg->ToString(buffer))
+  if (!msg->ToString(tmp))
     return false;
   buffer = std::string(buff) + tmp;
   return true;

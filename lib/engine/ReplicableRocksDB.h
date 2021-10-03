@@ -3,6 +3,7 @@
 #include "SimpleRocksDB.h"
 #include "lib/kafka/Consumer.h"
 #include "lib/kafka/Producer.h"
+#include "message/MessageFactory.h"
 #include "Comparator.h"
 #include <unordered_map>
 
@@ -48,11 +49,37 @@ class ReplicableRocksDB : public SimpleRocksDB,
   virtual bool shouldProcess(const interface::IMessagePtr msg) override;
   virtual bool onMessage(interface::ISessionPtr session,
                          const interface::IMessagePtr msg) override;
+ public: // override the write operations to make it async
+  virtual rocksdb::Status write(const std::vector<std::string> &keys,
+                                const std::vector<std::string> &values,
+                                const std::string &col
+  ) override;
+
+  virtual rocksdb::Status put(const std::string &key,
+                              const std::string &value,
+                              const std::string &col
+  ) override;
+
+  virtual rocksdb::Status remove(const std::string &key,
+                                 const std::string &col
+  ) override;
+
+  virtual rocksdb::Status remove_range(const std::string &col,
+                                       const std::string &begin,
+                                       const std::string &end
+  ) override;
  protected:
   virtual void init(config::Configuration config) override;
   virtual rocksdb::Options getDBOptions(config::Configuration config) override;
+
+ protected:
+  bool onAvroMessage(const interface::IMessagePtr msg);
+  bool onAvroPut(const interface::IMessagePtr msg);
+  bool onAvroWrite(const interface::IMessagePtr msg);
+  bool onAvroRemove(const interface::IMessagePtr msg);
+  bool onAvroRemoveRange(const interface::IMessagePtr msg);
  private:
-  std::unordered_map<std::string /*topic*/, lib::kafka::MessageCodecPtr /*codec*/> codecs_;
+  std::unordered_map<std::string /*topic*/, std::string /*protocols*/> producerTopics_;
   std::unique_ptr<lib::kafka::Consumer> kakfaConsumer_ = nullptr;
   std::unique_ptr<lib::kafka::Producer> kakfaProducer_ = nullptr;
   Comparator *comparator_ = nullptr;

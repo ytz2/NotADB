@@ -2,8 +2,120 @@
 #include <chrono>
 #include <thread>
 #include "ComparatorFactory.h"
+
 namespace lib {
 namespace engine {
+
+namespace {
+
+template<class T>
+T *asMsg(interface::IMessagePtr msg) {
+  if (!msg) return nullptr;
+  return dynamic_cast<T *>(msg.get());
+}
+
+template<class T>
+const T *asConstMsg(const interface::IMessagePtr msg) {
+  if (!msg) return nullptr;
+  return dynamic_cast<const T *>(msg.get());
+}
+
+interface::IMessagePtr toAvroWriteMsg(const std::vector<std::string> &keys,
+                                      const std::vector<std::string> &values,
+                                      const std::string &col
+) {
+  auto msg = lib::message::MessageFactory::getInstance()->createMessageByProtocolMsgID("Avro",
+                                                                                       (int) lib::message::avromsg::EMessageType::WriteMany);
+  auto writeMany = asMsg<lib::message::avromsg::WriteMany>(msg);
+  if (!writeMany)
+    return nullptr;
+  for (size_t i = 0; i < keys.size(); i++) {
+    avrogen::KeyValue kv;
+    kv.key = keys[i];
+    kv.value = values[i];
+    writeMany->keyValues.push_back(std::move(kv));
+  }
+  writeMany->column = col;
+  return msg;
+}
+
+// mapper function, todo: move it to separate utils, only support avro now
+interface::IMessagePtr toWriteMsg(const std::string &protocol, const std::vector<std::string> &keys,
+                                  const std::vector<std::string> &values,
+                                  const std::string &col
+) {
+  if (protocol == "Avro")
+    return toAvroWriteMsg(keys, values, col);
+  return nullptr;
+}
+
+interface::IMessagePtr toAvroPutMsg(const std::string &key,
+                                    const std::string &value,
+                                    const std::string &col) {
+  auto msg = lib::message::MessageFactory::getInstance()->createMessageByProtocolMsgID("Avro",
+                                                                                       (int) lib::message::avromsg::EMessageType::PutOne);
+  auto putOne = asMsg<lib::message::avromsg::PutOne>(msg);
+  if (!putOne)
+    return nullptr;
+  putOne->key = key;
+  putOne->value = value;
+  putOne->column = col;
+  return msg;
+}
+
+interface::IMessagePtr toPutMsg(const std::string &protocol, const std::string &key,
+                                const std::string &value,
+                                const std::string &col) {
+  if (protocol == "Avro")
+    return toAvroPutMsg(key, value, col);
+  return nullptr;
+}
+
+interface::IMessagePtr toAvroRemoveMsg(const std::string &key,
+                                       const std::string &col) {
+  auto msg = lib::message::MessageFactory::getInstance()->createMessageByProtocolMsgID("Avro",
+                                                                                       (int) lib::message::avromsg::EMessageType::RemoveOne);
+  auto removeOne = asMsg<lib::message::avromsg::RemoveOne>(msg);
+  if (!removeOne)
+    return nullptr;
+  removeOne->key = key;
+  removeOne->column = col;
+  return msg;
+}
+
+interface::IMessagePtr toRemoveMsg(const std::string &protocol, const std::string &key,
+                                   const std::string &col) {
+  if (protocol == "Avro")
+    return toAvroRemoveMsg(key, col);
+  return nullptr;
+}
+
+interface::IMessagePtr toAvroRemoveRangeMsg(const std::string &col,
+                                            const std::string &begin,
+                                            const std::string &end
+) {
+  auto msg = lib::message::MessageFactory::getInstance()->createMessageByProtocolMsgID("Avro",
+                                                                                       (int) lib::message::avromsg::EMessageType::RemoveRange);
+  auto removeRange = asMsg<lib::message::avromsg::RemoveRange>(msg);
+  if (!removeRange)
+    return nullptr;
+  removeRange->begin = begin;
+  removeRange->end = end;
+  removeRange->column = col;
+  return msg;
+}
+
+interface::IMessagePtr toRemoveRangeMsg(const std::string &protocol, const std::string &col,
+                                        const std::string &begin,
+                                        const std::string &end
+) {
+  if (protocol == "Avro")
+    return toAvroRemoveRangeMsg(col, begin, end);
+  return nullptr;
+}
+
+}
+
 ReplicableRocksDB::ReplicableRocksDB(config::Configuration config) {
   init(config);
 }
@@ -25,6 +137,7 @@ rocksdb::Options ReplicableRocksDB::getDBOptions(config::Configuration config) {
     }
     LOG(INFO) << "initialized " << name_ << " with comparator " << comparatorStr;
     options.comparator = comparator_;
+    colDataOption_.comparator = comparator_;
   }
   LOG(INFO) << "DBOptions is using ReplicableRocksDB override";
   return options;
@@ -46,10 +159,7 @@ void ReplicableRocksDB::init(config::Configuration config) {
       throw std::runtime_error("no entry to topic under topics");
     if (!each.get("protocol", protocol))
       throw std::runtime_error("no entry to protocol under topics");
-    auto codec = lib::kafka::CodecFactory::createCodec(protocol);
-    if (!codec)
-      throw std::runtime_error(protocol + " is not supported");
-    codecs_[topic] = codec;
+    producerTopics_[topic] = protocol;
   }
 
   lib::config::Configuration consumerConfig, producerConfig;
@@ -83,15 +193,125 @@ void ReplicableRocksDB::serve() {
   LOG(INFO) << name_ << " warm up done";
 }
 
+rocksdb::Status ReplicableRocksDB::write(const std::vector<std::string> &keys,
+                                         const std::vector<std::string> &values,
+                                         const std::string &col
+) {
+  // create protocol msg and publish to kafka, TODO: use macro for duplicate logic
+  for (auto &each: producerTopics_) {
+    auto msg = toWriteMsg(each.second, keys, values, col);
+    if (!msg || !kakfaProducer_->sendSync(each.first, msg)) {
+      LOG(ERROR) << "failed to write a write " << each.first << " msg for protocol" << each.second;
+      return rocksdb::Status::Corruption();
+    }
+  }
+  return rocksdb::Status::OK();
+}
+
+rocksdb::Status ReplicableRocksDB::put(const std::string &key,
+                                       const std::string &value,
+                                       const std::string &col
+) {
+  // create protocol msg and publish to kafka
+  for (auto &each: producerTopics_) {
+    auto msg = toPutMsg(each.second, key, value, col);
+    if (!msg || !kakfaProducer_->sendSync(each.first, msg)) {
+      LOG(ERROR) << "failed to write a put " << each.first << " msg for protocol" << each.second;
+      return rocksdb::Status::Corruption();
+    }
+  }
+  return rocksdb::Status::OK();
+}
+
+rocksdb::Status ReplicableRocksDB::remove(const std::string &key,
+                                          const std::string &col
+) {
+  // create protocol msg and publish to kafka
+  for (auto &each: producerTopics_) {
+    auto msg = toRemoveMsg(each.second, key, col);
+    if (!msg || !kakfaProducer_->sendSync(each.first, msg)) {
+      LOG(ERROR) << "failed to write a remove " << each.first << " msg for protocol" << each.second;
+      return rocksdb::Status::Corruption();
+    }
+  }
+  return rocksdb::Status::OK();
+}
+
+rocksdb::Status ReplicableRocksDB::remove_range(const std::string &col,
+                                                const std::string &begin,
+                                                const std::string &end
+) {
+  // create protocol msg and publish to kafka
+  for (auto &each: producerTopics_) {
+    auto msg = toRemoveRangeMsg(each.second, col, begin, end);
+    if (!msg || !kakfaProducer_->sendSync(each.first, msg)) {
+      LOG(ERROR) << "failed to write a remove_range " << each.first << " msg for protocol" << each.second;
+      return rocksdb::Status::Corruption();
+    }
+  }
+  return rocksdb::Status::OK();
+}
+
 // kafka callback
 bool ReplicableRocksDB::shouldProcess(const interface::IMessagePtr msg) {
-  return false;
+  return true; // no validation
 }
 
 // kafka callback
 bool ReplicableRocksDB::onMessage(interface::ISessionPtr session,
                                   const interface::IMessagePtr msg) {
+  if (!msg) return false;
+  auto protocol = msg->GetProtocol();
+  // on process avro now
+  if (protocol == "Avro") {
+    if (!onAvroMessage(msg)) {
+      LOG(ERROR) << "failed to process msg per " << protocol;
+      return false;
+    }
+    return true;
+  }
   return false;
+}
+
+bool ReplicableRocksDB::onAvroMessage(const interface::IMessagePtr msg) {
+  auto msgType = static_cast<lib::message::avromsg::EMessageType>(msg->GetMessageID());
+  switch (msgType) {
+    case lib::message::avromsg::EMessageType::PutOne:return onAvroPut(msg);
+    case lib::message::avromsg::EMessageType::WriteMany:return onAvroWrite(msg);
+    case lib::message::avromsg::EMessageType::RemoveOne:return onAvroRemove(msg);
+    case lib::message::avromsg::EMessageType::RemoveRange:return onAvroRemoveRange(msg);
+    default:return false;
+  }
+  return false;
+}
+
+bool ReplicableRocksDB::onAvroPut(const interface::IMessagePtr msg) {
+  const auto put = asConstMsg<lib::message::avromsg::PutOne>(msg);
+  if (!put) return false;
+  return SimpleRocksDB::put(put->key, put->value, put->column).ok();
+}
+
+bool ReplicableRocksDB::onAvroWrite(const interface::IMessagePtr msg) {
+  const auto write = asConstMsg<lib::message::avromsg::WriteMany>(msg);
+  if (!write) return false;
+  std::vector<std::string> keys, values;
+  for (const auto &each: write->keyValues) {
+    keys.push_back(each.key);
+    values.push_back(each.value);
+  }
+  return SimpleRocksDB::write(keys, values, write->column).ok();
+}
+
+bool ReplicableRocksDB::onAvroRemove(const interface::IMessagePtr msg) {
+  const auto remove = asConstMsg<lib::message::avromsg::RemoveOne>(msg);
+  if (!remove) return false;
+  return SimpleRocksDB::remove(remove->key, remove->column).ok();
+}
+
+bool ReplicableRocksDB::onAvroRemoveRange(const interface::IMessagePtr msg) {
+  const auto removeRange = asConstMsg<lib::message::avromsg::RemoveRange>(msg);
+  if (!removeRange) return false;
+  return SimpleRocksDB::remove_range(removeRange->column, removeRange->begin, removeRange->end).ok();
 }
 
 }

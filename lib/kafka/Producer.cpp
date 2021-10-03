@@ -61,6 +61,7 @@ MessageCodecPtr Producer::getCodec(const interface::IMessagePtr msg) {
 }
 
 bool Producer::writeToBuffer(const interface::IMessagePtr msg, std::string &buffer) {
+  buffer.clear();
   auto codec = getCodec(msg);
   if (!codec) {
     LOG(ERROR) << "failed to get codec for protocol " << msg->GetProtocol();

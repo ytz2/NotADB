@@ -47,9 +47,11 @@ void SimpleRocksDB::init(config::Configuration config) {
     std::vector<rocksdb::ColumnFamilyDescriptor> column_family_desc;
     std::vector < rocksdb::ColumnFamilyHandle * > handles;
     for (auto &column_family_name: column_family_names) {
+      auto colOption = rocksdb::ColumnFamilyOptions();
+      colOption.comparator = dboptions.comparator;
       column_family_desc.push_back(
           rocksdb::ColumnFamilyDescriptor(column_family_name,
-                                          rocksdb::ColumnFamilyOptions()));
+                                          colOption));
     }
     s = rocksdb::DB::Open(dboptions,
                           dbPath_,
@@ -63,7 +65,7 @@ void SimpleRocksDB::init(config::Configuration config) {
         LOG(INFO) << "open column family " << handle->GetName();
       }
     } else {
-      throw std::runtime_error("cannot reopen db " + dbPath_);
+      throw std::runtime_error("cannot reopen db " + dbPath_ + " " + s.getState());
     }
     // check if we need to create cols per config
     for (const auto &configuredCol: cols) {
@@ -79,6 +81,8 @@ void SimpleRocksDB::init(config::Configuration config) {
     }
   } else {
     dboptions.create_if_missing = true;
+    LOG(INFO) << name_ << " uses comparator type: "
+              << (dboptions.comparator == nullptr ? "default" : dboptions.comparator->Name());
     auto s = rocksdb::DB::Open(dboptions, dbPath_, &rocksDB_);
     if (!s.ok()) {
       throw std::runtime_error("failed to open db " + dbPath_ + " due to status code " + s.ToString());

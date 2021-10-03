@@ -28,6 +28,9 @@ bool Consumer::start() {
     topics.insert(each.first);
   try {
     consumer_->subscribe(topics);
+    for (const auto &each: topics) {
+      LOG(INFO) << name_ << " subscribed to " << each;
+    }
   }
   catch (...) {
     LOG(ERROR) << "Failed to start kafka consumer";
@@ -104,6 +107,7 @@ void Consumer::init(config::Configuration config) {
     if (!codec)
       throw std::runtime_error(protocol + " is not supported");
     codecs_[topic] = codec;
+    LOG(INFO) << "topic " << topic << " is using " << codec->protocol() << " codec";
   }
   // get timeout
   int pollTimeout = 0;
@@ -146,6 +150,15 @@ void Consumer::handleRecord(const ::kafka::ConsumerRecord &record) {
     return;
   }
   onMessage(msg);
+}
+
+// ICallbackContainer, hacky here
+void Consumer::onMessage(const interface::IMessagePtr msg) {
+  for (auto l: appCallbacks_) {
+    if (l->shouldProcess(msg)) {
+      l->onMessage(nullptr, msg);
+    }
+  }
 }
 
 }

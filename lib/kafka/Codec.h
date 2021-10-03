@@ -3,6 +3,7 @@
 #include "kafka/ConsumerRecord.h"
 #include <unordered_map>
 #include <memory>
+#include <glog/logging.h>
 
 namespace lib {
 namespace kafka {
@@ -20,6 +21,7 @@ class MessageCodec {
   virtual interface::IMessagePtr deserialize(const std::string &string) = 0;
   virtual interface::IMessagePtr deserialize(const ::kafka::ConsumerRecord &record) = 0;
   virtual bool serialize(interface::IMessagePtr, std::string &buffer) = 0;
+  const std::string protocol() const { return protocol_; }
  protected:
   std::string protocol_;
 };
@@ -51,10 +53,12 @@ class AvroBinaryMessageCodec : public MessageCodec {
 class CodecFactory {
  public:
   static MessageCodecPtr createCodec(const std::string &protocol) {
-    if (protocol == "CommonJson" || protocol == "CommonJsonMessage"){
+    if (protocol == "CommonJson" || protocol == "CommonJsonMessage") {
+      LOG(INFO) << "created json codec";
       return std::make_shared<FlatMessageCodec>(protocol);
     }
     if (protocol == "Avro") {
+      LOG(INFO) << "created avro codec";
       return std::make_shared<AvroBinaryMessageCodec>(protocol);
     }
     return nullptr;

@@ -16,7 +16,7 @@
 
 namespace lib {
 namespace kafka {
-class Consumer : public interface::ISession {
+class Consumer : public interface::ISession, public std::enable_shared_from_this<Consumer> {
  public:
   Consumer() = delete;
   virtual ~Consumer();
@@ -26,7 +26,7 @@ class Consumer : public interface::ISession {
   virtual bool send(const interface::IMessagePtr msg) override { return false; };
   virtual bool start() override;
   virtual void disconnect() override;
-
+  void onMessage(const interface::IMessagePtr msg) override;
  protected:
   void consume();
 
