@@ -197,6 +197,12 @@ rocksdb::Status ReplicableRocksDB::write(const std::vector<std::string> &keys,
                                          const std::vector<std::string> &values,
                                          const std::string &col
 ) {
+  if (comparator_) {
+    for (const auto &k: keys)
+      if (!comparator_->validate(k))
+        return rocksdb::Status::Corruption();
+  }
+
   // create protocol msg and publish to kafka, TODO: use macro for duplicate logic
   for (auto &each: producerTopics_) {
     auto msg = toWriteMsg(each.second, keys, values, col);
@@ -212,6 +218,8 @@ rocksdb::Status ReplicableRocksDB::put(const std::string &key,
                                        const std::string &value,
                                        const std::string &col
 ) {
+  if (comparator_ && !comparator_->validate(key))
+    return rocksdb::Status::Corruption(); // validate before publish
   // create protocol msg and publish to kafka
   for (auto &each: producerTopics_) {
     auto msg = toPutMsg(each.second, key, value, col);
@@ -226,6 +234,8 @@ rocksdb::Status ReplicableRocksDB::put(const std::string &key,
 rocksdb::Status ReplicableRocksDB::remove(const std::string &key,
                                           const std::string &col
 ) {
+  if (comparator_ && !comparator_->validate(key))
+    return rocksdb::Status::Corruption(); // validate before publish
   // create protocol msg and publish to kafka
   for (auto &each: producerTopics_) {
     auto msg = toRemoveMsg(each.second, key, col);
@@ -241,6 +251,8 @@ rocksdb::Status ReplicableRocksDB::remove_range(const std::string &col,
                                                 const std::string &begin,
                                                 const std::string &end
 ) {
+  if (comparator_ && !(comparator_->validate(begin) && comparator_->validate(end)))
+    return rocksdb::Status::Corruption(); // validate before publish
   // create protocol msg and publish to kafka
   for (auto &each: producerTopics_) {
     auto msg = toRemoveRangeMsg(each.second, col, begin, end);
