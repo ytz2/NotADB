@@ -47,19 +47,30 @@ Thanks to *RocksDB*, it makes process build-in db possible. Thanks to *Kafka*, I
     a) more flexible partition
     b) customized sorting 
     c) computation and data IO happens on same process 
-    It can easily handle below scenario:
+
+    _Some mocked examples below:_
+- 
     key:{store_id}-{product}|{score}|{item_id} 
+
     value: object 
     
-    You can customize to indicate: partition all store_id to same group, sort according to group and score. Because data is sorted on RocksDB, it is easy to answer below question:
+    Customize:
+    partition by store_id to same group, sort according to group and score.
+
+    Problem to solve:
     What's the available items for the given store and product 
-    
-    key: {user-id} | {timestamp} | {feature_name} 
+-    
+    key: {user-id} | {timestamp} | {feature_name}
+
     value: object
-    answer: what's the most viewed items in past 1 hours for this user? what's the continuously viewed items in past 30 minutes? 
-    or, in past 15 minutes, user's effective search. (look at feature = searched index and look at feature = click)
-    
-    Anyway, it does not enforce you conform with SQL and let you define what you want. 
+
+    customize: 
+    partition by user_id, sort by timestamp, assign any feature_name
+    Problem to solve:
+  - what's user's most viewed item in last 20 minutes
+  - what's user's effective search in time range? (user searched and clicked on given results)
+-
+    You name it, it is highly customizable and the complicated logic is done by your own code instead of ugly and long SQL queries
 
 5. What about write
 
