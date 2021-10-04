@@ -19,6 +19,7 @@ class AvroFactory : public interface::IMessageFactory {
       case EMessageType::WriteMany:return std::make_shared<WriteMany>();
       case EMessageType::RemoveOne:return std::make_shared<RemoveOne>();
       case EMessageType::RemoveRange:return std::make_shared<RemoveRange>();
+      case EMessageType::Merge:return std::make_shared<Merge>();
     }
     return nullptr;
   }
@@ -45,6 +46,7 @@ class AvroFactory : public interface::IMessageFactory {
       {"WriteMany", static_cast<int>(EMessageType::WriteMany)},
       {"RemoveOne", static_cast<int>(EMessageType::RemoveOne)},
       {"RemoveRange", static_cast<int>(EMessageType::RemoveRange)},
+      {"Merge", static_cast<int>(EMessageType::Merge)},
   };
 };
 

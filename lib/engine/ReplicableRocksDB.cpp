@@ -206,7 +206,7 @@ rocksdb::Status ReplicableRocksDB::write(const std::vector<std::string> &keys,
   // create protocol msg and publish to kafka, TODO: use macro for duplicate logic
   for (auto &each: producerTopics_) {
     auto msg = toWriteMsg(each.second, keys, values, col);
-    if (!msg || !kakfaProducer_->sendSync(each.first, msg)) {
+    if (!msg || !kakfaProducer_->sendSync(each.first, msg, keys.front())) {
       LOG(ERROR) << "failed to write a write " << each.first << " msg for protocol" << each.second;
       return rocksdb::Status::Corruption();
     }
@@ -223,7 +223,7 @@ rocksdb::Status ReplicableRocksDB::put(const std::string &key,
   // create protocol msg and publish to kafka
   for (auto &each: producerTopics_) {
     auto msg = toPutMsg(each.second, key, value, col);
-    if (!msg || !kakfaProducer_->sendSync(each.first, msg)) {
+    if (!msg || !kakfaProducer_->sendSync(each.first, msg, key)) {
       LOG(ERROR) << "failed to write a put " << each.first << " msg for protocol" << each.second;
       return rocksdb::Status::Corruption();
     }
@@ -239,7 +239,7 @@ rocksdb::Status ReplicableRocksDB::remove(const std::string &key,
   // create protocol msg and publish to kafka
   for (auto &each: producerTopics_) {
     auto msg = toRemoveMsg(each.second, key, col);
-    if (!msg || !kakfaProducer_->sendSync(each.first, msg)) {
+    if (!msg || !kakfaProducer_->sendSync(each.first, msg, key)) {
       LOG(ERROR) << "failed to write a remove " << each.first << " msg for protocol" << each.second;
       return rocksdb::Status::Corruption();
     }
@@ -256,7 +256,7 @@ rocksdb::Status ReplicableRocksDB::remove_range(const std::string &col,
   // create protocol msg and publish to kafka
   for (auto &each: producerTopics_) {
     auto msg = toRemoveRangeMsg(each.second, col, begin, end);
-    if (!msg || !kakfaProducer_->sendSync(each.first, msg)) {
+    if (!msg || !kakfaProducer_->sendSync(each.first, msg, begin+ "-" + end)) {
       LOG(ERROR) << "failed to write a remove_range " << each.first << " msg for protocol" << each.second;
       return rocksdb::Status::Corruption();
     }

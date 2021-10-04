@@ -48,6 +48,8 @@ class AvroBinaryMessageCodec : public MessageCodec {
   virtual interface::IMessagePtr deserialize(const std::string &string) override;
   virtual interface::IMessagePtr deserialize(const ::kafka::ConsumerRecord &record) override;
   virtual bool serialize(interface::IMessagePtr, std::string &buffer) override;
+ private:
+  void decorate(const ::kafka::ConsumerRecord &record, interface::IMessagePtr msg);
 };
 
 class CodecFactory {

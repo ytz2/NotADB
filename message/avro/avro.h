@@ -79,49 +79,56 @@ struct RemoveRange {
         { }
 };
 
-struct MergeIncrementNum {
-    int32_t value;
-    std::string operand;
-    MergeIncrementNum() :
-        value(int32_t()),
-        operand(std::string())
+struct MergeMeta {
+    std::string topic;
+    int32_t partition;
+    int64_t offset;
+    MergeMeta() :
+        topic(std::string()),
+        partition(int32_t()),
+        offset(int64_t())
         { }
 };
 
-struct MergeUpdateNum {
+struct MergeIncrement {
     int32_t value;
-    std::string operand;
-    MergeUpdateNum() :
+    std::string path;
+    MergeIncrement() :
         value(int32_t()),
-        operand(std::string())
+        path(std::string())
         { }
 };
 
-struct MergeUpdateString {
+struct MergeSet {
     std::string value;
     std::string operand;
-    MergeUpdateString() :
+    MergeSet() :
         value(std::string()),
         operand(std::string())
         { }
 };
 
-struct MergeDeleteKey {
-    std::string key;
+struct MergeDelete {
     std::string operand;
-    MergeDeleteKey() :
-        key(std::string()),
+    MergeDelete() :
         operand(std::string())
         { }
 };
 
-struct MergeAppendString {
+struct MergeAppend {
     std::string value;
     std::string operand;
-    MergeAppendString() :
+    MergeAppend() :
         value(std::string()),
         operand(std::string())
         { }
+};
+
+enum class EMergeType: unsigned {
+    MergeIncrement,
+    MergeSet,
+    MergeDelete,
+    MergeAppend,
 };
 
 struct schema_json_Union__0__ {
@@ -130,31 +137,53 @@ private:
     std::any value_;
 public:
     size_t idx() const { return idx_; }
-    MergeIncrementNum get_MergeIncrementNum() const;
-    void set_MergeIncrementNum(const MergeIncrementNum& v);
-    MergeUpdateNum get_MergeUpdateNum() const;
-    void set_MergeUpdateNum(const MergeUpdateNum& v);
-    MergeUpdateString get_MergeUpdateString() const;
-    void set_MergeUpdateString(const MergeUpdateString& v);
-    MergeAppendString get_MergeAppendString() const;
-    void set_MergeAppendString(const MergeAppendString& v);
-    MergeDeleteKey get_MergeDeleteKey() const;
-    void set_MergeDeleteKey(const MergeDeleteKey& v);
+    MergeIncrement get_MergeIncrement() const;
+    void set_MergeIncrement(const MergeIncrement& v);
+    MergeSet get_MergeSet() const;
+    void set_MergeSet(const MergeSet& v);
+    MergeDelete get_MergeDelete() const;
+    void set_MergeDelete(const MergeDelete& v);
+    MergeAppend get_MergeAppend() const;
+    void set_MergeAppend(const MergeAppend& v);
     schema_json_Union__0__();
 };
 
+struct schema_json_Union__1__ {
+private:
+    size_t idx_;
+    std::any value_;
+public:
+    size_t idx() const { return idx_; }
+    bool is_null() const {
+        return (idx_ == 0);
+    }
+    void set_null() {
+        idx_ = 0;
+        value_ = std::any();
+    }
+    MergeMeta get_MergeMeta() const;
+    void set_MergeMeta(const MergeMeta& v);
+    schema_json_Union__1__();
+};
+
 struct Merge {
+    typedef schema_json_Union__0__ operation_t;
+    typedef schema_json_Union__1__ meta_t;
     std::string key;
     std::string column;
-    std::vector<schema_json_Union__0__ > operators;
+    EMergeType type;
+    operation_t operation;
+    meta_t meta;
     Merge() :
         key(std::string()),
         column(std::string()),
-        operators(std::vector<schema_json_Union__0__ >())
+        type(EMergeType()),
+        operation(operation_t()),
+        meta(meta_t())
         { }
 };
 
-struct schema_json_Union__1__ {
+struct schema_json_Union__2__ {
 private:
     size_t idx_;
     std::any value_;
@@ -170,93 +199,93 @@ public:
     void set_RemoveOne(const RemoveOne& v);
     RemoveRange get_RemoveRange() const;
     void set_RemoveRange(const RemoveRange& v);
-    MergeIncrementNum get_MergeIncrementNum() const;
-    void set_MergeIncrementNum(const MergeIncrementNum& v);
-    MergeUpdateNum get_MergeUpdateNum() const;
-    void set_MergeUpdateNum(const MergeUpdateNum& v);
-    MergeUpdateString get_MergeUpdateString() const;
-    void set_MergeUpdateString(const MergeUpdateString& v);
-    MergeDeleteKey get_MergeDeleteKey() const;
-    void set_MergeDeleteKey(const MergeDeleteKey& v);
-    MergeAppendString get_MergeAppendString() const;
-    void set_MergeAppendString(const MergeAppendString& v);
+    MergeMeta get_MergeMeta() const;
+    void set_MergeMeta(const MergeMeta& v);
+    MergeIncrement get_MergeIncrement() const;
+    void set_MergeIncrement(const MergeIncrement& v);
+    MergeSet get_MergeSet() const;
+    void set_MergeSet(const MergeSet& v);
+    MergeDelete get_MergeDelete() const;
+    void set_MergeDelete(const MergeDelete& v);
+    MergeAppend get_MergeAppend() const;
+    void set_MergeAppend(const MergeAppend& v);
     Merge get_Merge() const;
     void set_Merge(const Merge& v);
-    schema_json_Union__1__();
+    schema_json_Union__2__();
 };
 
 inline
-MergeIncrementNum schema_json_Union__0__::get_MergeIncrementNum() const {
+MergeIncrement schema_json_Union__0__::get_MergeIncrement() const {
     if (idx_ != 0) {
         throw avro::Exception("Invalid type for union");
     }
-    return std::any_cast<MergeIncrementNum >(value_);
+    return std::any_cast<MergeIncrement >(value_);
 }
 
 inline
-void schema_json_Union__0__::set_MergeIncrementNum(const MergeIncrementNum& v) {
+void schema_json_Union__0__::set_MergeIncrement(const MergeIncrement& v) {
     idx_ = 0;
     value_ = v;
 }
 
 inline
-MergeUpdateNum schema_json_Union__0__::get_MergeUpdateNum() const {
+MergeSet schema_json_Union__0__::get_MergeSet() const {
     if (idx_ != 1) {
         throw avro::Exception("Invalid type for union");
     }
-    return std::any_cast<MergeUpdateNum >(value_);
+    return std::any_cast<MergeSet >(value_);
 }
 
 inline
-void schema_json_Union__0__::set_MergeUpdateNum(const MergeUpdateNum& v) {
+void schema_json_Union__0__::set_MergeSet(const MergeSet& v) {
     idx_ = 1;
     value_ = v;
 }
 
 inline
-MergeUpdateString schema_json_Union__0__::get_MergeUpdateString() const {
+MergeDelete schema_json_Union__0__::get_MergeDelete() const {
     if (idx_ != 2) {
         throw avro::Exception("Invalid type for union");
     }
-    return std::any_cast<MergeUpdateString >(value_);
+    return std::any_cast<MergeDelete >(value_);
 }
 
 inline
-void schema_json_Union__0__::set_MergeUpdateString(const MergeUpdateString& v) {
+void schema_json_Union__0__::set_MergeDelete(const MergeDelete& v) {
     idx_ = 2;
     value_ = v;
 }
 
 inline
-MergeAppendString schema_json_Union__0__::get_MergeAppendString() const {
+MergeAppend schema_json_Union__0__::get_MergeAppend() const {
     if (idx_ != 3) {
         throw avro::Exception("Invalid type for union");
     }
-    return std::any_cast<MergeAppendString >(value_);
+    return std::any_cast<MergeAppend >(value_);
 }
 
 inline
-void schema_json_Union__0__::set_MergeAppendString(const MergeAppendString& v) {
+void schema_json_Union__0__::set_MergeAppend(const MergeAppend& v) {
     idx_ = 3;
     value_ = v;
 }
 
 inline
-MergeDeleteKey schema_json_Union__0__::get_MergeDeleteKey() const {
-    if (idx_ != 4) {
+MergeMeta schema_json_Union__1__::get_MergeMeta() const {
+    if (idx_ != 1) {
         throw avro::Exception("Invalid type for union");
     }
-    return std::any_cast<MergeDeleteKey >(value_);
+    return std::any_cast<MergeMeta >(value_);
 }
 
 inline
-void schema_json_Union__0__::set_MergeDeleteKey(const MergeDeleteKey& v) {
-    idx_ = 4;
+void schema_json_Union__1__::set_MergeMeta(const MergeMeta& v) {
+    idx_ = 1;
     value_ = v;
 }
 
 inline
-KeyValue schema_json_Union__1__::get_KeyValue() const {
+KeyValue schema_json_Union__2__::get_KeyValue() const {
     if (idx_ != 0) {
         throw avro::Exception("Invalid type for union");
     }
@@ -264,13 +293,13 @@ KeyValue schema_json_Union__1__::get_KeyValue() const {
 }
 
 inline
-void schema_json_Union__1__::set_KeyValue(const KeyValue& v) {
+void schema_json_Union__2__::set_KeyValue(const KeyValue& v) {
     idx_ = 0;
     value_ = v;
 }
 
 inline
-PutOne schema_json_Union__1__::get_PutOne() const {
+PutOne schema_json_Union__2__::get_PutOne() const {
     if (idx_ != 1) {
         throw avro::Exception("Invalid type for union");
     }
@@ -278,13 +307,13 @@ PutOne schema_json_Union__1__::get_PutOne() const {
 }
 
 inline
-void schema_json_Union__1__::set_PutOne(const PutOne& v) {
+void schema_json_Union__2__::set_PutOne(const PutOne& v) {
     idx_ = 1;
     value_ = v;
 }
 
 inline
-WriteMany schema_json_Union__1__::get_WriteMany() const {
+WriteMany schema_json_Union__2__::get_WriteMany() const {
     if (idx_ != 2) {
         throw avro::Exception("Invalid type for union");
     }
@@ -292,13 +321,13 @@ WriteMany schema_json_Union__1__::get_WriteMany() const {
 }
 
 inline
-void schema_json_Union__1__::set_WriteMany(const WriteMany& v) {
+void schema_json_Union__2__::set_WriteMany(const WriteMany& v) {
     idx_ = 2;
     value_ = v;
 }
 
 inline
-RemoveOne schema_json_Union__1__::get_RemoveOne() const {
+RemoveOne schema_json_Union__2__::get_RemoveOne() const {
     if (idx_ != 3) {
         throw avro::Exception("Invalid type for union");
     }
@@ -306,13 +335,13 @@ RemoveOne schema_json_Union__1__::get_RemoveOne() const {
 }
 
 inline
-void schema_json_Union__1__::set_RemoveOne(const RemoveOne& v) {
+void schema_json_Union__2__::set_RemoveOne(const RemoveOne& v) {
     idx_ = 3;
     value_ = v;
 }
 
 inline
-RemoveRange schema_json_Union__1__::get_RemoveRange() const {
+RemoveRange schema_json_Union__2__::get_RemoveRange() const {
     if (idx_ != 4) {
         throw avro::Exception("Invalid type for union");
     }
@@ -320,83 +349,83 @@ RemoveRange schema_json_Union__1__::get_RemoveRange() const {
 }
 
 inline
-void schema_json_Union__1__::set_RemoveRange(const RemoveRange& v) {
+void schema_json_Union__2__::set_RemoveRange(const RemoveRange& v) {
     idx_ = 4;
     value_ = v;
 }
 
 inline
-MergeIncrementNum schema_json_Union__1__::get_MergeIncrementNum() const {
+MergeMeta schema_json_Union__2__::get_MergeMeta() const {
     if (idx_ != 5) {
         throw avro::Exception("Invalid type for union");
     }
-    return std::any_cast<MergeIncrementNum >(value_);
+    return std::any_cast<MergeMeta >(value_);
 }
 
 inline
-void schema_json_Union__1__::set_MergeIncrementNum(const MergeIncrementNum& v) {
+void schema_json_Union__2__::set_MergeMeta(const MergeMeta& v) {
     idx_ = 5;
     value_ = v;
 }
 
 inline
-MergeUpdateNum schema_json_Union__1__::get_MergeUpdateNum() const {
+MergeIncrement schema_json_Union__2__::get_MergeIncrement() const {
     if (idx_ != 6) {
         throw avro::Exception("Invalid type for union");
     }
-    return std::any_cast<MergeUpdateNum >(value_);
+    return std::any_cast<MergeIncrement >(value_);
 }
 
 inline
-void schema_json_Union__1__::set_MergeUpdateNum(const MergeUpdateNum& v) {
+void schema_json_Union__2__::set_MergeIncrement(const MergeIncrement& v) {
     idx_ = 6;
     value_ = v;
 }
 
 inline
-MergeUpdateString schema_json_Union__1__::get_MergeUpdateString() const {
+MergeSet schema_json_Union__2__::get_MergeSet() const {
     if (idx_ != 7) {
         throw avro::Exception("Invalid type for union");
     }
-    return std::any_cast<MergeUpdateString >(value_);
+    return std::any_cast<MergeSet >(value_);
 }
 
 inline
-void schema_json_Union__1__::set_MergeUpdateString(const MergeUpdateString& v) {
+void schema_json_Union__2__::set_MergeSet(const MergeSet& v) {
     idx_ = 7;
     value_ = v;
 }
 
 inline
-MergeDeleteKey schema_json_Union__1__::get_MergeDeleteKey() const {
+MergeDelete schema_json_Union__2__::get_MergeDelete() const {
     if (idx_ != 8) {
         throw avro::Exception("Invalid type for union");
     }
-    return std::any_cast<MergeDeleteKey >(value_);
+    return std::any_cast<MergeDelete >(value_);
 }
 
 inline
-void schema_json_Union__1__::set_MergeDeleteKey(const MergeDeleteKey& v) {
+void schema_json_Union__2__::set_MergeDelete(const MergeDelete& v) {
     idx_ = 8;
     value_ = v;
 }
 
 inline
-MergeAppendString schema_json_Union__1__::get_MergeAppendString() const {
+MergeAppend schema_json_Union__2__::get_MergeAppend() const {
     if (idx_ != 9) {
         throw avro::Exception("Invalid type for union");
     }
-    return std::any_cast<MergeAppendString >(value_);
+    return std::any_cast<MergeAppend >(value_);
 }
 
 inline
-void schema_json_Union__1__::set_MergeAppendString(const MergeAppendString& v) {
+void schema_json_Union__2__::set_MergeAppend(const MergeAppend& v) {
     idx_ = 9;
     value_ = v;
 }
 
 inline
-Merge schema_json_Union__1__::get_Merge() const {
+Merge schema_json_Union__2__::get_Merge() const {
     if (idx_ != 10) {
         throw avro::Exception("Invalid type for union");
     }
@@ -404,13 +433,14 @@ Merge schema_json_Union__1__::get_Merge() const {
 }
 
 inline
-void schema_json_Union__1__::set_Merge(const Merge& v) {
+void schema_json_Union__2__::set_Merge(const Merge& v) {
     idx_ = 10;
     value_ = v;
 }
 
-inline schema_json_Union__0__::schema_json_Union__0__() : idx_(0), value_(MergeIncrementNum()) { }
-inline schema_json_Union__1__::schema_json_Union__1__() : idx_(0), value_(KeyValue()) { }
+inline schema_json_Union__0__::schema_json_Union__0__() : idx_(0), value_(MergeIncrement()) { }
+inline schema_json_Union__1__::schema_json_Union__1__() : idx_(0) { }
+inline schema_json_Union__2__::schema_json_Union__2__() : idx_(0), value_(KeyValue()) { }
 }
 namespace avro {
 template<> struct codec_traits<avrogen::KeyValue> {
@@ -573,12 +603,75 @@ template<> struct codec_traits<avrogen::RemoveRange> {
     }
 };
 
-template<> struct codec_traits<avrogen::MergeIncrementNum> {
-    static void encode(Encoder& e, const avrogen::MergeIncrementNum& v) {
+template<> struct codec_traits<avrogen::MergeMeta> {
+    static void encode(Encoder& e, const avrogen::MergeMeta& v) {
+        avro::encode(e, v.topic);
+        avro::encode(e, v.partition);
+        avro::encode(e, v.offset);
+    }
+    static void decode(Decoder& d, avrogen::MergeMeta& v) {
+        if (avro::ResolvingDecoder *rd =
+            dynamic_cast<avro::ResolvingDecoder *>(&d)) {
+            const std::vector<size_t> fo = rd->fieldOrder();
+            for (std::vector<size_t>::const_iterator it = fo.begin();
+                it != fo.end(); ++it) {
+                switch (*it) {
+                case 0:
+                    avro::decode(d, v.topic);
+                    break;
+                case 1:
+                    avro::decode(d, v.partition);
+                    break;
+                case 2:
+                    avro::decode(d, v.offset);
+                    break;
+                default:
+                    break;
+                }
+            }
+        } else {
+            avro::decode(d, v.topic);
+            avro::decode(d, v.partition);
+            avro::decode(d, v.offset);
+        }
+    }
+};
+
+template<> struct codec_traits<avrogen::MergeIncrement> {
+    static void encode(Encoder& e, const avrogen::MergeIncrement& v) {
+        avro::encode(e, v.value);
+        avro::encode(e, v.path);
+    }
+    static void decode(Decoder& d, avrogen::MergeIncrement& v) {
+        if (avro::ResolvingDecoder *rd =
+            dynamic_cast<avro::ResolvingDecoder *>(&d)) {
+            const std::vector<size_t> fo = rd->fieldOrder();
+            for (std::vector<size_t>::const_iterator it = fo.begin();
+                it != fo.end(); ++it) {
+                switch (*it) {
+                case 0:
+                    avro::decode(d, v.value);
+                    break;
+                case 1:
+                    avro::decode(d, v.path);
+                    break;
+                default:
+                    break;
+                }
+            }
+        } else {
+            avro::decode(d, v.value);
+            avro::decode(d, v.path);
+        }
+    }
+};
+
+template<> struct codec_traits<avrogen::MergeSet> {
+    static void encode(Encoder& e, const avrogen::MergeSet& v) {
         avro::encode(e, v.value);
         avro::encode(e, v.operand);
     }
-    static void decode(Decoder& d, avrogen::MergeIncrementNum& v) {
+    static void decode(Decoder& d, avrogen::MergeSet& v) {
         if (avro::ResolvingDecoder *rd =
             dynamic_cast<avro::ResolvingDecoder *>(&d)) {
             const std::vector<size_t> fo = rd->fieldOrder();
@@ -602,12 +695,36 @@ template<> struct codec_traits<avrogen::MergeIncrementNum> {
     }
 };
 
-template<> struct codec_traits<avrogen::MergeUpdateNum> {
-    static void encode(Encoder& e, const avrogen::MergeUpdateNum& v) {
+template<> struct codec_traits<avrogen::MergeDelete> {
+    static void encode(Encoder& e, const avrogen::MergeDelete& v) {
+        avro::encode(e, v.operand);
+    }
+    static void decode(Decoder& d, avrogen::MergeDelete& v) {
+        if (avro::ResolvingDecoder *rd =
+            dynamic_cast<avro::ResolvingDecoder *>(&d)) {
+            const std::vector<size_t> fo = rd->fieldOrder();
+            for (std::vector<size_t>::const_iterator it = fo.begin();
+                it != fo.end(); ++it) {
+                switch (*it) {
+                case 0:
+                    avro::decode(d, v.operand);
+                    break;
+                default:
+                    break;
+                }
+            }
+        } else {
+            avro::decode(d, v.operand);
+        }
+    }
+};
+
+template<> struct codec_traits<avrogen::MergeAppend> {
+    static void encode(Encoder& e, const avrogen::MergeAppend& v) {
         avro::encode(e, v.value);
         avro::encode(e, v.operand);
     }
-    static void decode(Decoder& d, avrogen::MergeUpdateNum& v) {
+    static void decode(Decoder& d, avrogen::MergeAppend& v) {
         if (avro::ResolvingDecoder *rd =
             dynamic_cast<avro::ResolvingDecoder *>(&d)) {
             const std::vector<size_t> fo = rd->fieldOrder();
@@ -631,90 +748,25 @@ template<> struct codec_traits<avrogen::MergeUpdateNum> {
     }
 };
 
-template<> struct codec_traits<avrogen::MergeUpdateString> {
-    static void encode(Encoder& e, const avrogen::MergeUpdateString& v) {
-        avro::encode(e, v.value);
-        avro::encode(e, v.operand);
-    }
-    static void decode(Decoder& d, avrogen::MergeUpdateString& v) {
-        if (avro::ResolvingDecoder *rd =
-            dynamic_cast<avro::ResolvingDecoder *>(&d)) {
-            const std::vector<size_t> fo = rd->fieldOrder();
-            for (std::vector<size_t>::const_iterator it = fo.begin();
-                it != fo.end(); ++it) {
-                switch (*it) {
-                case 0:
-                    avro::decode(d, v.value);
-                    break;
-                case 1:
-                    avro::decode(d, v.operand);
-                    break;
-                default:
-                    break;
-                }
-            }
-        } else {
-            avro::decode(d, v.value);
-            avro::decode(d, v.operand);
+template<> struct codec_traits<avrogen::EMergeType> {
+    static void encode(Encoder& e, avrogen::EMergeType v) {
+        if (v > avrogen::EMergeType::MergeAppend)
+        {
+            std::ostringstream error;
+            error << "enum value " << static_cast<unsigned>(v) << " is out of bound for avrogen::EMergeType and cannot be encoded";
+            throw avro::Exception(error.str());
         }
+        e.encodeEnum(static_cast<size_t>(v));
     }
-};
-
-template<> struct codec_traits<avrogen::MergeDeleteKey> {
-    static void encode(Encoder& e, const avrogen::MergeDeleteKey& v) {
-        avro::encode(e, v.key);
-        avro::encode(e, v.operand);
-    }
-    static void decode(Decoder& d, avrogen::MergeDeleteKey& v) {
-        if (avro::ResolvingDecoder *rd =
-            dynamic_cast<avro::ResolvingDecoder *>(&d)) {
-            const std::vector<size_t> fo = rd->fieldOrder();
-            for (std::vector<size_t>::const_iterator it = fo.begin();
-                it != fo.end(); ++it) {
-                switch (*it) {
-                case 0:
-                    avro::decode(d, v.key);
-                    break;
-                case 1:
-                    avro::decode(d, v.operand);
-                    break;
-                default:
-                    break;
-                }
-            }
-        } else {
-            avro::decode(d, v.key);
-            avro::decode(d, v.operand);
+    static void decode(Decoder& d, avrogen::EMergeType& v) {
+        size_t index = d.decodeEnum();
+        if (index > static_cast<size_t>(avrogen::EMergeType::MergeAppend))
+        {
+            std::ostringstream error;
+            error << "enum value " << index << " is out of bound for avrogen::EMergeType and cannot be decoded";
+            throw avro::Exception(error.str());
         }
-    }
-};
-
-template<> struct codec_traits<avrogen::MergeAppendString> {
-    static void encode(Encoder& e, const avrogen::MergeAppendString& v) {
-        avro::encode(e, v.value);
-        avro::encode(e, v.operand);
-    }
-    static void decode(Decoder& d, avrogen::MergeAppendString& v) {
-        if (avro::ResolvingDecoder *rd =
-            dynamic_cast<avro::ResolvingDecoder *>(&d)) {
-            const std::vector<size_t> fo = rd->fieldOrder();
-            for (std::vector<size_t>::const_iterator it = fo.begin();
-                it != fo.end(); ++it) {
-                switch (*it) {
-                case 0:
-                    avro::decode(d, v.value);
-                    break;
-                case 1:
-                    avro::decode(d, v.operand);
-                    break;
-                default:
-                    break;
-                }
-            }
-        } else {
-            avro::decode(d, v.value);
-            avro::decode(d, v.operand);
-        }
+        v = static_cast<avrogen::EMergeType>(index);
     }
 };
 
@@ -723,59 +775,80 @@ template<> struct codec_traits<avrogen::schema_json_Union__0__> {
         e.encodeUnionIndex(v.idx());
         switch (v.idx()) {
         case 0:
-            avro::encode(e, v.get_MergeIncrementNum());
+            avro::encode(e, v.get_MergeIncrement());
             break;
         case 1:
-            avro::encode(e, v.get_MergeUpdateNum());
+            avro::encode(e, v.get_MergeSet());
             break;
         case 2:
-            avro::encode(e, v.get_MergeUpdateString());
+            avro::encode(e, v.get_MergeDelete());
             break;
         case 3:
-            avro::encode(e, v.get_MergeAppendString());
-            break;
-        case 4:
-            avro::encode(e, v.get_MergeDeleteKey());
+            avro::encode(e, v.get_MergeAppend());
             break;
         }
     }
     static void decode(Decoder& d, avrogen::schema_json_Union__0__& v) {
         size_t n = d.decodeUnionIndex();
-        if (n >= 5) { throw avro::Exception("Union index too big"); }
+        if (n >= 4) { throw avro::Exception("Union index too big"); }
         switch (n) {
         case 0:
             {
-                avrogen::MergeIncrementNum vv;
+                avrogen::MergeIncrement vv;
                 avro::decode(d, vv);
-                v.set_MergeIncrementNum(vv);
+                v.set_MergeIncrement(vv);
             }
             break;
         case 1:
             {
-                avrogen::MergeUpdateNum vv;
+                avrogen::MergeSet vv;
                 avro::decode(d, vv);
-                v.set_MergeUpdateNum(vv);
+                v.set_MergeSet(vv);
             }
             break;
         case 2:
             {
-                avrogen::MergeUpdateString vv;
+                avrogen::MergeDelete vv;
                 avro::decode(d, vv);
-                v.set_MergeUpdateString(vv);
+                v.set_MergeDelete(vv);
             }
             break;
         case 3:
             {
-                avrogen::MergeAppendString vv;
+                avrogen::MergeAppend vv;
                 avro::decode(d, vv);
-                v.set_MergeAppendString(vv);
+                v.set_MergeAppend(vv);
             }
             break;
-        case 4:
+        }
+    }
+};
+
+template<> struct codec_traits<avrogen::schema_json_Union__1__> {
+    static void encode(Encoder& e, avrogen::schema_json_Union__1__ v) {
+        e.encodeUnionIndex(v.idx());
+        switch (v.idx()) {
+        case 0:
+            e.encodeNull();
+            break;
+        case 1:
+            avro::encode(e, v.get_MergeMeta());
+            break;
+        }
+    }
+    static void decode(Decoder& d, avrogen::schema_json_Union__1__& v) {
+        size_t n = d.decodeUnionIndex();
+        if (n >= 2) { throw avro::Exception("Union index too big"); }
+        switch (n) {
+        case 0:
+            d.decodeNull();
+            v.set_null();
+            break;
+        case 1:
             {
-                avrogen::MergeDeleteKey vv;
+                avrogen::MergeMeta vv;
                 avro::decode(d, vv);
-                v.set_MergeDeleteKey(vv);
+                v.set_MergeMeta(vv);
             }
             break;
         }
@@ -786,7 +859,9 @@ template<> struct codec_traits<avrogen::Merge> {
     static void encode(Encoder& e, const avrogen::Merge& v) {
         avro::encode(e, v.key);
         avro::encode(e, v.column);
-        avro::encode(e, v.operators);
+        avro::encode(e, v.type);
+        avro::encode(e, v.operation);
+        avro::encode(e, v.meta);
     }
     static void decode(Decoder& d, avrogen::Merge& v) {
         if (avro::ResolvingDecoder *rd =
@@ -802,7 +877,13 @@ template<> struct codec_traits<avrogen::Merge> {
                     avro::decode(d, v.column);
                     break;
                 case 2:
-                    avro::decode(d, v.operators);
+                    avro::decode(d, v.type);
+                    break;
+                case 3:
+                    avro::decode(d, v.operation);
+                    break;
+                case 4:
+                    avro::decode(d, v.meta);
                     break;
                 default:
                     break;
@@ -811,13 +892,15 @@ template<> struct codec_traits<avrogen::Merge> {
         } else {
             avro::decode(d, v.key);
             avro::decode(d, v.column);
-            avro::decode(d, v.operators);
+            avro::decode(d, v.type);
+            avro::decode(d, v.operation);
+            avro::decode(d, v.meta);
         }
     }
 };
 
-template<> struct codec_traits<avrogen::schema_json_Union__1__> {
-    static void encode(Encoder& e, avrogen::schema_json_Union__1__ v) {
+template<> struct codec_traits<avrogen::schema_json_Union__2__> {
+    static void encode(Encoder& e, avrogen::schema_json_Union__2__ v) {
         e.encodeUnionIndex(v.idx());
         switch (v.idx()) {
         case 0:
@@ -836,26 +919,26 @@ template<> struct codec_traits<avrogen::schema_json_Union__1__> {
             avro::encode(e, v.get_RemoveRange());
             break;
         case 5:
-            avro::encode(e, v.get_MergeIncrementNum());
+            avro::encode(e, v.get_MergeMeta());
             break;
         case 6:
-            avro::encode(e, v.get_MergeUpdateNum());
+            avro::encode(e, v.get_MergeIncrement());
             break;
         case 7:
-            avro::encode(e, v.get_MergeUpdateString());
+            avro::encode(e, v.get_MergeSet());
             break;
         case 8:
-            avro::encode(e, v.get_MergeDeleteKey());
+            avro::encode(e, v.get_MergeDelete());
             break;
         case 9:
-            avro::encode(e, v.get_MergeAppendString());
+            avro::encode(e, v.get_MergeAppend());
             break;
         case 10:
             avro::encode(e, v.get_Merge());
             break;
         }
     }
-    static void decode(Decoder& d, avrogen::schema_json_Union__1__& v) {
+    static void decode(Decoder& d, avrogen::schema_json_Union__2__& v) {
         size_t n = d.decodeUnionIndex();
         if (n >= 11) { throw avro::Exception("Union index too big"); }
         switch (n) {
@@ -896,37 +979,37 @@ template<> struct codec_traits<avrogen::schema_json_Union__1__> {
             break;
         case 5:
             {
-                avrogen::MergeIncrementNum vv;
+                avrogen::MergeMeta vv;
                 avro::decode(d, vv);
-                v.set_MergeIncrementNum(vv);
+                v.set_MergeMeta(vv);
             }
             break;
         case 6:
             {
-                avrogen::MergeUpdateNum vv;
+                avrogen::MergeIncrement vv;
                 avro::decode(d, vv);
-                v.set_MergeUpdateNum(vv);
+                v.set_MergeIncrement(vv);
             }
             break;
         case 7:
             {
-                avrogen::MergeUpdateString vv;
+                avrogen::MergeSet vv;
                 avro::decode(d, vv);
-                v.set_MergeUpdateString(vv);
+                v.set_MergeSet(vv);
             }
             break;
         case 8:
             {
-                avrogen::MergeDeleteKey vv;
+                avrogen::MergeDelete vv;
                 avro::decode(d, vv);
-                v.set_MergeDeleteKey(vv);
+                v.set_MergeDelete(vv);
             }
             break;
         case 9:
             {
-                avrogen::MergeAppendString vv;
+                avrogen::MergeAppend vv;
                 avro::decode(d, vv);
-                v.set_MergeAppendString(vv);
+                v.set_MergeAppend(vv);
             }
             break;
         case 10:

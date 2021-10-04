@@ -86,7 +86,25 @@
   },
   {
     "type": "record",
-    "name": "MergeIncrementNum",
+    "name": "MergeMeta",
+    "fields": [
+      {
+        "name": "topic",
+        "type": "string"
+      },
+      {
+        "name": "partition",
+        "type": "int"
+      },
+      {
+        "name": "offset",
+        "type": "long"
+      }
+    ]
+  },
+  {
+    "type": "record",
+    "name": "MergeIncrement",
     "fields": [
       {
         "name": "value",
@@ -94,7 +112,7 @@
         "default": 1
       },
       {
-        "name": "operand",
+        "name": "path",
         "type": "string",
         "default": ""
       }
@@ -102,22 +120,7 @@
   },
   {
     "type": "record",
-    "name": "MergeUpdateNum",
-    "fields": [
-      {
-        "name": "value",
-        "type": "int"
-      },
-      {
-        "name": "operand",
-        "type": "string",
-        "default": ""
-      }
-    ]
-  },
-  {
-    "type": "record",
-    "name": "MergeUpdateString",
+    "name": "MergeSet",
     "fields": [
       {
         "name": "value",
@@ -132,12 +135,8 @@
   },
   {
     "type": "record",
-    "name": "MergeDeleteKey",
+    "name": "MergeDelete",
     "fields": [
-      {
-        "name": "key",
-        "type": "string"
-      },
       {
         "name": "operand",
         "type": "string",
@@ -147,7 +146,7 @@
   },
   {
     "type": "record",
-    "name": "MergeAppendString",
+    "name": "MergeAppend",
     "fields": [
       {
         "name": "value",
@@ -173,17 +172,30 @@
         "type": "string"
       },
       {
-        "name": "operators",
-        "type":  {
-          "type": "array",
-          "items" : [
-              "MergeIncrementNum",
-              "MergeUpdateNum",
-              "MergeUpdateString",
-              "MergeAppendString",
-              "MergeDeleteKey"
-            ]
+        "name": "type",
+        "type": {
+          "type": "enum",
+          "name": "EMergeType",
+          "symbols":  [
+            "MergeIncrement",
+            "MergeSet",
+            "MergeDelete",
+            "MergeAppend"
+          ]
         }
+      },
+      {
+        "name": "operation",
+        "type": [
+          "MergeIncrement",
+          "MergeSet",
+          "MergeDelete",
+          "MergeAppend"
+        ]
+      },
+      {
+        "name": "meta",
+        "type": ["null", "MergeMeta"]
       }
     ]
   }
