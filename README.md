@@ -1,7 +1,8 @@
 ##### **NotADB**
 
 **What is NotADB**
-This is my kill-time project, don't take it serious.
+
+_This is my kill-time project, don't take it serious._
 
 Literally, it is not a db. It is a framework to help build a distributed *stateful* services, which helps below:
 1. Queries a lot of data to retrieve simple answer (eg. analysis, personalization search, real-time aggregation)
@@ -28,34 +29,39 @@ Thanks to *RocksDB*, it makes process build-in db possible. Thanks to *Kafka*, I
 **FAQ**
 
 1. What's external facing transport?
-Right now only support GRPC
+
+    Right now only support GRPC
 
 2. How to scale?
-I am not implementing consistent hashing. But within one shard, RocksDB supports backup. We can use backup file to spin up new instances easily.
-As we are replicating from kafka, the new instance might need to catch up the queue from copied offset. Before catching up, we set k8s probe api not available. 
+
+    I am not implementing consistent hashing. But within one shard, RocksDB supports backup. We can use backup file to spin up new instances easily.
+    As we are replicating from kafka, the new instance might need to catch up the queue from copied offset. Before catching up, we set k8s probe api not available. 
 
 3. Have you heard about ClickHouse?
-Yes, in some sense, the goal is similar: being able to handle big data based query in a faster way. 
+
+    Yes, in some sense, the goal is similar: being able to handle big data based query in a faster way. 
 
 4. Why do you write similar stuff?
-I am bored. Also, the NotADB provides: 
-a) more flexible partition
-b) customized sorting 
-c) computation and data IO happens on same process 
-It can easily handle below scenario:
-key:{store_id}-{product}|{score}|{item_id} 
-value: object 
 
-You can customize to indicate: partition all store_id to same group, sort according to group and score. Because data is sorted on RocksDB, it is easy to answer below question:
-What's the available items for the given store and product 
-
-key: {user-id} | {timestamp} | {feature_name} 
-value: object
-answer: what's the most viewed items in past 1 hours for this user? what's the continuously viewed items in past 30 minutes? 
-or, in past 15 minutes, user's effective search. (look at feature = searched index and look at feature = click)
-
-Anyway, it does not enforce you conform with SQL and let you define what you want. 
+    I am bored. Also, the NotADB provides: 
+    a) more flexible partition
+    b) customized sorting 
+    c) computation and data IO happens on same process 
+    It can easily handle below scenario:
+    key:{store_id}-{product}|{score}|{item_id} 
+    value: object 
+    
+    You can customize to indicate: partition all store_id to same group, sort according to group and score. Because data is sorted on RocksDB, it is easy to answer below question:
+    What's the available items for the given store and product 
+    
+    key: {user-id} | {timestamp} | {feature_name} 
+    value: object
+    answer: what's the most viewed items in past 1 hours for this user? what's the continuously viewed items in past 30 minutes? 
+    or, in past 15 minutes, user's effective search. (look at feature = searched index and look at feature = click)
+    
+    Anyway, it does not enforce you conform with SQL and let you define what you want. 
 
 5. What about write
-The write is handled async. So, if you are looking for write and read, it is not a proper solution for you. 
+
+    The write is handled async. So, if you are looking for write and read, it is not a proper solution for you. 
 
