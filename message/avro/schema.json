@@ -83,5 +83,108 @@
         "type": "boolean"
       }
     ]
+  },
+  {
+    "type": "record",
+    "name": "MergeIncrementNum",
+    "fields": [
+      {
+        "name": "value",
+        "type": "int",
+        "default": 1
+      },
+      {
+        "name": "operand",
+        "type": "string",
+        "default": ""
+      }
+    ]
+  },
+  {
+    "type": "record",
+    "name": "MergeUpdateNum",
+    "fields": [
+      {
+        "name": "value",
+        "type": "int"
+      },
+      {
+        "name": "operand",
+        "type": "string",
+        "default": ""
+      }
+    ]
+  },
+  {
+    "type": "record",
+    "name": "MergeUpdateString",
+    "fields": [
+      {
+        "name": "value",
+        "type": "string"
+      },
+      {
+        "name": "operand",
+        "type": "string",
+        "default": ""
+      }
+    ]
+  },
+  {
+    "type": "record",
+    "name": "MergeDeleteKey",
+    "fields": [
+      {
+        "name": "key",
+        "type": "string"
+      },
+      {
+        "name": "operand",
+        "type": "string",
+        "default": ""
+      }
+    ]
+  },
+  {
+    "type": "record",
+    "name": "MergeAppendString",
+    "fields": [
+      {
+        "name": "value",
+        "type": "string"
+      },
+      {
+        "name": "operand",
+        "type": "string",
+        "default": ""
+      }
+    ]
+  },
+  {
+    "type": "record",
+    "name": "Merge",
+    "fields": [
+      {
+        "name": "key",
+        "type": "string"
+      },
+      {
+        "name": "column",
+        "type": "string"
+      },
+      {
+        "name": "operators",
+        "type":  {
+          "type": "array",
+          "items" : [
+              "MergeIncrementNum",
+              "MergeUpdateNum",
+              "MergeUpdateString",
+              "MergeAppendString",
+              "MergeDeleteKey"
+            ]
+        }
+      }
+    ]
   }
 ]
