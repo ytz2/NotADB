@@ -1,6 +1,7 @@
 ##### **NotADB**
 
 **What is NotADB**
+This is my kill-time project, don't take it serious.
 
 Literally, it is not a db. It is a framework to help build a distributed *stateful* services, which helps below:
 1. Queries a lot of data to retrieve simple answer (eg. analysis, personalization search, real-time aggregation)
