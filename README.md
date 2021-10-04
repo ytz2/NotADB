@@ -30,7 +30,7 @@ Thanks to *RocksDB*, it makes process build-in db possible. Thanks to *Kafka*, I
 
 1. What's external facing transport?
 
-    Right now only support GRPC
+    Right now only support GRPC and plan to add kafka for streaming process
 
 2. How to scale?
 
