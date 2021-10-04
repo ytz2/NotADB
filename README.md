@@ -4,7 +4,7 @@
 
 _This is my kill-time project, don't take it serious._
 
-Literally, it is not a db. It is a framework to help build a distributed *stateful* services, which helps below:
+Literally, it is not a db. It is a framework to build *locally-stateful* distributed services, which helps below:
 1. Queries a lot of data to retrieve simple answer (eg. analysis, personalization search, real-time aggregation)
 2. Query is strictly partition based (eg. same zone, same store, same prefix range)
 3. Write is less heavy than read (can be tuned, but still prefer less heavy write than read)
