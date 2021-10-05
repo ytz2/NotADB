@@ -45,6 +45,13 @@ class SimpleRocksDB : public interface::iRocksDB {
                                        const std::string &end
   ) override;
 
+  virtual interface::iMergeBuilderPtr createMergeBuilder() override;
+
+  virtual rocksdb::Status merge(const std::string key,
+                                const std::string &col,
+                                const std::string &val
+  ) override;
+
   virtual std::shared_ptr<rocksdb::Iterator> new_iterator(const std::string &col) override;
 
   virtual rocksdb::Status add_column(const std::string &col) override;

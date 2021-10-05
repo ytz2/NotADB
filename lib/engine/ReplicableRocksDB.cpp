@@ -256,7 +256,7 @@ rocksdb::Status ReplicableRocksDB::remove_range(const std::string &col,
   // create protocol msg and publish to kafka
   for (auto &each: producerTopics_) {
     auto msg = toRemoveRangeMsg(each.second, col, begin, end);
-    if (!msg || !kakfaProducer_->sendSync(each.first, msg, begin+ "-" + end)) {
+    if (!msg || !kakfaProducer_->sendSync(each.first, msg, begin + "-" + end)) {
       LOG(ERROR) << "failed to write a remove_range " << each.first << " msg for protocol" << each.second;
       return rocksdb::Status::Corruption();
     }
@@ -292,9 +292,14 @@ bool ReplicableRocksDB::onAvroMessage(const interface::IMessagePtr msg) {
     case lib::message::avromsg::EMessageType::WriteMany:return onAvroWrite(msg);
     case lib::message::avromsg::EMessageType::RemoveOne:return onAvroRemove(msg);
     case lib::message::avromsg::EMessageType::RemoveRange:return onAvroRemoveRange(msg);
+    case lib::message::avromsg::EMessageType::Merge: return onAvroMerge(msg);
     default:return false;
   }
   return false;
+}
+
+bool ReplicableRocksDB::onAvroMerge(const interface::IMessagePtr msg) {
+  return true;
 }
 
 bool ReplicableRocksDB::onAvroPut(const interface::IMessagePtr msg) {
@@ -324,6 +329,19 @@ bool ReplicableRocksDB::onAvroRemoveRange(const interface::IMessagePtr msg) {
   const auto removeRange = asConstMsg<lib::message::avromsg::RemoveRange>(msg);
   if (!removeRange) return false;
   return SimpleRocksDB::remove_range(removeRange->column, removeRange->begin, removeRange->end).ok();
+}
+
+rocksdb::Status ReplicableRocksDB::merge(const std::string key,
+                                         const std::string &col,
+                                         const std::string &val
+) {
+  LOG(ERROR) << "merge is not supported";
+  return rocksdb::Status::Corruption();
+}
+
+interface::iMergeBuilderPtr ReplicableRocksDB::createMergeBuilder() {
+  LOG(ERROR) << "not supported";
+  return nullptr;
 }
 
 }

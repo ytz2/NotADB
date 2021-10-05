@@ -210,5 +210,19 @@ rocksdb::Status SimpleRocksDB::delete_column(const std::string &col) {
   columnFamilies_.erase(col);
   return rocksdb::Status::OK();
 }
+
+rocksdb::Status SimpleRocksDB::merge(const std::string key,
+                                     const std::string &col,
+                                     const std::string &val
+) {
+  LOG(ERROR) << "merge is not supported";
+  return rocksdb::Status::Corruption();
+}
+
+interface::iMergeBuilderPtr SimpleRocksDB::createMergeBuilder() {
+  LOG(ERROR) << "not supported";
+  return nullptr;
+}
+
 }
 }

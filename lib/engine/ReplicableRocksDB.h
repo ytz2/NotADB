@@ -68,6 +68,14 @@ class ReplicableRocksDB : public SimpleRocksDB,
                                        const std::string &begin,
                                        const std::string &end
   ) override;
+
+  virtual rocksdb::Status merge(const std::string key,
+                                const std::string &col,
+                                const std::string &val
+  ) override;
+
+  virtual interface::iMergeBuilderPtr createMergeBuilder() override;
+
  protected:
   virtual void init(config::Configuration config) override;
   virtual rocksdb::Options getDBOptions(config::Configuration config) override;
@@ -78,6 +86,8 @@ class ReplicableRocksDB : public SimpleRocksDB,
   bool onAvroWrite(const interface::IMessagePtr msg);
   bool onAvroRemove(const interface::IMessagePtr msg);
   bool onAvroRemoveRange(const interface::IMessagePtr msg);
+  bool onAvroMerge(const interface::IMessagePtr msg);
+
  private:
   std::unordered_map<std::string /*topic*/, std::string /*protocols*/> producerTopics_;
   std::unique_ptr<lib::kafka::Consumer> kakfaConsumer_ = nullptr;

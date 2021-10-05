@@ -101,26 +101,26 @@ struct MergeIncrement {
 
 struct MergeSet {
     std::string value;
-    std::string operand;
+    std::string path;
     MergeSet() :
         value(std::string()),
-        operand(std::string())
+        path(std::string())
         { }
 };
 
 struct MergeDelete {
-    std::string operand;
+    std::string path;
     MergeDelete() :
-        operand(std::string())
+        path(std::string())
         { }
 };
 
 struct MergeAppend {
     std::string value;
-    std::string operand;
+    std::string path;
     MergeAppend() :
         value(std::string()),
-        operand(std::string())
+        path(std::string())
         { }
 };
 
@@ -669,7 +669,7 @@ template<> struct codec_traits<avrogen::MergeIncrement> {
 template<> struct codec_traits<avrogen::MergeSet> {
     static void encode(Encoder& e, const avrogen::MergeSet& v) {
         avro::encode(e, v.value);
-        avro::encode(e, v.operand);
+        avro::encode(e, v.path);
     }
     static void decode(Decoder& d, avrogen::MergeSet& v) {
         if (avro::ResolvingDecoder *rd =
@@ -682,7 +682,7 @@ template<> struct codec_traits<avrogen::MergeSet> {
                     avro::decode(d, v.value);
                     break;
                 case 1:
-                    avro::decode(d, v.operand);
+                    avro::decode(d, v.path);
                     break;
                 default:
                     break;
@@ -690,14 +690,14 @@ template<> struct codec_traits<avrogen::MergeSet> {
             }
         } else {
             avro::decode(d, v.value);
-            avro::decode(d, v.operand);
+            avro::decode(d, v.path);
         }
     }
 };
 
 template<> struct codec_traits<avrogen::MergeDelete> {
     static void encode(Encoder& e, const avrogen::MergeDelete& v) {
-        avro::encode(e, v.operand);
+        avro::encode(e, v.path);
     }
     static void decode(Decoder& d, avrogen::MergeDelete& v) {
         if (avro::ResolvingDecoder *rd =
@@ -707,14 +707,14 @@ template<> struct codec_traits<avrogen::MergeDelete> {
                 it != fo.end(); ++it) {
                 switch (*it) {
                 case 0:
-                    avro::decode(d, v.operand);
+                    avro::decode(d, v.path);
                     break;
                 default:
                     break;
                 }
             }
         } else {
-            avro::decode(d, v.operand);
+            avro::decode(d, v.path);
         }
     }
 };
@@ -722,7 +722,7 @@ template<> struct codec_traits<avrogen::MergeDelete> {
 template<> struct codec_traits<avrogen::MergeAppend> {
     static void encode(Encoder& e, const avrogen::MergeAppend& v) {
         avro::encode(e, v.value);
-        avro::encode(e, v.operand);
+        avro::encode(e, v.path);
     }
     static void decode(Decoder& d, avrogen::MergeAppend& v) {
         if (avro::ResolvingDecoder *rd =
@@ -735,7 +735,7 @@ template<> struct codec_traits<avrogen::MergeAppend> {
                     avro::decode(d, v.value);
                     break;
                 case 1:
-                    avro::decode(d, v.operand);
+                    avro::decode(d, v.path);
                     break;
                 default:
                     break;
@@ -743,7 +743,7 @@ template<> struct codec_traits<avrogen::MergeAppend> {
             }
         } else {
             avro::decode(d, v.value);
-            avro::decode(d, v.operand);
+            avro::decode(d, v.path);
         }
     }
 };

@@ -11,23 +11,21 @@
 #include "rocksdb/slice_transform.h"
 #include "rocksdb/utilities/transaction.h"
 #include "rocksdb/utilities/transaction_db.h"
-
+#include "message.h"
 /*
  * interface for creating a RocksDB / other engine backed 'built-in' DB
  */
 
 namespace interface {
 
-// TODO support write batch
-// boost::any is a solution
-class WriteBatch{
- public:
-  virtual void write(const std::vector<std::string> &keys,  const std::vector<std::string> &values) = 0;
-  virtual void put(const std::string& key, const std::string& value) = 0;
-  virtual void remove(const std::string &key) = 0;
-  virtual void remove_range(const std::string &begin, const std::string &end) = 0;
+// merge operation encoding rule
+class iMergeBuilder{
+  virtual void set(const std::string& input, const std::string& value) = 0;
+  virtual bool serialize(std::string& output) = 0;
+  virtual IMessagePtr deserialize(std::string& input) = 0;
 };
 
+typedef std::shared_ptr<iMergeBuilder> iMergeBuilderPtr;
 // customize the usage of RocksDB
 class iRocksDB {
  public:
@@ -64,6 +62,12 @@ class iRocksDB {
   ) = 0;
 
   virtual std::shared_ptr<rocksdb::Iterator> new_iterator(const std::string& col)
+  = 0;
+
+  virtual iMergeBuilderPtr createMergeBuilder()
+  = 0;
+
+  virtual rocksdb::Status merge(const std::string key, const std::string& col, const std::string& val)
   = 0;
 
   virtual rocksdb::Status add_column(const std::string& col) = 0;
