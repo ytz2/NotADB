@@ -6,10 +6,14 @@
 
 namespace interface {
 
-class IMessage {
+class ISerializable {
  public:
   virtual bool ToString(std::string &output) const = 0;  // NOLINT
   virtual bool FromString(const std::string &input) = 0;
+};
+
+class IMessage : public ISerializable {
+ public:
 
   virtual int GetMessageID() = 0;
 

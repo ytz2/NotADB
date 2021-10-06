@@ -18,19 +18,12 @@
 
 namespace interface {
 
-// merge operation encoding rule
-class iMergeBuilder{
-  virtual void set(const std::string& input, const std::string& value) = 0;
-  virtual bool serialize(std::string& output) = 0;
-  virtual IMessagePtr deserialize(std::string& input) = 0;
-};
-
-typedef std::shared_ptr<iMergeBuilder> iMergeBuilderPtr;
+typedef std::shared_ptr<ISerializable> iSerializablePtr;
 // customize the usage of RocksDB
 class iRocksDB {
  public:
   iRocksDB() = default;
-  virtual ~iRocksDB()  {};
+  virtual ~iRocksDB() {};
   virtual const std::string name() const = 0;
   virtual rocksdb::Status get(const std::string &key,
                               std::string &value,
@@ -38,8 +31,8 @@ class iRocksDB {
   ) = 0;
 
   virtual std::vector<rocksdb::Status> multiGet(const std::vector<std::string> &key,
-                                   std::vector<std::string> &value,
-                                   const std::string &col
+                                                std::vector<std::string> &value,
+                                                const std::string &col
   ) = 0;
 
   virtual rocksdb::Status write(const std::vector<std::string> &keys,
@@ -61,17 +54,14 @@ class iRocksDB {
                                        const std::string &end
   ) = 0;
 
-  virtual std::shared_ptr<rocksdb::Iterator> new_iterator(const std::string& col)
+  virtual std::shared_ptr<rocksdb::Iterator> new_iterator(const std::string &col)
   = 0;
 
-  virtual iMergeBuilderPtr createMergeBuilder()
+  virtual rocksdb::Status merge(const std::string &key, const std::string &col, const iSerializablePtr val)
   = 0;
 
-  virtual rocksdb::Status merge(const std::string key, const std::string& col, const std::string& val)
-  = 0;
-
-  virtual rocksdb::Status add_column(const std::string& col) = 0;
-  virtual rocksdb::Status delete_column(const std::string& col) = 0;
+  virtual rocksdb::Status add_column(const std::string &col) = 0;
+  virtual rocksdb::Status delete_column(const std::string &col) = 0;
   virtual void serve() = 0;
 };
 

@@ -2,6 +2,7 @@
 #include <chrono>
 #include <thread>
 #include "ComparatorFactory.h"
+#include "MergableOperation.h"
 
 namespace lib {
 namespace engine {
@@ -264,6 +265,28 @@ rocksdb::Status ReplicableRocksDB::remove_range(const std::string &col,
   return rocksdb::Status::OK();
 }
 
+rocksdb::Status ReplicableRocksDB::merge(const std::string &key,
+                                         const std::string &col,
+                                         const interface::iSerializablePtr val
+) {
+  if (comparator_ && !comparator_->validate(key)) {
+    return rocksdb::Status::Corruption(); // validate before publish
+  }
+  // here we strictly require the ptr to be Merge
+  const auto msg = std::dynamic_pointer_cast<MergeOperation>(val);
+  if (!msg) {
+    LOG(ERROR) << "merge operation for replicable mode only accept Merge type";
+    return rocksdb::Status::Corruption();
+  }
+  for (auto &each: producerTopics_) {
+    if (!kakfaProducer_->sendSync(each.first, msg, key)) {
+      LOG(ERROR) << "failed to write a merge " << each.first << " msg for protocol" << each.second;
+      return rocksdb::Status::Corruption();
+    }
+  }
+  return rocksdb::Status::OK();
+}
+
 // kafka callback
 bool ReplicableRocksDB::shouldProcess(const interface::IMessagePtr msg) {
   return true; // no validation
@@ -299,7 +322,9 @@ bool ReplicableRocksDB::onAvroMessage(const interface::IMessagePtr msg) {
 }
 
 bool ReplicableRocksDB::onAvroMerge(const interface::IMessagePtr msg) {
-  return true;
+  const auto mergeMsg = asConstMsg<lib::message::avromsg::Merge>(msg);
+  if (!mergeMsg) return false;
+  return SimpleRocksDB::merge(mergeMsg->key, mergeMsg->column, msg).ok();
 }
 
 bool ReplicableRocksDB::onAvroPut(const interface::IMessagePtr msg) {
@@ -329,19 +354,6 @@ bool ReplicableRocksDB::onAvroRemoveRange(const interface::IMessagePtr msg) {
   const auto removeRange = asConstMsg<lib::message::avromsg::RemoveRange>(msg);
   if (!removeRange) return false;
   return SimpleRocksDB::remove_range(removeRange->column, removeRange->begin, removeRange->end).ok();
-}
-
-rocksdb::Status ReplicableRocksDB::merge(const std::string key,
-                                         const std::string &col,
-                                         const std::string &val
-) {
-  LOG(ERROR) << "merge is not supported";
-  return rocksdb::Status::Corruption();
-}
-
-interface::iMergeBuilderPtr ReplicableRocksDB::createMergeBuilder() {
-  LOG(ERROR) << "not supported";
-  return nullptr;
 }
 
 }

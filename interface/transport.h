@@ -17,7 +17,7 @@ class ITransport {
   virtual void stop() = 0;
   virtual bool initialize() = 0;
   virtual const ServingStatus status() const = 0;
-  virtual bool registerSupervisedService(IService* svc) = 0;
+  virtual bool registerSupervisedService(IService *svc) = 0;
   //TODO stats api
  public:
   const TransportType getTransportType() const {
@@ -26,12 +26,9 @@ class ITransport {
 
   const std::string transportType() const {
     switch (transportType_) {
-      case TransportType::GRPC:
-        return "GRPC";
-      case TransportType::HTTP:
-        return "HTTP";
-      default:
-        return "UNKNOWN";
+      case TransportType::GRPC:return "GRPC";
+      case TransportType::HTTP:return "HTTP";
+      default:return "UNKNOWN";
     }
     return "UNKNOWN";
   }

@@ -1,6 +1,7 @@
 #include "SimpleRocksDB.h"
 #include <glog/logging.h>
 #include <algorithm>
+#include "MergableOperation.h"
 
 namespace lib {
 namespace engine {
@@ -22,6 +23,7 @@ rocksdb::Options SimpleRocksDB::getDBOptions(config::Configuration config) {
   dboptions.IncreaseParallelism();
   dboptions.OptimizeLevelStyleCompaction();
   dboptions.create_if_missing = false;
+  dboptions.merge_operator.reset(new MyMergeOperator);
   return dboptions;
 }
 
@@ -187,7 +189,7 @@ rocksdb::Status SimpleRocksDB::add_column(const std::string &col) {
     LOG(INFO) << col << " has been created";
   } else {
     LOG(INFO) << col << " failed to be created";
-    return rocksdb::Status::Corruption();;
+    return rocksdb::Status::Corruption();
   }
   columnFamilies_[col] = handler;
   return rocksdb::Status::OK();
@@ -211,17 +213,24 @@ rocksdb::Status SimpleRocksDB::delete_column(const std::string &col) {
   return rocksdb::Status::OK();
 }
 
-rocksdb::Status SimpleRocksDB::merge(const std::string key,
+rocksdb::Status SimpleRocksDB::merge(const std::string &key,
                                      const std::string &col,
-                                     const std::string &val
+                                     const interface::iSerializablePtr val
 ) {
-  LOG(ERROR) << "merge is not supported";
-  return rocksdb::Status::Corruption();
-}
-
-interface::iMergeBuilderPtr SimpleRocksDB::createMergeBuilder() {
-  LOG(ERROR) << "not supported";
-  return nullptr;
+  auto cf = getHandle(col);
+  if (!cf) return rocksdb::Status::NotFound();
+  // here we strictly require the ptr to be Merge
+  const auto msg = std::dynamic_pointer_cast<MergeOperation>(val);
+  if (!msg) {
+    LOG(ERROR) << "merge operation for simple mode only accept Merge type";
+    return rocksdb::Status::Corruption();
+  }
+  std::string mergeVal;
+  if (!val->ToString(mergeVal)) {
+    LOG(ERROR) << "cannot serialize merge operation";
+    return rocksdb::Status::Corruption();
+  }
+  return rocksDB_->Merge(writeOptions_, cf, key, mergeVal);
 }
 
 }

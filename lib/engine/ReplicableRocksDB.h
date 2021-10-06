@@ -69,12 +69,10 @@ class ReplicableRocksDB : public SimpleRocksDB,
                                        const std::string &end
   ) override;
 
-  virtual rocksdb::Status merge(const std::string key,
+  virtual rocksdb::Status merge(const std::string &key,
                                 const std::string &col,
-                                const std::string &val
+                                const interface::iSerializablePtr val
   ) override;
-
-  virtual interface::iMergeBuilderPtr createMergeBuilder() override;
 
  protected:
   virtual void init(config::Configuration config) override;
