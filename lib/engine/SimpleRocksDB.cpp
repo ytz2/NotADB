@@ -1,7 +1,7 @@
 #include "SimpleRocksDB.h"
 #include <glog/logging.h>
 #include <algorithm>
-#include "MergableOperation.h"
+#include "MergeOperation.h"
 
 namespace lib {
 namespace engine {

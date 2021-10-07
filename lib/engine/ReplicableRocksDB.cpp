@@ -2,7 +2,7 @@
 #include <chrono>
 #include <thread>
 #include "ComparatorFactory.h"
-#include "MergableOperation.h"
+#include "MergeOperation.h"
 
 namespace lib {
 namespace engine {
