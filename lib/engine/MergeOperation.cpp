@@ -2,6 +2,7 @@
 #include <glog/logging.h>
 #include <json/json.h>
 #include <boost/algorithm/string.hpp>
+#include <boost/lexical_cast.hpp>
 #include <deque>
 // in order to record meta info to dedup the KAFKA at least once delivery
 // we use json as data record, the rule is to write meta field and data field and all operations are on
@@ -86,6 +87,14 @@ MergeCheckResult seekToPath(const std::string &path,
   return MergeCheckResult::SUCCESS;
 }
 
+void updateMeta(Json::Value &val, const MergeOperation &op) {
+  auto &jv = val[META_FIELD];
+  auto meta = op.meta.get_MergeMeta();
+  jv["topic"] = meta.topic;
+  jv["partition"] = meta.partition;
+  jv["offset"] = meta.offset;
+}
+
 MergeCheckResult checkAndUpdateMeta(Json::Value &val, const MergeOperation &op) {
   if (op.meta.is_null()) // always require meta
     return MergeCheckResult::NO_META_INFO;
@@ -93,9 +102,7 @@ MergeCheckResult checkAndUpdateMeta(Json::Value &val, const MergeOperation &op) 
   auto &jv = val[META_FIELD];
   if (jv["topic"] == meta.topic && jv["partition"] == meta.partition && jv["offset"] <= meta.offset)
     return MergeCheckResult::DUPLICATE_MERGE;
-  jv["topic"] = meta.topic;
-  jv["partition"] = meta.partition;
-  jv["offset"] = meta.offset;
+  updateMeta(val, op);
   return MergeCheckResult::SUCCESS;
 }
 
@@ -119,12 +126,70 @@ MergeCheckResult preProcess(const rocksdb::Slice *existing_value,
 bool mergeIncrement(const rocksdb::Slice *existing_value,
                     std::string *new_value,
                     const MergeOperation &op) {
+  Json::Value root;
+  auto res = preProcess(existing_value, op, root);
+  if (res != MergeCheckResult::SUCCESS) {
+    printMergeCheckResult(res);
+    return true;
+  }
+  Json::Value *parent = nullptr;
+  const auto operation = op.operation.get_MergeIncrement();
+  std::string field;
+  res = seekToPath(operation.path, root, &parent, field);
+  if (res != MergeCheckResult::SUCCESS || !parent || field.empty()) {
+    return true;
+  }
+  try {
+    std::string prev = (*parent)[field].asString();
+    int64_t num = boost::lexical_cast<int64_t>(prev);
+    int64_t incr = 1;
+    if (operation.value != 0) {
+      incr = (int64_t) operation.value;
+    }
+    (*parent)[field] = std::to_string(num + incr);
+  } catch (...) {
+    LOG(ERROR) << "either the existing value for " << operation.path << " or incremental is not numerical";
+    return true;
+  }
+  Json::StreamWriterBuilder builder;
+  builder["indentation"] = "";
+  *new_value = Json::writeString(builder, root);
   return true;
 }
 
 bool mergeSet(const rocksdb::Slice *existing_value,
               std::string *new_value,
               const MergeOperation &op) {
+  Json::Value root;
+  Json::Value *parent = nullptr;
+  std::string field;
+
+  const auto operation = op.operation.get_MergeSet();
+
+  if (!existing_value) {
+    auto res = preProcess(existing_value, op, root);
+    if (res != MergeCheckResult::SUCCESS) {
+      printMergeCheckResult(res);
+      return true;
+    }
+
+    res = seekToPath(operation.path, root, &parent, field);
+    if (res != MergeCheckResult::SUCCESS || !parent || field.empty()) {
+      return true;
+    }
+    (*parent)[field] = operation.value;
+  } else {
+    // there is no existing value
+    updateMeta(root, op);
+    auto tokens = parsePath(operation.path);
+    Json::Value *node = &root;
+    for (size_t i = 0; i < tokens.size() - 1; i++)
+      node = &(*node)[tokens[i]];
+    (*node)[tokens.back()] = operation.value;
+  }
+  Json::StreamWriterBuilder builder;
+  builder["indentation"] = "";
+  *new_value = Json::writeString(builder, root);
   return true;
 }
 
@@ -153,9 +218,32 @@ bool mergeDelete(const rocksdb::Slice *existing_value,
 bool mergeAppend(const rocksdb::Slice *existing_value,
                  std::string *new_value,
                  const MergeOperation &op) {
+  Json::Value root;
+  auto res = preProcess(existing_value, op, root);
+  if (res != MergeCheckResult::SUCCESS) {
+    printMergeCheckResult(res);
+    return true;
+  }
+  Json::Value *parent = nullptr;
+  std::string field;
+  const auto &operation = op.operation.get_MergeAppend();
+  res = seekToPath(operation.path, root, &parent, field);
+  if (res != MergeCheckResult::SUCCESS || !parent || field.empty()) {
+    return true;
+  }
+  Json::Value &node = (*parent)[field];
+  if (!node.isArray()) {
+    LOG(ERROR) << "cannot append value as it is not array";
+    return true;
+  }
+  node.append(operation.value);
+  Json::StreamWriterBuilder builder;
+  builder["indentation"] = "";
+  *new_value = Json::writeString(builder, root);
   return true;
 }
 }
+
 bool MyMergeOperator::Merge(
     const rocksdb::Slice &key,
     const rocksdb::Slice *existing_value,
