@@ -41,6 +41,7 @@ consumer:
   try {
     auto db = lib::engine::CreateDB(config);
     db->serve();
+
     int counter = 0;
     while (true) {
       counter++;
@@ -51,6 +52,7 @@ consumer:
         LOG(INFO) << "success";
       else
         LOG(ERROR) <<"fail";
+
       std::this_thread::sleep_for(std::chrono::milliseconds(1000));
       std::string val2;
       LOG(INFO) << "read the key " << key;
@@ -59,6 +61,7 @@ consumer:
       } else {
         LOG(ERROR) <<"fail";
       }
+
     }
   } catch (std::exception &e) {
     LOG(ERROR) << e.what();

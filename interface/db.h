@@ -57,9 +57,6 @@ class iRocksDB {
   virtual std::shared_ptr<rocksdb::Iterator> new_iterator(const std::string &col)
   = 0;
 
-  virtual rocksdb::Status merge(const std::string &key, const std::string &col, const iSerializablePtr val)
-  = 0;
-
   virtual rocksdb::Status add_column(const std::string &col) = 0;
   virtual rocksdb::Status delete_column(const std::string &col) = 0;
   virtual void serve() = 0;

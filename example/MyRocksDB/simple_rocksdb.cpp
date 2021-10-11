@@ -8,7 +8,7 @@
 int main() {
   const static std::string configStr = R"(
 dbName: test
-dbPath: /tmp/test_rocksdb_example
+dbPath: /tmp/test_rocksdb_simple_example
 dbType: SimpleKV
 dbColumns:
   - foo

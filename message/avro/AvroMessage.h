@@ -56,7 +56,6 @@ enum class EMessageType {
   WriteMany,
   RemoveOne,
   RemoveRange,
-  Merge
 };
 
 class KeyValue : public avrogen::KeyValue, public AvroMessage<avrogen::KeyValue> {
@@ -118,19 +117,6 @@ class RemoveRange : public avrogen::RemoveRange, public AvroMessage<avrogen::Rem
     return FromStringImp(input, *this);
   }
 };
-
-class Merge : public avrogen::Merge, public AvroMessage<avrogen::Merge> {
- public:
-  virtual int GetMessageID() override { return static_cast<int>(EMessageType::Merge); }
-  virtual const std::string GetMessageName() override { return "Merge"; }
-  bool ToString(std::string &output) const override {
-    return ToStringImp(output, *this);
-  }
-  bool FromString(const std::string &input) override {
-    return FromStringImp(input, *this);
-  }
-};
-
 }
 }
 }

@@ -69,14 +69,10 @@ class ReplicableRocksDB : public SimpleRocksDB,
                                        const std::string &end
   ) override;
 
-  virtual rocksdb::Status merge(const std::string &key,
-                                const std::string &col,
-                                const interface::iSerializablePtr val
-  ) override;
-
  protected:
   virtual void init(config::Configuration config) override;
   virtual rocksdb::Options getDBOptions(config::Configuration config) override;
+  void initMeta(config::Configuration config);
 
  protected:
   bool onAvroMessage(const interface::IMessagePtr msg);
@@ -84,13 +80,14 @@ class ReplicableRocksDB : public SimpleRocksDB,
   bool onAvroWrite(const interface::IMessagePtr msg);
   bool onAvroRemove(const interface::IMessagePtr msg);
   bool onAvroRemoveRange(const interface::IMessagePtr msg);
-  bool onAvroMerge(const interface::IMessagePtr msg);
 
  private:
   std::unordered_map<std::string /*topic*/, std::string /*protocols*/> producerTopics_;
   std::unique_ptr<lib::kafka::Consumer> kakfaConsumer_ = nullptr;
   std::unique_ptr<lib::kafka::Producer> kakfaProducer_ = nullptr;
   Comparator *comparator_ = nullptr;
+  rocksdb::DB *metaDB_; // internal db to maintain meta data, should be really minimal
+  std::string metaPath_;
 };
 }
 }

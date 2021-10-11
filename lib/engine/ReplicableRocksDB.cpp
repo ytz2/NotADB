@@ -2,7 +2,6 @@
 #include <chrono>
 #include <thread>
 #include "ComparatorFactory.h"
-#include "MergeOperation.h"
 
 namespace lib {
 namespace engine {
@@ -144,12 +143,27 @@ rocksdb::Options ReplicableRocksDB::getDBOptions(config::Configuration config) {
   return options;
 }
 
+void ReplicableRocksDB::initMeta(config::Configuration config) {
+  metaPath_ = dbPath_ + "/meta";
+  rocksdb::Options options;
+  options.create_if_missing = true;
+  rocksdb::Status status =
+      rocksdb::DB::Open(options, metaPath_, &metaDB_);
+  if (!status.ok()) {
+    std::string msg = std::string("failed to init meta: ") + status.ToString();
+    LOG(ERROR) << msg;
+    throw std::runtime_error(msg);
+  }
+  LOG(INFO) << "meta db initiated";
+}
+
 void ReplicableRocksDB::init(config::Configuration config) {
   // bootstrap db first
   // TODO: 1) shard id init shard id
   //       2) shard key init
   //       3) order policy init
   SimpleRocksDB::init(config);
+  initMeta(config);
   std::vector<config::Configuration> configs;
   if (!config.getConfigs("topics", configs)) {
     throw std::runtime_error("does not have topics in config for replicable db");
@@ -162,7 +176,6 @@ void ReplicableRocksDB::init(config::Configuration config) {
       throw std::runtime_error("no entry to protocol under topics");
     producerTopics_[topic] = protocol;
   }
-
   lib::config::Configuration consumerConfig, producerConfig;
   if (!config.getConfig("producer", producerConfig) || !config.getConfig("consumer", consumerConfig)) {
     throw std::runtime_error("does not have producer/consumer in config for replicable db");
@@ -265,28 +278,6 @@ rocksdb::Status ReplicableRocksDB::remove_range(const std::string &col,
   return rocksdb::Status::OK();
 }
 
-rocksdb::Status ReplicableRocksDB::merge(const std::string &key,
-                                         const std::string &col,
-                                         const interface::iSerializablePtr val
-) {
-  if (comparator_ && !comparator_->validate(key)) {
-    return rocksdb::Status::Corruption(); // validate before publish
-  }
-  // here we strictly require the ptr to be Merge
-  const auto msg = std::dynamic_pointer_cast<MergeOperation>(val);
-  if (!msg) {
-    LOG(ERROR) << "merge operation for replicable mode only accept Merge type";
-    return rocksdb::Status::Corruption();
-  }
-  for (auto &each: producerTopics_) {
-    if (!kakfaProducer_->sendSync(each.first, msg, key)) {
-      LOG(ERROR) << "failed to write a merge " << each.first << " msg for protocol" << each.second;
-      return rocksdb::Status::Corruption();
-    }
-  }
-  return rocksdb::Status::OK();
-}
-
 // kafka callback
 bool ReplicableRocksDB::shouldProcess(const interface::IMessagePtr msg) {
   return true; // no validation
@@ -315,16 +306,9 @@ bool ReplicableRocksDB::onAvroMessage(const interface::IMessagePtr msg) {
     case lib::message::avromsg::EMessageType::WriteMany:return onAvroWrite(msg);
     case lib::message::avromsg::EMessageType::RemoveOne:return onAvroRemove(msg);
     case lib::message::avromsg::EMessageType::RemoveRange:return onAvroRemoveRange(msg);
-    case lib::message::avromsg::EMessageType::Merge: return onAvroMerge(msg);
     default:return false;
   }
   return false;
-}
-
-bool ReplicableRocksDB::onAvroMerge(const interface::IMessagePtr msg) {
-  const auto mergeMsg = asConstMsg<lib::message::avromsg::Merge>(msg);
-  if (!mergeMsg) return false;
-  return SimpleRocksDB::merge(mergeMsg->key, mergeMsg->column, msg).ok();
 }
 
 bool ReplicableRocksDB::onAvroPut(const interface::IMessagePtr msg) {

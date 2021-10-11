@@ -39,7 +39,7 @@
         "name": "keyValues",
         "type": {
           "type": "array",
-          "items" : "KeyValue"
+          "items": "KeyValue"
         }
       },
       {
@@ -81,121 +81,6 @@
       {
         "name": "deleteFileInRange",
         "type": "boolean"
-      }
-    ]
-  },
-  {
-    "type": "record",
-    "name": "MergeMeta",
-    "fields": [
-      {
-        "name": "topic",
-        "type": "string"
-      },
-      {
-        "name": "partition",
-        "type": "int"
-      },
-      {
-        "name": "offset",
-        "type": "long"
-      }
-    ]
-  },
-  {
-    "type": "record",
-    "name": "MergeIncrement",
-    "fields": [
-      {
-        "name": "value",
-        "type": "int",
-        "default": 1
-      },
-      {
-        "name": "path",
-        "type": "string",
-        "default": ""
-      }
-    ]
-  },
-  {
-    "type": "record",
-    "name": "MergeSet",
-    "fields": [
-      {
-        "name": "value",
-        "type": "string"
-      },
-      {
-        "name": "path",
-        "type": "string",
-        "default": ""
-      }
-    ]
-  },
-  {
-    "type": "record",
-    "name": "MergeDelete",
-    "fields": [
-      {
-        "name": "path",
-        "type": "string",
-        "default": ""
-      }
-    ]
-  },
-  {
-    "type": "record",
-    "name": "MergeAppend",
-    "fields": [
-      {
-        "name": "value",
-        "type": "string"
-      },
-      {
-        "name": "path",
-        "type": "string",
-        "default": ""
-      }
-    ]
-  },
-  {
-    "type": "record",
-    "name": "Merge",
-    "fields": [
-      {
-        "name": "key",
-        "type": "string"
-      },
-      {
-        "name": "column",
-        "type": "string"
-      },
-      {
-        "name": "type",
-        "type": {
-          "type": "enum",
-          "name": "EMergeType",
-          "symbols":  [
-            "MergeIncrement",
-            "MergeSet",
-            "MergeDelete",
-            "MergeAppend"
-          ]
-        }
-      },
-      {
-        "name": "operation",
-        "type": [
-          "MergeIncrement",
-          "MergeSet",
-          "MergeDelete",
-          "MergeAppend"
-        ]
-      },
-      {
-        "name": "meta",
-        "type": ["null", "MergeMeta"]
       }
     ]
   }

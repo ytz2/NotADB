@@ -1,7 +1,6 @@
 #include "SimpleRocksDB.h"
 #include <glog/logging.h>
 #include <algorithm>
-#include "MergeOperation.h"
 
 namespace lib {
 namespace engine {
@@ -23,7 +22,6 @@ rocksdb::Options SimpleRocksDB::getDBOptions(config::Configuration config) {
   dboptions.IncreaseParallelism();
   dboptions.OptimizeLevelStyleCompaction();
   dboptions.create_if_missing = false;
-  dboptions.merge_operator.reset(new MyMergeOperator);
   return dboptions;
 }
 
@@ -211,26 +209,6 @@ rocksdb::Status SimpleRocksDB::delete_column(const std::string &col) {
   }
   columnFamilies_.erase(col);
   return rocksdb::Status::OK();
-}
-
-rocksdb::Status SimpleRocksDB::merge(const std::string &key,
-                                     const std::string &col,
-                                     const interface::iSerializablePtr val
-) {
-  auto cf = getHandle(col);
-  if (!cf) return rocksdb::Status::NotFound();
-  // here we strictly require the ptr to be Merge
-  const auto msg = std::dynamic_pointer_cast<MergeOperation>(val);
-  if (!msg) {
-    LOG(ERROR) << "merge operation for simple mode only accept Merge type";
-    return rocksdb::Status::Corruption();
-  }
-  std::string mergeVal;
-  if (!val->ToString(mergeVal)) {
-    LOG(ERROR) << "cannot serialize merge operation";
-    return rocksdb::Status::Corruption();
-  }
-  return rocksDB_->Merge(writeOptions_, cf, key, mergeVal);
 }
 
 }

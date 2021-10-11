@@ -48,21 +48,7 @@ interface::IMessagePtr AvroBinaryMessageCodec::deserialize(const std::string &va
 
 interface::IMessagePtr AvroBinaryMessageCodec::deserialize(const ::kafka::ConsumerRecord &record) {
   std::string val((char *) record.value().data(), record.value().size());
-  auto res = deserialize(val);
-  decorate(record, res);
-  return res;
-}
-
-void AvroBinaryMessageCodec::decorate(const ::kafka::ConsumerRecord &record, interface::IMessagePtr msg) {
-  if (!msg || msg->GetMessageID() != static_cast<int>(lib::message::avromsg::EMessageType::Merge)) return;
-  auto ptr = dynamic_cast<lib::message::avromsg::Merge *>(msg.get());
-  if (!ptr) return;
-  // merge operator needs the kafka meta info in record to avoid deliver at least once
-  avrogen::MergeMeta meta;
-  meta.topic = record.topic();
-  meta.partition = record.partition();
-  meta.offset = record.offset();
-  ptr->meta.set_MergeMeta(meta);
+  return deserialize(val);
 }
 
 // not that efficient , todo: migrate to boost buffer
