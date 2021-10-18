@@ -13,14 +13,19 @@
 #include <string>
 #include <thread>
 #include <atomic>
+#include <map>
 
 namespace lib {
 namespace kafka {
+
+typedef std::map<size_t, size_t> TopicMeta;
+
 class Consumer : public interface::ISession, public std::enable_shared_from_this<Consumer> {
  public:
   Consumer() = delete;
   virtual ~Consumer();
   explicit Consumer(config::Configuration config);
+  explicit Consumer(config::Configuration config, const std::map<std::string, TopicMeta> &metas);
 
   // ISession
   virtual bool send(const interface::IMessagePtr msg) override { return false; };
@@ -40,6 +45,7 @@ class Consumer : public interface::ISession, public std::enable_shared_from_this
   std::unordered_map<std::string /*topic*/, MessageCodecPtr /*codec*/> codecs_;
   std::thread thread_;
   size_t kafkaPollTimeout_ = 100;
+  const std::map<std::string, TopicMeta> initMetas_;
 };
 }
 }

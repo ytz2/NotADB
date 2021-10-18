@@ -45,7 +45,7 @@ void SimpleRocksDB::init(config::Configuration config) {
   // db exist
   if (s.ok()) {
     std::vector<rocksdb::ColumnFamilyDescriptor> column_family_desc;
-    std::vector < rocksdb::ColumnFamilyHandle * > handles;
+    std::vector<rocksdb::ColumnFamilyHandle *> handles;
     for (auto &column_family_name: column_family_names) {
       auto colOption = rocksdb::ColumnFamilyOptions();
       colOption.comparator = dboptions.comparator;

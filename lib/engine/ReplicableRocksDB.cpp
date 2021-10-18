@@ -144,17 +144,65 @@ rocksdb::Options ReplicableRocksDB::getDBOptions(config::Configuration config) {
 }
 
 void ReplicableRocksDB::initMeta(config::Configuration config) {
+  // note: the meta follows topic|partition key style
   metaPath_ = dbPath_ + "/meta";
   rocksdb::Options options;
   options.create_if_missing = true;
-  rocksdb::Status status =
-      rocksdb::DB::Open(options, metaPath_, &metaDB_);
+  options.comparator = ComparatorFactory::createComparator("KeyValue", '|');
+  rocksdb::Status status = rocksdb::DB::Open(options, metaPath_, &metaDB_);
   if (!status.ok()) {
     std::string msg = std::string("failed to init meta: ") + status.ToString();
     LOG(ERROR) << msg;
     throw std::runtime_error(msg);
   }
   LOG(INFO) << "meta db initiated";
+}
+
+std::map<std::string, lib::kafka::TopicMeta> ReplicableRocksDB::getTopicMetas(config::Configuration config) {
+  std::vector<lib::config::Configuration> configs;
+  if (!config.getConfigs("topics", configs)) {
+    throw std::runtime_error("no topics available");
+  }
+  std::vector<std::string> topics;
+  for (const auto &each: configs) {
+    std::string topic;
+    if (!each.get("topic", topic))
+      throw std::runtime_error("no entry to topic under topics");
+    topics.push_back(topic);
+  }
+  // read offset from meta
+  std::map<std::string, lib::kafka::TopicMeta> result;
+  auto it = metaDB_->NewIterator(rocksdb::ReadOptions());
+  if (!it) {
+    std::string msg = "meta db failed to create iterator";
+    LOG(ERROR) << msg;
+    throw std::runtime_error(msg.c_str());
+  }
+  for (const auto &topic : topics) {
+    auto prefix = topic + "|";
+    auto firstPartition = prefix + "0"; // hard code
+    for (it->Seek(firstPartition); it->Valid() && it->key().starts_with(prefix); it->Next()) {
+      // split the topic to partition
+      auto key = it->key().ToString();
+      auto partitionStr = key.substr(key.find('|') + 1);
+      try {
+        size_t partition = boost::lexical_cast<size_t>(partitionStr);
+        size_t offset = boost::lexical_cast<size_t>(it->value().ToString());
+        result[topic][partition] = offset;
+      }
+      catch (...) {
+        LOG(ERROR) << "failed to deserialize meta info for key " << key;
+        throw std::runtime_error(key + " has bad record");
+      }
+    }
+  }
+  for (const auto &each : result) {
+    for (const auto &partition : each.second) {
+      LOG(INFO) << "topic: " << each.first << ", partition " << partition.first << ", offset " << partition.second;
+    }
+  }
+  delete it;
+  return result;
 }
 
 void ReplicableRocksDB::init(config::Configuration config) {
@@ -180,7 +228,7 @@ void ReplicableRocksDB::init(config::Configuration config) {
   if (!config.getConfig("producer", producerConfig) || !config.getConfig("consumer", consumerConfig)) {
     throw std::runtime_error("does not have producer/consumer in config for replicable db");
   }
-  kakfaConsumer_ = std::make_unique<lib::kafka::Consumer>(consumerConfig);
+  kakfaConsumer_ = std::make_unique<lib::kafka::Consumer>(consumerConfig, getTopicMetas(consumerConfig));
   kakfaProducer_ = std::make_unique<lib::kafka::Producer>(producerConfig);
 }
 

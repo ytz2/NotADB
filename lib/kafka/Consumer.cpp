@@ -12,6 +12,12 @@ Consumer::Consumer(config::Configuration config)
   connected_ = false;
 }
 
+Consumer::Consumer(config::Configuration config, const std::map<std::string, TopicMeta> &metas)
+    : interface::ISession("KafkaConsumer"), initMetas_(metas) {
+  init(config);
+  connected_ = false;
+}
+
 Consumer::~Consumer() {
   if (consumer_)
     delete consumer_;
@@ -36,6 +42,20 @@ bool Consumer::start() {
     LOG(ERROR) << "Failed to start kafka consumer";
     return false;
   }
+  // seek to offset
+  for (const auto &eachTopic : initMetas_) {
+    auto topic = eachTopic.first;
+    for (const auto &eachPartition : eachTopic.second) {
+      auto partition = eachPartition.first;
+      auto offset = eachPartition.second;
+      ::kafka::TopicPartition kpartition;
+      kpartition.first = topic;
+      kpartition.second = partition;
+      consumer_->seek(kpartition, (int64_t) offset, std::chrono::milliseconds(10000));
+      LOG(INFO) << topic << " partition " << partition << " seeks to offset " << offset;
+    }
+  }
+
   thread_ = std::thread([this] {
     consume();
   });

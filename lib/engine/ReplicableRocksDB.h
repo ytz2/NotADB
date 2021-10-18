@@ -80,6 +80,7 @@ class ReplicableRocksDB : public SimpleRocksDB,
   bool onAvroWrite(const interface::IMessagePtr msg);
   bool onAvroRemove(const interface::IMessagePtr msg);
   bool onAvroRemoveRange(const interface::IMessagePtr msg);
+  std::map<std::string, lib::kafka::TopicMeta> getTopicMetas(config::Configuration config);
 
  private:
   std::unordered_map<std::string /*topic*/, std::string /*protocols*/> producerTopics_;
