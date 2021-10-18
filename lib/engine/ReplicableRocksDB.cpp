@@ -158,6 +158,15 @@ void ReplicableRocksDB::initMeta(config::Configuration config) {
   LOG(INFO) << "meta db initiated";
 }
 
+void ReplicableRocksDB::writeMeta(const avrogen::kafkaMeta& meta) {
+  std::string key = meta.topic + "|" + std::to_string(meta.partition);
+  std::string value = std::to_string(meta.offset);
+  auto status = this->metaDB_->Put(rocksdb::WriteOptions(), key, value);
+  if (!status.ok()) {
+    LOG(ERROR) << status.ToString();
+  }
+}
+
 std::map<std::string, lib::kafka::TopicMeta> ReplicableRocksDB::getTopicMetas(config::Configuration config) {
   std::vector<lib::config::Configuration> configs;
   if (!config.getConfigs("topics", configs)) {
@@ -362,12 +371,14 @@ bool ReplicableRocksDB::onAvroMessage(const interface::IMessagePtr msg) {
 bool ReplicableRocksDB::onAvroPut(const interface::IMessagePtr msg) {
   const auto put = asConstMsg<lib::message::avromsg::PutOne>(msg);
   if (!put) return false;
+  writeMeta(put->meta);
   return SimpleRocksDB::put(put->key, put->value, put->column).ok();
 }
 
 bool ReplicableRocksDB::onAvroWrite(const interface::IMessagePtr msg) {
   const auto write = asConstMsg<lib::message::avromsg::WriteMany>(msg);
   if (!write) return false;
+  writeMeta(write->meta);
   std::vector<std::string> keys, values;
   for (const auto &each: write->keyValues) {
     keys.push_back(each.key);
@@ -379,12 +390,14 @@ bool ReplicableRocksDB::onAvroWrite(const interface::IMessagePtr msg) {
 bool ReplicableRocksDB::onAvroRemove(const interface::IMessagePtr msg) {
   const auto remove = asConstMsg<lib::message::avromsg::RemoveOne>(msg);
   if (!remove) return false;
+  writeMeta(remove->meta);
   return SimpleRocksDB::remove(remove->key, remove->column).ok();
 }
 
 bool ReplicableRocksDB::onAvroRemoveRange(const interface::IMessagePtr msg) {
   const auto removeRange = asConstMsg<lib::message::avromsg::RemoveRange>(msg);
   if (!removeRange) return false;
+  writeMeta(removeRange->meta);
   return SimpleRocksDB::remove_range(removeRange->column, removeRange->begin, removeRange->end).ok();
 }
 

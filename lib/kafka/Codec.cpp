@@ -1,5 +1,7 @@
 #include "Codec.h"
 #include "message/MessageFactory.h"
+#include <memory>
+
 namespace lib {
 namespace kafka {
 
@@ -48,7 +50,19 @@ interface::IMessagePtr AvroBinaryMessageCodec::deserialize(const std::string &va
 
 interface::IMessagePtr AvroBinaryMessageCodec::deserialize(const ::kafka::ConsumerRecord &record) {
   std::string val((char *) record.value().data(), record.value().size());
-  return deserialize(val);
+  auto ptr = deserialize(val);
+  // pass the meta info
+  if (ptr) {
+    avrogen::kafkaMeta meta;
+    meta.topic = record.topic();
+    meta.partition = record.partition();
+    meta.offset = record.offset();
+    auto newPtr = dynamic_cast<lib::message::avromsg::AvroMessage *>(ptr.get());
+    if (newPtr) {
+      newPtr->setMetaData(meta);
+    }
+  }
+  return ptr;
 }
 
 // not that efficient , todo: migrate to boost buffer

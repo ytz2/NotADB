@@ -6,6 +6,7 @@
 #include "message/MessageFactory.h"
 #include "Comparator.h"
 #include <unordered_map>
+#include <future>
 
 namespace lib {
 namespace engine {
@@ -81,6 +82,7 @@ class ReplicableRocksDB : public SimpleRocksDB,
   bool onAvroRemove(const interface::IMessagePtr msg);
   bool onAvroRemoveRange(const interface::IMessagePtr msg);
   std::map<std::string, lib::kafka::TopicMeta> getTopicMetas(config::Configuration config);
+  void writeMeta(const avrogen::kafkaMeta& meta);
 
  private:
   std::unordered_map<std::string /*topic*/, std::string /*protocols*/> producerTopics_;

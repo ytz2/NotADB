@@ -10,13 +10,15 @@ namespace lib {
 namespace message {
 namespace avromsg {
 
-template<class avrogenType>
 class AvroMessage : public interface::IMessage {
  public:  // IMessage
   virtual const std::string GetProtocol() override { return "Avro"; };
+  virtual void setMetaData(const avrogen::kafkaMeta &meta) = 0;
+};
 
+template<class avrogenType>
+class AvroMessageHelper {
  protected:
-
   bool ToStringImp(std::string &output, const avrogenType &obj) const {
     try {
       std::ostringstream os;
@@ -58,7 +60,7 @@ enum class EMessageType {
   RemoveRange,
 };
 
-class KeyValue : public avrogen::KeyValue, public AvroMessage<avrogen::KeyValue> {
+class KeyValue : public avrogen::KeyValue, public AvroMessage, public AvroMessageHelper<avrogen::KeyValue> {
  public:
   virtual int GetMessageID() override { return static_cast<int>(EMessageType::KeyValue); }
   virtual const std::string GetMessageName() override { return "KeyValue"; }
@@ -68,9 +70,12 @@ class KeyValue : public avrogen::KeyValue, public AvroMessage<avrogen::KeyValue>
   bool FromString(const std::string &input) override {
     return FromStringImp(input, *this);
   }
+  virtual void setMetaData(const avrogen::kafkaMeta &meta) override {
+    return; // no meta
+  }
 };
 
-class PutOne : public avrogen::PutOne, public AvroMessage<avrogen::PutOne> {
+class PutOne : public avrogen::PutOne, public AvroMessage, public AvroMessageHelper<avrogen::PutOne> {
  public:
   virtual int GetMessageID() override { return static_cast<int>(EMessageType::PutOne); }
   virtual const std::string GetMessageName() override { return "PutOne"; }
@@ -80,9 +85,12 @@ class PutOne : public avrogen::PutOne, public AvroMessage<avrogen::PutOne> {
   bool FromString(const std::string &input) override {
     return FromStringImp(input, *this);
   }
+  virtual void setMetaData(const avrogen::kafkaMeta &meta) override {
+    this->meta = meta;
+  }
 };
 
-class WriteMany : public avrogen::WriteMany, public AvroMessage<avrogen::WriteMany> {
+class WriteMany : public avrogen::WriteMany, public AvroMessage, public AvroMessageHelper<avrogen::WriteMany> {
  public:
   virtual int GetMessageID() override { return static_cast<int>(EMessageType::WriteMany); }
   virtual const std::string GetMessageName() override { return "WriteMany"; }
@@ -92,9 +100,12 @@ class WriteMany : public avrogen::WriteMany, public AvroMessage<avrogen::WriteMa
   bool FromString(const std::string &input) override {
     return FromStringImp(input, *this);
   }
+  virtual void setMetaData(const avrogen::kafkaMeta &meta) override {
+    this->meta = meta;
+  }
 };
 
-class RemoveOne : public avrogen::RemoveOne, public AvroMessage<avrogen::RemoveOne> {
+class RemoveOne : public avrogen::RemoveOne, public AvroMessage, public AvroMessageHelper<avrogen::RemoveOne> {
  public:
   virtual int GetMessageID() override { return static_cast<int>(EMessageType::RemoveOne); }
   virtual const std::string GetMessageName() override { return "RemoveOne"; }
@@ -104,9 +115,12 @@ class RemoveOne : public avrogen::RemoveOne, public AvroMessage<avrogen::RemoveO
   bool FromString(const std::string &input) override {
     return FromStringImp(input, *this);
   }
+  virtual void setMetaData(const avrogen::kafkaMeta &meta) override {
+    this->meta = meta;
+  }
 };
 
-class RemoveRange : public avrogen::RemoveRange, public AvroMessage<avrogen::RemoveRange> {
+class RemoveRange : public avrogen::RemoveRange, public AvroMessage, public AvroMessageHelper<avrogen::RemoveRange> {
  public:
   virtual int GetMessageID() override { return static_cast<int>(EMessageType::RemoveRange); }
   virtual const std::string GetMessageName() override { return "RemoveRange"; }
@@ -115,6 +129,9 @@ class RemoveRange : public avrogen::RemoveRange, public AvroMessage<avrogen::Rem
   }
   bool FromString(const std::string &input) override {
     return FromStringImp(input, *this);
+  }
+  virtual void setMetaData(const avrogen::kafkaMeta &meta) override {
+    this->meta = meta;
   }
 };
 }

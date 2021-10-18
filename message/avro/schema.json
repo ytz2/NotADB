@@ -15,6 +15,24 @@
   },
   {
     "type": "record",
+    "name": "kafkaMeta",
+    "fields": [
+      {
+        "name": "topic",
+        "type": "string"
+      },
+      {
+        "name": "partition",
+        "type": "int"
+      },
+      {
+        "name": "offset",
+        "type": "long"
+      }
+    ]
+  },
+  {
+    "type": "record",
     "name": "PutOne",
     "fields": [
       {
@@ -28,6 +46,10 @@
       {
         "name": "column",
         "type": "string"
+      },
+      {
+        "name": "meta",
+        "type": "kafkaMeta"
       }
     ]
   },
@@ -45,6 +67,10 @@
       {
         "name": "column",
         "type": "string"
+      },
+      {
+        "name": "meta",
+        "type": "kafkaMeta"
       }
     ]
   },
@@ -59,6 +85,10 @@
       {
         "name": "column",
         "type": "string"
+      },
+      {
+        "name": "meta",
+        "type": "kafkaMeta"
       }
     ]
   },
@@ -81,6 +111,10 @@
       {
         "name": "deleteFileInRange",
         "type": "boolean"
+      },
+      {
+        "name": "meta",
+        "type": "kafkaMeta"
       }
     ]
   }
